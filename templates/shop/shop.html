@@ -1330,13 +1330,15 @@
 
                         <div class="product-img-box">
                             {% if product.image %}
-                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                <a href="{% url 'product_detail' product.slug %}">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                </a>
                             {% endif %}
                         </div>
 
-                        <div class="product-title">
+                        <a class="product-title" href="{% url 'product_detail' product.slug %}">
                             {{ product.name }}
-                        </div>
+                        </a>
 
                         <span class="product-brand">
                             {% if product.brand %}

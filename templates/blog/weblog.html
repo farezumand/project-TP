@@ -1423,8 +1423,10 @@
             <h1>وبلاگ <span>تجهیزات پزشکی</span> آذریزدان</h1>
             <p>جدیدترین مقالات، راهنماهای تخصصی و اخبار حوزه تجهیزات پزشکی را در وبلاگ آذریزدان مطالعه کنید.</p>
             <div class="hero-search">
-                <input type="text" placeholder="جستجو در مقالات...">
-                <button><i class="fas fa-search meta-icon"></i> جستجو</button>
+                <form method="get" action="{% url 'post_list' %}" style="display:contents;">
+                    <input type="text" name="q" placeholder="جستجو در مقالات..." value="{{ query }}">
+                    <button type="submit"><i class="fas fa-search meta-icon"></i> جستجو</button>
+                </form>
             </div>
         </div>
     </section>
@@ -1435,90 +1437,53 @@
         <!-- POSTS SECTION -->
         <section class="posts-section">
 
+            {% if featured %}
             <!-- Featured Post -->
             <article class="post-card featured">
                 <div class="post-image">
                     <span class="post-category-badge">ویژه</span>
-                    <img src="/media/webloggggg.jpeg" alt="ونتیلاتور">
+                    {% if featured.image %}<img src="{{ featured.image.url }}" alt="{{ featured.title }}">{% endif %}
                 </div>
                 <div class="post-body">
                     <div class="post-meta">
-                        <span><i class="fas fa-calendar-alt meta-icon"></i> ۲۴ خرداد ۱۴۰۵</span>
-                        <span><i class="fas fa-clock meta-icon"></i> ۱۲ دقیقه مطالعه</span>
-                        <span><i class="fas fa-eye meta-icon"></i> ۴,۸۲۰ بازدید</span>
+                        <span><i class="fas fa-calendar-alt meta-icon"></i> {{ featured.created_at|date:"Y/m/d" }}</span>
+                        <span><i class="fas fa-clock meta-icon"></i> {{ featured.reading_time }} دقیقه مطالعه</span>
+                        <span><i class="fas fa-eye meta-icon"></i> {{ featured.views }} بازدید</span>
                     </div>
-                    <h3><a href="#">راهنمای جامع انتخاب دستگاه ونتیلاتور برای بیمارستان‌ها و مراکز درمانی</a></h3>
-                    <p>در این مقاله به بررسی کامل معیارهای انتخاب ونتیلاتور مناسب، مقایسه برندهای مطرح جهانی و نکات کلیدی در خرید تجهیزات تنفسی می‌پردازیم. از ظرفیت‌های مختلف تا تکنولوژی‌های روز...</p>
-                    <a href="#" class="read-more-link">
+                    <h3><a href="{% url 'post_detail' featured.slug %}">{{ featured.title }}</a></h3>
+                    <p>{{ featured.excerpt }}</p>
+                    <a href="{% url 'post_detail' featured.slug %}" class="read-more-link">
                         ادامه مطلب
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
                 </div>
             </article>
+            {% endif %}
 
             <!-- Section Header -->
             <div class="section-header">
                 <h2><i class="fas fa-clipboard-list meta-icon"></i> جدیدترین مقالات</h2>
-                <a href="#" class="view-all">مشاهده همه مقالات </a>
+                <a href="{% url 'post_list' %}" class="view-all">مشاهده همه مقالات </a>
             </div>
 
             <!-- Posts Grid -->
             <div class="posts-grid">
-                <!-- Post 1 -->
+                {% for post in posts %}
                 <article class="post-card standard">
                     <div class="post-image">
-                        <span class="post-category-badge">تصویربرداری</span>
-                        <img src="/media/mri jadid.jpeg" alt="MRI">
+                        {% if post.category %}<span class="post-category-badge">{{ post.category.name }}</span>{% endif %}
+                        {% if post.image %}<img src="{{ post.image.url }}" alt="{{ post.title }}">{% endif %}
                     </div>
                     <div class="post-body">
-                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۲۲ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۸ دقیقه</span></div>
-                        <h3><a href="#">تفاوت‌های کلیدی MRI و CT Scan در تشخیص پزشکی</a></h3>
-                        <p>بررسی تخصصی مزایا و معایب هر روش تصویربرداری و کاربردهای بالینی آن‌ها...</p>
-                        <a href="#" class="read-more-link">ادامه مطلب →</a>
+                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> {{ post.created_at|date:"Y/m/d" }}</span><span><i class="fas fa-clock meta-icon"></i> {{ post.reading_time }} دقیقه</span></div>
+                        <h3><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h3>
+                        <p>{{ post.excerpt }}</p>
+                        <a href="{% url 'post_detail' post.slug %}" class="read-more-link">ادامه مطلب →</a>
                     </div>
                 </article>
-
-                <!-- Post 2 -->
-                <article class="post-card standard">
-                    <div class="post-image">
-                        <span class="post-category-badge">مانیتورینگ</span>
-                        <img src="/media/dasgahalaemhayati.jpeg" alt="مانیتورینگ علائم حیاتی">
-                    </div>
-                    <div class="post-body">
-                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۲۰ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۶ دقیقه</span></div>
-                        <h3><a href="#">مانیتورینگ علائم حیاتی: استانداردهای ۲۰۲۵</a></h3>
-                        <p>آشنایی با جدیدترین استانداردهای جهانی در مانیتورینگ بیمار و تجهیزات مرتبط...</p>
-                        <a href="#" class="read-more-link">ادامه مطلب →</a>
-                    </div>
-                </article>
-
-                <!-- Post 3 -->
-                <article class="post-card standard">
-                    <div class="post-image">
-                        <span class="post-category-badge">اتاق عمل</span>
-                        <img src="/media/cheraghled.jpeg" alt="چراغ جراحی">
-                    </div>
-                    <div class="post-body">
-                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۱۸ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۱۰ دقیقه</span></div>
-                        <h3><a href="#">چراغ‌های جراحی LED: راهنمای خرید هوشمندانه</a></h3>
-                        <p>نکات ضروری برای انتخاب چراغ جراحی مناسب با توجه به نیاز اتاق عمل شما...</p>
-                        <a href="#" class="read-more-link">ادامه مطلب →</a>
-                    </div>
-                </article>
-
-                <!-- Post 4 -->
-                <article class="post-card standard">
-                    <div class="post-image">
-                        <span class="post-category-badge">استریلیزاسیون</span>
-                        <img src="/media/otocluve.jpeg" alt="اتوکلاو">
-                    </div>
-                    <div class="post-body">
-                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۱۵ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۷ دقیقه</span></div>
-                        <h3><a href="#">اتوکلاو بیمارستانی: مقایسه کلاس B و کلاس S</a></h3>
-                        <p>تفاوت‌های فنی، مزایا و کاربردهای هر کلاس در مراکز درمانی مختلف...</p>
-                        <a href="#" class="read-more-link">ادامه مطلب →</a>
-                    </div>
-                </article>
+                {% empty %}
+                <p>در حال حاضر مقاله‌ای برای نمایش وجود ندارد.</p>
+                {% endfor %}
             </div>
 
             <!-- Pagination -->
@@ -1541,55 +1506,30 @@
             <div class="sidebar-widget">
                 <h4><i class="fas fa-folder-open"></i> دسته‌بندی مقالات</h4>
                 <ul class="category-list">
-                    <li><a href="#">تجهیزات تصویربرداری <span class="count">۲۴</span></a></li>
-                    <li><a href="#">تجهیزات اتاق عمل <span class="count">۱۸</span></a></li>
-                    <li><a href="#">مانیتورینگ بیمار <span class="count">۱۵</span></a></li>
-                    <li><a href="#">استریلیزاسیون <span class="count">۱۱</span></a></li>
-                    <li><a href="#">تجهیزات تنفسی <span class="count">۹</span></a></li>
-                    <li><a href="#">تجهیزات آزمایشگاهی <span class="count">۱۴</span></a></li>
-                    <li><a href="#">اخبار صنعت <span class="count">۲۰</span></a></li>
+                    {% for cat in categories %}
+                    <li><a href="{% url 'post_list' %}?category={{ cat.slug }}">{{ cat.name }}</a></li>
+                    {% empty %}
+                    <li>دسته‌بندی‌ای وجود ندارد.</li>
+                    {% endfor %}
                 </ul>
             </div>
 
             <!-- Recent Posts Widget -->
             <div class="sidebar-widget">
                 <h4><i class="fas fa-history"></i> آخرین مقالات</h4>
+                {% for p in popular_posts %}
                 <div class="recent-post-item">
                     <div class="recent-post-thumb">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23dce8fc' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%231565F7' opacity='0.35'/%3E%3C/svg%3E" alt="">
+                        {% if p.image %}<img src="{{ p.image.url }}" alt="{{ p.title }}">{% endif %}
                     </div>
                     <div class="recent-post-info">
-                        <h5><a href="#">نگهداری پیشگیرانه تجهیزات پزشکی</a></h5>
-                        <span class="date">۱۴ خرداد ۱۴۰۵</span>
+                        <h5><a href="{% url 'post_detail' p.slug %}">{{ p.title }}</a></h5>
+                        <span class="date">{{ p.created_at|date:"Y/m/d" }}</span>
                     </div>
                 </div>
-                <div class="recent-post-item">
-                    <div class="recent-post-thumb">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23e2ebfa' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%234B8CFF' opacity='0.35'/%3E%3C/svg%3E" alt="">
-                    </div>
-                    <div class="recent-post-info">
-                        <h5><a href="#">کالیبراسیون دستگاه‌های فشارسنج</a></h5>
-                        <span class="date">۱۲ خرداد ۱۴۰۵</span>
-                    </div>
-                </div>
-                <div class="recent-post-item">
-                    <div class="recent-post-thumb">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23edf2fc' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%231565F7' opacity='0.3'/%3E%3C/svg%3E" alt="">
-                    </div>
-                    <div class="recent-post-info">
-                        <h5><a href="#">نکات ایمنی در استفاده از لیزر پزشکی</a></h5>
-                        <span class="date">۱۰ خرداد ۱۴۰۵</span>
-                    </div>
-                </div>
-                <div class="recent-post-item">
-                    <div class="recent-post-thumb">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23e6eefa' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%234B8CFF' opacity='0.3'/%3E%3C/svg%3E" alt="">
-                    </div>
-                    <div class="recent-post-info">
-                        <h5><a href="#">بازار تجهیزات پزشکی در سال ۱۴۰۵</a></h5>
-                        <span class="date">۸ خرداد ۱۴۰۵</span>
-                    </div>
-                </div>
+                {% empty %}
+                <p>مقاله‌ای موجود نیست.</p>
+                {% endfor %}
             </div>
 
             <!-- Tags Widget -->

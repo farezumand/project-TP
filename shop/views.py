@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from .models import Product, Category, Brand
 
@@ -74,3 +74,22 @@ def product_list(request):
     }
 
     return render(request, 'shop/shop.html', context)
+
+
+def product_detail(request, slug):
+    product = get_object_or_404(
+        Product.objects.select_related('category', 'brand'),
+        slug=slug,
+        is_active=True,
+    )
+    related_products = (
+        Product.objects
+        .filter(is_active=True, category=product.category)
+        .exclude(pk=product.pk)
+        .select_related('brand')[:4]
+    )
+    context = {
+        'product': product,
+        'related_products': related_products,
+    }
+    return render(request, 'shop/tkmhsul.html', context)

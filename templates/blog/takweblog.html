@@ -1409,7 +1409,7 @@
             </div>
             <h1>وبلاگ <span class="highlight">تجهیزات پزشکی</span></h1>
             <div class="breadcrumb">
-                <span class="current">راهنمای خرید یونیت دندانپزشکی</span>
+                <a href="{% url 'post_list' %}">وبلاگ</a><span class="separator">/</span><span class="current">{{ post.title }}</span>
             </div>
         </div>
     </section>
@@ -1508,64 +1508,21 @@
             <main class="main-content">
                 <article class="article-card">
                     <div class="cover-wrap">
-                        <img class="cover"
-                        src="/media/takweblog.jpeg"
-                        alt="یونیت دندانپزشکی مدرن"
-                        loading="lazy">
+                        {% if post.image %}
+                        <img class="cover" src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy">
+                        {% endif %}
                     </div>
 
                     <div class="meta">
-                        <span><i class="fa-regular fa-calendar-days"></i> ۲۳ اردیبهشت ۱۴۰۳</span>
-                        <span><i class="fa-regular fa-clock"></i> ۶ دقیقه مطالعه</span>
-                        <span><i class="fa-solid fa-tooth"></i> تجهیزات دندانپزشکی</span>
+                        <span><i class="fa-regular fa-calendar-days"></i> {{ post.created_at|date:"Y/m/d" }}</span>
+                        <span><i class="fa-regular fa-clock"></i> {{ post.reading_time }} دقیقه مطالعه</span>
+                        <span><i class="fa-solid fa-eye"></i> {{ post.views }} بازدید</span>
+                        {% if post.category %}<span><i class="fa-solid fa-folder"></i> {{ post.category.name }}</span>{% endif %}
                     </div>
 
-                    <h2>راهنمای خرید یونیت دندانپزشکی؛ نکات مهم قبل از خرید</h2>
+                    <h2>{{ post.title }}</h2>
 
-                    <p>
-                        یونیت دندانپزشکی یکی از مهم‌ترین تجهیزات هر مطب است
-                        که تأثیر مستقیمی بر کیفیت خدمات و رضایت بیماران دارد.
-                        انتخاب صحیح این تجهیزات نیازمند بررسی دقیق مشخصات
-                        فنی و کیفیت ساخت می‌باشد.
-                    </p>
-
-                    <h3>چرا انتخاب یونیت مناسب اهمیت دارد؟</h3>
-                    <p>
-                        یک یونیت استاندارد علاوه بر افزایش بهره‌وری،
-                        موجب راحتی بیمار و پزشک شده و فرآیند درمان را
-                        به شکل مؤثرتری مدیریت می‌کند.
-                    </p>
-
-                    <h3>نکات مهم هنگام خرید</h3>
-                    <ul>
-                        <li>ارگونومی و راحتی بیمار</li>
-                        <li>کیفیت ساخت و دوام بالا</li>
-                        <li>امکانات و تجهیزات جانبی</li>
-                        <li>خدمات پس از فروش و گارانتی معتبر</li>
-                        <li>اعتبار برند تولیدکننده</li>
-                    </ul>
-
-                    <h3>جمع‌بندی</h3>
-                    <p>
-                        پیش از خرید یونیت دندانپزشکی، نیازهای کلینیک،
-                        بودجه و امکانات مورد نیاز خود را مشخص کنید تا
-                        بهترین انتخاب را داشته باشید.
-                    </p>
-
-                    <div class="note-box">
-                        <span class="note-icon"><i class="fa-regular fa-lightbulb"></i></span>
-                        <div>
-                            <strong>نکته مهم:</strong>
-                            قبل از خرید، خدمات پس از فروش و تأمین قطعات یدکی را به‌دقت بررسی کنید.
-                        </div>
-                    </div>
-
-                    <div class="tags">
-                        <span>یونیت دندانپزشکی</span>
-                        <span>خرید تجهیزات</span>
-                        <span>راهنمای خرید</span>
-                        <span>تجهیزات مطب</span>
-                    </div>
+                    {{ post.content|linebreaks }}
                 </article>
             </main>
         </div>
