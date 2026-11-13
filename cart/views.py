@@ -158,6 +158,22 @@ def checkout(request):
         total=subtotal - discount,
         coupon_code=coupon.code if coupon else '',
     )
+    # قفل ردیف محصولات در انبار و کسر موجودی (ضد ریس شرط در سفارش همزمان)
+    locked_products = {
+        p.pk: p
+        for p in Product.objects.select_for_update().filter(
+            pk__in=[product.pk for product, _ in chosen]
+        )
+    }
+    for product, quantity in chosen:
+        locked = locked_products[product.pk]
+        if locked.stock < quantity:
+            messages.error(request, f'موجودی «{locked.name}» همین لحظه تمام شد.')
+            transaction.set_rollback(True)
+            return redirect('cart_detail')
+        locked.stock -= quantity
+        locked.save(update_fields=['stock'])
+
     for product, quantity in chosen:
         OrderItem.objects.create(
             order=order,
