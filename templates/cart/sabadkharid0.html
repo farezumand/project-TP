@@ -1,0 +1,2032 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سبد خرید | تجهیزات پزشکی آذر یزدان</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1565F7;
+            --primary-dark: #0E4FC7;
+            --primary-light: #EAF2FF;
+            --secondary: #4B8CFF;
+            --text-dark: #1D2B53;
+            --text: #4A587C;
+            --text-light: #8B96B8;
+            --white: #FFFFFF;
+            --border: #E6ECF5;
+            --bg: #F8FAFD;
+            --shadow: 0 10px 30px rgba(21, 101, 247, .08);
+            --shadow-lg: 0 20px 50px rgba(21, 101, 247, .12);
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --sidebar-bg: #0b1526;
+            --danger: #ef4444;
+            --danger-light: #fef2f2;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --warning: #f59e0b;
+            --warning-light: #fffbeb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IRANSans', 'Vazir', 'Shabnam', 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ========== TOPBAR ========== */
+        .topbar {
+            height: 70px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        .topbar .container {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+        .topbar-right,
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .topbar-right a {
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .topbar-right a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .topbar-left {
+            gap: 10px;
+        }
+        .topbar-left i.fa-user {
+            color: #fff;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .topbar-left .auth-btn {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+        .topbar-left .auth-btn:hover {
+            background: #fff;
+            color: var(--primary);
+            border-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .topbar-left .auth-btn.register {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        .topbar-left .auth-btn.register:hover {
+            background: #fff;
+            color: var(--primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                height: auto;
+                padding: 10px 0;
+            }
+            .topbar .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .topbar-right,
+            .topbar-left {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .topbar-right a {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+            .topbar-left .auth-btn {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+            .topbar-left i.fa-user {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .topbar-right {
+                gap: 4px;
+            }
+            .topbar-right a {
+                font-size: 10px;
+                padding: 4px 7px;
+                gap: 3px;
+            }
+            .topbar-left {
+                gap: 6px;
+            }
+            .topbar-left .auth-btn {
+                font-size: 10px;
+                padding: 5px 10px;
+            }
+        }
+
+        /* ========== HEADER / NAV ========== */
+        .header {
+            background: #fff;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .header .container {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 6px 0;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .header-icons i {
+            transition: transform 0.25s ease, color 0.25s;
+        }
+        .header-icons i:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+            order: 1;
+            flex-shrink: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 992px) {
+            .hamburger {
+                display: flex;
+            }
+            .header-icons {
+                order: 0;
+                gap: 14px;
+                font-size: 18px;
+            }
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 300px;
+                height: 100vh;
+                background: rgba(11, 21, 38, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                box-shadow: 5px 0 30px rgba(0, 0, 0, 0.4);
+                padding: 100px 30px 30px;
+                transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+                z-index: 1000;
+                display: block !important;
+                border-left: 1px solid rgba(255, 255, 255, 0.15);
+            }
+            nav.active {
+                left: 0;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 2px;
+            }
+            nav a {
+                color: #ffffff;
+                font-size: 16px;
+                display: block;
+                padding: 12px 10px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                font-weight: 500;
+                transition: all 0.3s ease;
+                border-radius: 8px;
+                margin-bottom: 2px;
+            }
+            nav a:hover {
+                background: rgba(21, 101, 247, 0.25);
+                color: #ffffff;
+                padding-right: 20px;
+                border-bottom-color: transparent;
+            }
+            .header .container {
+                height: 75px;
+            }
+            .logo {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header .container {
+                height: 65px;
+            }
+            .logo {
+                font-size: 20px;
+            }
+            .header-icons {
+                gap: 10px;
+                font-size: 16px;
+            }
+            .hamburger span {
+                width: 24px;
+                height: 2.5px;
+            }
+            .hamburger {
+                gap: 5px;
+                padding: 6px;
+            }
+        }
+
+        /* ==================== MAIN LAYOUT ==================== */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 28px 20px 50px;
+            flex: 1;
+            width: 100%;
+        }
+        .page-title-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .page-title {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .icon-circle {
+            width: 46px;
+            height: 46px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .cart-item-count {
+            font-size: .9rem;
+            font-weight: 500;
+            color: var(--text-light);
+            background: var(--white);
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+
+        /* ==================== CART GRID ==================== */
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .cart-items-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: box-shadow .3s;
+        }
+        .cart-items-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        .cart-items-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fafbfd;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .cart-items-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .select-all-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .85rem;
+            color: var(--text-light);
+            cursor: pointer;
+            user-select: none;
+            font-weight: 500;
+        }
+        .select-all-label input {
+            accent-color: var(--primary);
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            transition: background .25s;
+            position: relative;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-item:hover {
+            background: #fcfdff;
+        }
+        .cart-item-checkbox input {
+            accent-color: var(--primary);
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+        .cart-item-img {
+            width: 90px;
+            height: 90px;
+            border-radius: var(--radius-md);
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        /* استایل جدید برای تصاویر محصول */
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .item-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: .95rem;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .item-meta {
+            font-size: .78rem;
+            color: var(--text-light);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .item-meta span {
+            background: var(--bg);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .cart-item-price-section {
+            text-align: left;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .item-total {
+            font-weight: 900;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+        .item-unit-price {
+            font-size: .75rem;
+            color: var(--text-light);
+            display: block;
+        }
+        .item-discount-badge {
+            display: inline-block;
+            background: var(--success-light);
+            color: var(--success);
+            font-size: .7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: #f1f5f9;
+            border-radius: 28px;
+            padding: 3px;
+            flex-shrink: 0;
+        }
+        .quantity-control button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+            line-height: 1;
+        }
+        .quantity-control button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .quantity-control button:active {
+            transform: scale(.9);
+        }
+        .qty-display {
+            min-width: 38px;
+            text-align: center;
+            font-weight: 700;
+            font-size: .9rem;
+            color: var(--text-dark);
+            user-select: none;
+        }
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all .25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .remove-btn:hover {
+            color: #fff;
+            background: var(--danger);
+        }
+        .remove-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+        }
+
+        /* ==================== SUMMARY ==================== */
+        .cart-summary {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            padding: 24px;
+            position: sticky;
+            top: 110px;
+        }
+        .cart-summary h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 2px dashed var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: .9rem;
+            color: var(--text);
+            gap: 10px;
+        }
+        .summary-row span:last-child {
+            white-space: nowrap;
+        }
+        .summary-row.total-row {
+            font-weight: 900;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            border-top: 1px solid var(--border);
+            margin-top: 8px;
+            padding-top: 16px;
+        }
+        .coupon-section {
+            margin: 16px 0;
+            display: flex;
+            gap: 8px;
+        }
+        .coupon-section input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: .85rem;
+            outline: none;
+            background: var(--bg);
+            direction: ltr;
+            text-align: left;
+            min-width: 0;
+        }
+        .coupon-section input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(21, 101, 247, .06);
+            background: white;
+        }
+        .coupon-section button {
+            padding: 12px 20px;
+            background: var(--text-dark);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 700;
+            font-family: inherit;
+            font-size: .85rem;
+            white-space: nowrap;
+            transition: background .25s;
+            flex-shrink: 0;
+        }
+        .coupon-section button:hover {
+            background: var(--sidebar-bg);
+        }
+        .coupon-applied {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: var(--success-light);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--success);
+            margin: 8px 0 16px;
+            flex-wrap: wrap;
+        }
+        .coupon-applied button {
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: .8rem;
+            margin-right: auto;
+            font-family: inherit;
+        }
+        .btn-checkout {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 6px 20px rgba(21, 101, 247, .3);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all .3s;
+        }
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(21, 101, 247, .4);
+        }
+        .trust-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .trust-badge {
+            font-size: .7rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg);
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+            flex-shrink: 0;
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 21, 38, 0.6);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px 28px;
+            width: 90%;
+            max-width: 520px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, .25);
+            transform: translateY(30px);
+            transition: transform .3s;
+        }
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        .modal h2 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: .9rem;
+            transition: .2s;
+            background: #fff;
+        }
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(21, 101, 247, .06);
+            outline: none;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .btn-primary {
+            flex: 1;
+            padding: 13px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background .25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        .btn-secondary {
+            flex: 1;
+            padding: 13px;
+            background: transparent;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            color: var(--text);
+            transition: .25s;
+        }
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .empty-cart {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+        .empty-cart .empty-icon {
+            color: var(--text-light);
+            opacity: .25;
+            margin-bottom: 16px;
+        }
+        .btn-shop {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 16px;
+        }
+
+        /* Responsive - Cart Grid */
+        @media (max-width: 1100px) {
+            .cart-grid {
+                grid-template-columns: 1fr 340px;
+                gap: 20px;
+            }
+            .cart-item {
+                padding: 16px 18px;
+                gap: 12px;
+            }
+            .cart-item-img {
+                width: 75px;
+                height: 75px;
+            }
+            .cart-summary {
+                top: 100px;
+                padding: 18px;
+            }
+            .cart-summary h3 {
+                font-size: 1rem;
+                margin-bottom: 16px;
+                padding-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .cart-grid {
+                grid-template-columns: 1fr;
+            }
+            .cart-summary {
+                position: static;
+                order: -1;
+                top: auto;
+            }
+            .cart-item {
+                flex-wrap: wrap;
+                padding-right: 40px;
+                gap: 10px;
+            }
+            .cart-item-price-section {
+                order: 1;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding-right: 35px;
+            }
+            .quantity-control {
+                order: 2;
+            }
+            .remove-btn {
+                position: absolute;
+                top: 16px;
+                left: 16px;
+                z-index: 2;
+            }
+            .cart-item-checkbox {
+                position: absolute;
+                top: 18px;
+                right: 16px;
+            }
+            .page-title {
+                font-size: 1.3rem;
+            }
+            .icon-circle {
+                width: 38px;
+                height: 38px;
+            }
+            .icon-circle svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-container {
+                padding: 16px 12px 30px;
+            }
+            .cart-item {
+                padding: 12px 10px 12px 35px;
+                gap: 8px;
+            }
+            .cart-item-img {
+                width: 60px;
+                height: 60px;
+                border-radius: var(--radius-sm);
+            }
+            .item-title {
+                font-size: .82rem;
+            }
+            .item-meta {
+                font-size: .7rem;
+                gap: 4px;
+            }
+            .item-meta span {
+                padding: 2px 7px;
+            }
+            .cart-item-price-section {
+                padding-right: 30px;
+            }
+            .item-total {
+                font-size: .95rem;
+            }
+            .quantity-control button {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
+            .qty-display {
+                min-width: 32px;
+                font-size: .8rem;
+            }
+            .cart-summary {
+                padding: 16px;
+                border-radius: var(--radius-md);
+            }
+            .cart-summary h3 {
+                font-size: .95rem;
+            }
+            .summary-row {
+                font-size: .8rem;
+                padding: 8px 0;
+            }
+            .summary-row.total-row {
+                font-size: 1rem;
+            }
+            .btn-checkout {
+                padding: 13px;
+                font-size: .9rem;
+            }
+            .modal {
+                padding: 20px 16px;
+                border-radius: var(--radius-md);
+            }
+            .modal h2 {
+                font-size: 1.1rem;
+            }
+            .form-group input {
+                padding: 10px 12px;
+                font-size: .85rem;
+            }
+            .page-title-section {
+                margin-bottom: 20px;
+                gap: 10px;
+            }
+            .page-title {
+                font-size: 1.1rem;
+                gap: 8px;
+            }
+            .icon-circle {
+                width: 34px;
+                height: 34px;
+            }
+            .icon-circle svg {
+                width: 16px;
+                height: 16px;
+            }
+            .cart-item-count {
+                font-size: .78rem;
+                padding: 5px 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .cart-item {
+                padding: 10px 8px 10px 30px;
+                gap: 6px;
+            }
+            .cart-item-img {
+                width: 48px;
+                height: 48px;
+                border-radius: 10px;
+            }
+            .item-title {
+                font-size: .75rem;
+            }
+            .item-meta {
+                font-size: .65rem;
+            }
+            .cart-item-price-section {
+                padding-right: 25px;
+            }
+            .item-total {
+                font-size: .85rem;
+            }
+            .quantity-control button {
+                width: 26px;
+                height: 26px;
+                font-size: .9rem;
+            }
+            .qty-display {
+                min-width: 28px;
+                font-size: .75rem;
+            }
+            .remove-btn svg {
+                width: 15px;
+                height: 15px;
+            }
+            .coupon-section {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .coupon-section button {
+                width: 100%;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            position: relative;
+            background: linear-gradient(180deg, #052867 0%, #03245d 50%, #041d4c 100%);
+            color: #fff;
+            padding: 60px 70px 25px;
+            margin-top: 50px;
+            overflow: hidden;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr 1.4fr;
+            gap: 45px;
+        }
+        .footer-col {
+            border-left: 1px solid rgba(255, 255, 255, .08);
+            padding-left: 40px;
+        }
+        .company-col {
+            border-left: none;
+            padding-left: 0;
+        }
+        .footer-col h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 32px;
+            height: 2px;
+            background: #2f79ff;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 16px;
+        }
+        .footer-col ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: .9;
+            transition: .3s;
+        }
+        .footer-col ul li a:hover {
+            color: #4f9dff;
+        }
+        .footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .logo-icon {
+            font-size: 42px;
+            color: #fff;
+        }
+        .footer .logo h2 {
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 700;
+            color: #fff;
+        }
+        .footer .logo span {
+            font-size: 12px;
+            opacity: .8;
+            color: #fff;
+        }
+        .about-text {
+            font-size: 14px;
+            line-height: 2.1;
+            opacity: .9;
+            margin-top: 15px;
+            max-width: 280px;
+        }
+        .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0e4db9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .socials a:hover {
+            transform: translateY(-3px);
+        }
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .contact-list i {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 4px;
+        }
+        .contact-list span {
+            font-size: 15px;
+            line-height: 2;
+            text-align: right;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            margin-top: 45px;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: .8;
+        }
+        .copyright {
+            font-size: 14px;
+            opacity: .8;
+        }
+
+        /* تبلت: فوتر ۵ ستونه */
+        @media (max-width: 1100px) {
+            .footer-container {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 16px;
+            }
+            .footer-col {
+                padding-left: 12px;
+                border-left: 1px solid rgba(255, 255, 255, .05);
+            }
+            .company-col {
+                border-left: none;
+                padding-left: 0;
+            }
+            .footer-col h3 {
+                font-size: 15px;
+                margin-bottom: 16px;
+            }
+            .footer-col h3::after {
+                width: 20px;
+                height: 1.5px;
+                bottom: -6px;
+            }
+            .footer-col ul li {
+                margin-bottom: 10px;
+            }
+            .footer-col ul li a {
+                font-size: 11px;
+            }
+            .contact-list li {
+                gap: 6px;
+                margin-bottom: 12px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .contact-list i {
+                font-size: 12px;
+                order: -1;
+                margin-bottom: 2px;
+            }
+            .contact-list span {
+                font-size: 10px;
+                line-height: 1.5;
+            }
+            .about-text {
+                font-size: 10px;
+                max-width: 100%;
+                line-height: 1.6;
+            }
+            .footer .logo h2 {
+                font-size: 18px;
+            }
+            .logo-icon {
+                font-size: 26px;
+            }
+            .footer .logo span {
+                font-size: 9px;
+            }
+            .socials {
+                gap: 8px;
+                margin-top: 14px;
+            }
+            .socials a {
+                width: 28px;
+                height: 28px;
+                font-size: 11px;
+            }
+            .footer {
+                padding: 40px 20px 18px;
+            }
+            .footer-bottom {
+                margin-top: 28px;
+                padding-top: 16px;
+            }
+            .footer-links a {
+                font-size: 11px;
+            }
+            .copyright {
+                font-size: 11px;
+            }
+            .footer-links {
+                gap: 14px;
+            }
+        }
+
+        /* موبایل: چیدمان ۲-۲-۱ با وسط‌چین */
+        @media (max-width: 600px) {
+            .footer-container {
+                grid-template-columns: auto auto;
+                justify-content: center;
+                gap: 20px 12px;
+                grid-template-areas:
+                    "contact services"
+                    "quick products"
+                    "company company";
+            }
+            .footer-container>.footer-col:nth-child(1) {
+                grid-area: contact;
+            }
+            .footer-container>.footer-col:nth-child(2) {
+                grid-area: services;
+            }
+            .footer-container>.footer-col:nth-child(3) {
+                grid-area: quick;
+            }
+            .footer-container>.footer-col:nth-child(4) {
+                grid-area: products;
+            }
+            .footer-container>.footer-col:nth-child(5) {
+                grid-area: company;
+            }
+
+            .footer-col {
+                border-left: none;
+                padding-left: 0;
+                text-align: center;
+            }
+            .company-col {
+                grid-column: 1 / -1;
+                text-align: center;
+                margin-top: 10px;
+            }
+            .footer-col h3 {
+                font-size: 12px;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            .footer-col h3::after {
+                right: 50%;
+                transform: translateX(50%);
+                width: 20px;
+                height: 1px;
+                bottom: -5px;
+            }
+            .footer-col ul li {
+                margin-bottom: 6px;
+                text-align: center;
+            }
+            .footer-col ul li a {
+                font-size: 9px;
+            }
+            .contact-list li {
+                flex-direction: column;
+                align-items: center;
+                gap: 2px;
+                margin-bottom: 8px;
+            }
+            .contact-list i {
+                font-size: 10px;
+                order: -1;
+                margin-bottom: 2px;
+            }
+            .contact-list span {
+                font-size: 8px;
+                line-height: 1.4;
+                text-align: center;
+            }
+            .about-text {
+                font-size: 8px;
+                max-width: 100%;
+                line-height: 1.5;
+                margin-top: 8px;
+            }
+            .footer .logo {
+                justify-content: center;
+                gap: 4px;
+                margin-bottom: 8px;
+            }
+            .footer .logo h2 {
+                font-size: 14px;
+            }
+            .logo-icon {
+                font-size: 18px;
+            }
+            .footer .logo span {
+                font-size: 7px;
+            }
+            .socials {
+                justify-content: center;
+                gap: 6px;
+                margin-top: 12px;
+            }
+            .socials a {
+                width: 26px;
+                height: 26px;
+                font-size: 10px;
+            }
+            .footer {
+                padding: 30px 15px 15px;
+            }
+            .footer-bottom {
+                margin-top: 22px;
+                padding-top: 12px;
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+            .footer-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .footer-links a {
+                font-size: 9px;
+            }
+            .copyright {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-container {
+                gap: 16px 8px;
+            }
+            .footer-col h3 {
+                font-size: 10px;
+                margin-bottom: 8px;
+            }
+            .footer-col ul li a {
+                font-size: 7px;
+            }
+            .contact-list span {
+                font-size: 6px;
+            }
+            .about-text {
+                font-size: 6px;
+            }
+            .footer .logo h2 {
+                font-size: 11px;
+            }
+            .footer {
+                padding: 20px 6px 10px;
+            }
+            .socials a {
+                width: 22px;
+                height: 22px;
+                font-size: 8px;
+            }
+            .footer-links a,
+            .copyright {
+                font-size: 7px;
+            }
+        }
+
+        /* دکمه اسکرول به بالا */
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1264ff, #0049d4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 84, 255, .35);
+            z-index: 999;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            touch-action: manipulation; /* بهبود عملکرد لمسی در موبایل */
+        }
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 84, 255, .5);
+        }
+        .scroll-top i {
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .scroll-top {
+                bottom: 25px;
+                right: 25px;
+                width: 44px;
+                height: 44px;
+            }
+            .scroll-top i {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== TOPBAR ==================== -->
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-right">
+                <a href="#"><i class="fa-solid fa-phone"></i> 09372105008</a>
+                <a href="#"><i class="fa-solid fa-envelope"></i> azaryazdan@gmail.com</a>
+            </div>
+            <div class="topbar-left">
+                <i class="fa-solid fa-user"></i>
+                <a href="#" class="auth-btn">ورود</a>
+                <a href="#" class="auth-btn register">ثبت نام</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">AZARYAZDAN</div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">دندانپزشکی</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                    <li><a href="#">تماس</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CART ==================== -->
+    <main class="main-container">
+
+        <div class="page-title-section">
+            <h1 class="page-title">
+                <span class="icon-circle">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                </span>
+                سبد خرید شما
+            </h1>
+            <span class="cart-item-count">۳ کالا در سبد</span>
+        </div>
+
+        <div class="cart-grid" id="cartGrid">
+            <!-- Cart Items Card -->
+            <div class="cart-items-card">
+                <div class="cart-items-header">
+                    <h3>محصولات انتخاب شده</h3>
+                    <label class="select-all-label">
+                        <input type="checkbox" checked id="selectAll"> انتخاب همه
+                    </label>
+                </div>
+
+                <!-- Item 1 -->
+                <div class="cart-item" data-price="2850000" data-discount="5" data-id="1">
+                    <div class="cart-item-checkbox"><input type="checkbox" checked class="item-checkbox"></div>
+                    <div class="cart-item-img">
+                        <!-- جایگزینی SVG با تگ img برای تصویر محصول -->
+                        <img src="/media/sorang.jpeg" alt="دستگاه فشارسنج دیجیتال بازویی AZ-200 Pro">
+                    </div>
+                    <div class="cart-item-info">
+                        <div class="item-title">دستگاه فشارسنج دیجیتال بازویی AZ-200 Pro</div>
+                        <div class="item-meta"><span>کد: AZ-200</span><span>۲۴ ماه گارانتی</span></div>
+                    </div>
+                    <div class="quantity-control">
+                        <button onclick="updateQty(this, -1)">−</button>
+                        <span class="qty-display">1</span>
+                        <button onclick="updateQty(this, 1)">+</button>
+                    </div>
+                    <div class="cart-item-price-section">
+                        <span class="item-total">۲,۷۰۷,۵۰۰</span>
+                        <span class="item-unit-price">تومان</span>
+                        <span class="item-discount-badge">۵٪ تخفیف</span>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(this)" title="حذف کالا">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="cart-item" data-price="450000" data-discount="0" data-id="2">
+                    <div class="cart-item-checkbox"><input type="checkbox" checked class="item-checkbox"></div>
+                    <div class="cart-item-img">
+                        <!-- جایگزینی SVG با تگ img برای تصویر محصول -->
+                        <img src="/media/tabasnj.jpeg" alt="تب سنج دیجیتال طبی T-100">
+                    </div>
+                    <div class="cart-item-info">
+                        <div class="item-title">تب سنج دیجیتال طبی T-100</div>
+                        <div class="item-meta"><span>کد: T-100</span><span>۱۲ ماه گارانتی</span></div>
+                    </div>
+                    <div class="quantity-control">
+                        <button onclick="updateQty(this, -1)">−</button>
+                        <span class="qty-display">2</span>
+                        <button onclick="updateQty(this, 1)">+</button>
+                    </div>
+                    <div class="cart-item-price-section">
+                        <span class="item-total">۹۰۰,۰۰۰</span>
+                        <span class="item-unit-price">۴۵۰,۰۰۰ تومان</span>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(this)" title="حذف کالا">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="cart-item" data-price="1200000" data-discount="8" data-id="3">
+                    <div class="cart-item-checkbox"><input type="checkbox" checked class="item-checkbox"></div>
+                    <div class="cart-item-img">
+                        <!-- جایگزینی SVG با تگ img برای تصویر محصول -->
+                        <img src="/media/paks ekstir.jpeg" alt="پالس اکسیمتر انگشتی OX-50">
+                    </div>
+                    <div class="cart-item-info">
+                        <div class="item-title">پالس اکسیمتر انگشتی OX-50</div>
+                        <div class="item-meta"><span>کد: OX-50</span><span>۱۸ ماه گارانتی</span></div>
+                    </div>
+                    <div class="quantity-control">
+                        <button onclick="updateQty(this, -1)">−</button>
+                        <span class="qty-display">1</span>
+                        <button onclick="updateQty(this, 1)">+</button>
+                    </div>
+                    <div class="cart-item-price-section">
+                        <span class="item-total">۱,۱۰۴,۰۰۰</span>
+                        <span class="item-unit-price">تومان</span>
+                        <span class="item-discount-badge">۸٪ تخفیف</span>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(this)" title="حذف کالا">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <aside class="cart-summary">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+                    خلاصه سفارش
+                </h3>
+                <div class="summary-row"><span>مجموع کالاها</span><span id="totalItemsPrice">۴,۷۱۱,۵۰۰</span> تومان</div>
+                <div class="summary-row"><span>تخفیف</span><span id="totalDiscount" style="color:#ef4444;">− ۴۲۰,۰۰۰</span> تومان</div>
+                <div class="summary-row"><span>هزینه ارسال</span><span style="color:var(--success);">رایگان</span></div>
+                <div class="coupon-section">
+                    <input type="text" placeholder="کد تخفیف..." id="couponInput">
+                    <button onclick="applyCoupon()">اعمال</button>
+                </div>
+                <div class="coupon-applied" id="couponMsg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    کد تخفیف <strong>AZAR10</strong> اعمال شد
+                    <button onclick="removeCoupon()">حذف</button>
+                </div>
+                <div class="summary-row total-row"><span>مبلغ قابل پرداخت</span><span id="finalPrice">۴,۵۳۰,۰۰۰</span> تومان</div>
+                <button class="btn-checkout" id="checkoutBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    ادامه فرایند پرداخت
+                </button>
+                <div class="trust-badges">
+                    <span class="trust-badge"><span class="badge-dot"></span> پرداخت امن</span>
+                    <span class="trust-badge"><span class="badge-dot"></span> ضمانت بازگشت</span>
+                    <span class="trust-badge"><span class="badge-dot"></span> پشتیبانی ۲۴/۷</span>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Empty Cart State -->
+        <div class="empty-cart" id="emptyCart">
+            <div class="empty-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+            <h3>سبد خرید شما خالی است</h3>
+            <p>محصولات مورد نظر خود را انتخاب کنید.</p>
+            <a href="#" class="btn-shop">مشاهده محصولات</a>
+        </div>
+    </main>
+
+    <!-- ==================== CUSTOMER INFO MODAL ==================== -->
+    <div class="modal-overlay" id="infoModal">
+        <div class="modal">
+            <h2>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                اطلاعات مشتری
+            </h2>
+            <form id="customerForm" onsubmit="handlePayment(event)">
+                <div class="form-group"><label>نام و نام خانوادگی</label><input type="text" required placeholder="مثال: علی محمدی"></div>
+                <div class="form-group"><label>شماره تماس</label><input type="tel" required placeholder="۰۹۱۲۳۴۵۶۷۸۹"></div>
+                <div class="form-group"><label>استان و شهر</label><input type="text" required placeholder="تهران"></div>
+                <div class="form-group"><label>آدرس پستی</label><input type="text" required placeholder="خیابان ..."></div>
+                <div class="form-group"><label>کد پستی</label><input type="text" placeholder="۱۰ رقمی"></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">انصراف</button>
+                    <button type="submit" class="btn-primary">پرداخت و ثبت نهایی</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col contact-col">
+                <h3>اطلاعات تماس</h3>
+                <ul class="contact-list">
+                    <li><span>09372105008</span><i class="fa-solid fa-phone"></i></li>
+                    <li><span>09372108005</span><i class="fa-solid fa-mobile-screen"></i></li>
+                    <li><span>azaryazdan@gmail.com</span><i class="fa-regular fa-envelope"></i></li>
+                    <li><span>تبریز 17 شهریور جدید <br>جنب بانک ملت کوی نوبری جنب فروشگاه پالتار شرکت آدریزدان پلاک18</span><i class="fa-solid fa-location-dot"></i></li>
+                </ul>
+            </div>
+            <div class="footer-col"><h3>خدمات</h3><ul><li><a href="#">مشاوره تخصصی</a></li><li><a href="#">خدمات پس از فروش</a></li><li><a href="#">آموزش و نصب</a></li><li><a href="#">گارانتی و ضمانت</a></li><li><a href="#">پشتیبانی آنلاین</a></li></ul></div>
+            <div class="footer-col"><h3>دسترسی سریع</h3><ul><li><a href="#">صفحه اصلی</a></li><li><a href="#">درباره ما</a></li><li><a href="#">برندها</a></li><li><a href="#">مقالات</a></li><li><a href="#">سوالات متداول</a></li><li><a href="#">تماس با ما</a></li></ul></div>
+            <div class="footer-col"><h3>محصولات</h3><ul><li><a href="#">تجهیزات دندانپزشکی</a></li><li><a href="#">تجهیزات پزشکی</a></li><li><a href="#">تجهیزات آزمایشگاهی</a></li><li><a href="#">تجهیزات تصویربرداری</a></li><li><a href="#">تجهیزات استریل</a></li><li><a href="#">تجهیزات مصرفی</a></li></ul></div>
+            <div class="footer-col company-col">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-circle-plus"></i></div>
+                    <div><h2>AZRYYAZDAN</h2><span>تجهیزات پزشکی و دندانپزشکی</span></div>
+                </div>
+                <p class="about-text">ارائه دهنده تجهیزات پزشکی و دندانپزشکی از برندهای معتبر جهانی با بهترین قیمت و خدمات پس از فروش</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links"><a href="#">شرایط و قوانین</a><a href="#">سیاست حفظ حریم خصوصی</a></div>
+            <div class="copyright">© 1405 تمامی حقوق این وبسایت متعلق به شرکت مدی‌دنت می‌باشد.</div>
+        </div>
+        <!-- تغییر تگ به button برای رفع باگ مرورگر فایرفاکس موبایل -->
+        <button class="scroll-top" id="scrollTopBtn" aria-label="اسکرول به بالا"><i class="fa-solid fa-arrow-up"></i></button>
+    </footer>
+
+    <script>
+        // ==================== HAMBURGER MENU ====================
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // ==================== CART LOGIC ====================
+        let couponApplied = false;
+        const couponCode = 'AZAR10';
+        const couponDiscountPercent = 10;
+
+        // Helper to format number with Persian commas
+        function formatNumber(num) {
+            return num.toLocaleString('fa-IR');
+        }
+
+        // Calculate item total based on price, discount %, qty
+        function calcItemTotal(price, discountPercent, qty) {
+            let discounted = price * (1 - discountPercent / 100);
+            return Math.round(discounted * qty);
+        }
+
+        // Update a single item's displayed total
+        function updateItemDisplay(item) {
+            const price = parseInt(item.dataset.price);
+            const discount = parseInt(item.dataset.discount) || 0;
+            const qty = parseInt(item.querySelector('.qty-display').textContent);
+            const total = calcItemTotal(price, discount, qty);
+            item.querySelector('.item-total').textContent = formatNumber(total);
+            // Update discount badge visibility
+            const badge = item.querySelector('.item-discount-badge');
+            if (badge) {
+                if (discount > 0) {
+                    badge.textContent = discount + '٪ تخفیف';
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+        }
+
+        // Recalculate entire cart summary
+        function updateCartSummary() {
+            const items = document.querySelectorAll('.cart-item');
+            let totalItemsPrice = 0;
+            let totalDiscountAmount = 0;
+            let selectedCount = 0;
+
+            items.forEach(item => {
+                const checkbox = item.querySelector('.item-checkbox');
+                if (!checkbox || !checkbox.checked) return;
+                const price = parseInt(item.dataset.price);
+                const discount = parseInt(item.dataset.discount) || 0;
+                const qty = parseInt(item.querySelector('.qty-display').textContent);
+                const originalTotal = price * qty;
+                const discountedTotal = calcItemTotal(price, discount, qty);
+                totalItemsPrice += originalTotal;
+                totalDiscountAmount += (originalTotal - discountedTotal);
+                selectedCount++;
+            });
+
+            // Apply coupon if active
+            let finalPrice = totalItemsPrice - totalDiscountAmount;
+            if (couponApplied && selectedCount > 0) {
+                finalPrice = finalPrice * (1 - couponDiscountPercent / 100);
+                finalPrice = Math.round(finalPrice);
+            }
+
+            document.getElementById('totalItemsPrice').textContent = formatNumber(totalItemsPrice);
+            document.getElementById('totalDiscount').textContent = '− ' + formatNumber(totalDiscountAmount);
+            document.getElementById('finalPrice').textContent = formatNumber(finalPrice);
+
+            // Update cart count in the page title section
+            const remainingItems = document.querySelectorAll('.cart-item').length;
+            document.querySelector('.cart-item-count').textContent = remainingItems + ' کالا در سبد';
+
+            // Handle empty cart visibility
+            if (remainingItems === 0) {
+                document.getElementById('cartGrid').style.display = 'none';
+                document.getElementById('emptyCart').style.display = 'block';
+                document.querySelector('.page-title-section').style.display = 'none';
+            } else {
+                document.getElementById('cartGrid').style.display = '';
+                document.getElementById('emptyCart').style.display = 'none';
+                document.querySelector('.page-title-section').style.display = '';
+            }
+        }
+
+        // Quantity change
+        function updateQty(btn, change) {
+            const qtySpan = btn.parentElement.querySelector('.qty-display');
+            let qty = parseInt(qtySpan.textContent) + change;
+            if (qty < 1) qty = 1;
+            if (qty > 99) qty = 99;
+            qtySpan.textContent = qty;
+            // Quick scale animation
+            qtySpan.style.transform = 'scale(1.3)';
+            qtySpan.style.transition = 'transform 0.15s ease';
+            setTimeout(() => {
+                qtySpan.style.transform = 'scale(1)';
+            }, 150);
+            const item = btn.closest('.cart-item');
+            updateItemDisplay(item);
+            updateCartSummary();
+        }
+
+        // Remove item with animation
+        function removeItem(btn) {
+            const item = btn.closest('.cart-item');
+            item.style.transition = 'all 0.35s ease';
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(40px)';
+            item.style.maxHeight = item.offsetHeight + 'px';
+            item.style.overflow = 'hidden';
+            setTimeout(() => {
+                item.style.maxHeight = '0';
+                item.style.padding = '0';
+                item.style.margin = '0';
+                item.style.border = 'none';
+            }, 180);
+            setTimeout(() => {
+                item.remove();
+                updateCartSummary();
+                syncSelectAll();
+            }, 500);
+        }
+
+        // Select all checkbox
+        document.getElementById('selectAll').addEventListener('change', function(e) {
+            const checked = e.target.checked;
+            document.querySelectorAll('.item-checkbox').forEach(cb => cb.checked = checked);
+            updateCartSummary();
+        });
+
+        // Individual checkboxes
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('item-checkbox')) {
+                updateCartSummary();
+                syncSelectAll();
+            }
+        });
+
+        function syncSelectAll() {
+            const allCheckboxes = document.querySelectorAll('.item-checkbox');
+            if (allCheckboxes.length === 0) return;
+            const checkedAll = Array.from(allCheckboxes).every(cb => cb.checked);
+            document.getElementById('selectAll').checked = checkedAll;
+        }
+
+        // Coupon functions
+        function applyCoupon() {
+            const input = document.getElementById('couponInput');
+            const code = input.value.trim().toUpperCase();
+            if (code === couponCode && !couponApplied) {
+                couponApplied = true;
+                document.getElementById('couponMsg').style.display = 'flex';
+                input.value = '';
+                updateCartSummary();
+            } else if (couponApplied) {
+                alert('کد تخفیف قبلاً اعمال شده است.');
+            } else if (code !== '') {
+                alert('کد تخفیف نامعتبر است.');
+                input.style.borderColor = 'var(--danger)';
+                input.style.transition = 'border-color 0.3s';
+                setTimeout(() => {
+                    input.style.borderColor = 'var(--border)';
+                }, 2000);
+            }
+        }
+
+        function removeCoupon() {
+            couponApplied = false;
+            document.getElementById('couponMsg').style.display = 'none';
+            updateCartSummary();
+        }
+
+        // ==================== MODAL HANDLING ====================
+        const modal = document.getElementById('infoModal');
+
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            const items = document.querySelectorAll('.cart-item');
+            if (items.length === 0) {
+                alert('سبد خرید خالی است.');
+                return;
+            }
+            // Check if at least one item is selected
+            const anyChecked = Array.from(document.querySelectorAll('.item-checkbox')).some(cb => cb.checked);
+            if (!anyChecked) {
+                alert('لطفاً حداقل یک کالا را انتخاب کنید.');
+                return;
+            }
+            openModal();
+        });
+
+        function handlePayment(e) {
+            e.preventDefault();
+            alert('در حال انتقال به درگاه پرداخت...\nپس از پرداخت، سفارش شما ثبت خواهد شد.');
+            closeModal();
+        }
+
+        // Close modal on overlay click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // ==================== SCROLL TO TOP (رفع باگ فایرفاکس موبایل) ====================
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', () => {
+                // روش ترکیبی برای پشتیبانی بهتر در فایرفاکس موبایل
+                try {
+                    document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+                } catch (e) {
+                    // Fallback for older or strict browsers
+                    document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = 0;
+                }
+            });
+        }
+
+        // ==================== INITIALIZATION ====================
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.cart-item').forEach(item => updateItemDisplay(item));
+            updateCartSummary();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2226 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>تک محصول تجهیزات پزشکی</title>
+    <style>
+        :root {
+            --primary: #1565F7;
+            --primary-dark: #0E4FC7;
+            --primary-light: #EAF2FF;
+            --secondary: #4B8CFF;
+            --text-dark: #1D2B53;
+            --text: #4A587C;
+            --text-light: #8B96B8;
+            --white: #FFFFFF;
+            --border: #E6ECF5;
+            --bg: #F8FAFD;
+            --shadow: 0 10px 30px rgba(21, 101, 247, .08);
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            background: radial-gradient(circle at 20% 30%, #f0f4ff 0%, #f4f7fc 60%, #f9fafc 100%);
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* ========== TOPBAR ========== */
+        .topbar {
+            background: var(--primary);
+        }
+
+        .topbar .container {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .topbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .topbar-right,
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .topbar-right a {
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .topbar-right a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .topbar-left {
+            gap: 4px;
+        }
+
+        .topbar-left i.fa-user {
+            color: #fff;
+            font-size: 16px;
+            margin-left: 8px;
+            opacity: 0.9;
+        }
+
+        .topbar-left .auth-btn {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        .topbar-left .auth-btn:hover {
+            background: #fff;
+            color: var(--primary);
+            border-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .topbar-left .auth-btn.register {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .topbar-left .auth-btn.register:hover {
+            background: #fff;
+            color: var(--primary-dark);
+        }
+
+        /* ========== HEADER / NAV ========== */
+        .header {
+            background: #fff;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 998;
+        }
+
+        .header .container {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--primary);
+            order: 2;
+            white-space: nowrap;
+        }
+
+        .hamburger {
+            order: 1;
+        }
+
+        nav {
+            order: 3;
+        }
+
+        .header-icons {
+            order: 4;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 6px 0;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 22px;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .header-icons i {
+            transition: transform 0.25s ease, color 0.25s;
+        }
+        .header-icons i:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* همبرگر منو */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);       /* آبی تیره */
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ========== بخش محصول ========== */
+        .product-section .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: stretch;
+        }
+
+        .info-box,
+        .gallery-box {
+            background: #FFFFFF;
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(38, 77, 163, 0.06);
+            border: 1px solid #eef3fc;
+        }
+
+        .info-box {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== گالری ========== */
+        .gallery-box {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: pan-y;
+        }
+
+        .badge {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            z-index: 5;
+            box-shadow: 0 6px 15px rgba(13, 110, 253, 0.2);
+        }
+
+        .slider {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .nav {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            font-size: 18px;
+            color: #3d4b69;
+            transition: 0.3s;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .nav:hover {
+            background: #0d6efd;
+            color: white;
+            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
+            transform: scale(1.05);
+        }
+        .nav:active {
+            transform: scale(0.95);
+        }
+
+        .prev { right: 10px; }
+        .next { left: 10px; }
+
+        .thumbs {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+
+        .thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            background: white;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .thumb.active {
+            border-color: #0d6efd;
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.25);
+            transform: translateY(-3px);
+        }
+        .thumb:hover {
+            border-color: #b0cdfb;
+            transform: translateY(-2px);
+        }
+
+        /* ========== محتوای اطلاعات ========== */
+        .top-icons {
+            display: flex;
+            gap: 18px;
+            font-size: 20px;
+            color: #8c98b3;
+            margin-bottom: 25px;
+        }
+        .top-icons i {
+            cursor: pointer;
+            transition: .3s;
+        }
+        .top-icons i:hover {
+            color: #0d6efd;
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 34px;
+            margin-bottom: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .brand {
+            font-size: 15px;
+            color: #6b7b9f;
+            margin-bottom: 25px;
+        }
+        .brand span {
+            color: #0d6efd;
+            font-weight: 700;
+        }
+
+        .price {
+            font-size: 40px;
+            font-weight: 800;
+            color: #0d6efd;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .description {
+            line-height: 2.2;
+            font-size: 15px;
+            color: #5b6787;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 35px;
+            flex: 1;
+        }
+
+        .features li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 15px;
+            color: #44506b;
+        }
+
+        .features i {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #edf4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #0d6efd;
+            flex-shrink: 0;
+        }
+
+        .buy {
+            width: 100%;
+            height: 58px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            color: #fff;
+            font-size: 17px;
+            font-family: inherit;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.15);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .buy:hover {
+            background: linear-gradient(135deg, #0b5ed7, #094ec0);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(13, 110, 253, 0.3);
+        }
+        .buy:active {
+            transform: scale(0.98);
+        }
+
+        .consult {
+            width: 100%;
+            height: 58px;
+            border: 2px solid #dce7ff;
+            background: #fff;
+            border-radius: 14px;
+            font-size: 17px;
+            font-family: inherit;
+            cursor: pointer;
+            color: #2d4a86;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .consult:hover {
+            border-color: #0d6efd;
+            color: #0d6efd;
+            background: #f4f8ff;
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.1);
+        }
+        .consult:active {
+            transform: scale(0.98);
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid #edf0f7;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .bottom div {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 14px;
+            color: #5c6985;
+        }
+        .bottom i {
+            color: #0d6efd;
+        }
+
+        /* ========== Top Features ========== */
+        .top-features {
+            display: flex;
+            justify-content: space-around;
+            background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%);
+            border: 1px solid #e9eff9;
+            border-radius: var(--radius-md);
+            padding: 25px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(21, 101, 247, 0.06);
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 97%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: right;
+            flex: 1 1 auto;
+            min-width: 200px;
+            justify-content: center;
+            padding: 5px 10px;
+        }
+
+        .feature-icon {
+            color: var(--primary);
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        .feature-text span {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* ========== Product Details ========== */
+        .product-details {
+            margin: 80px auto;
+        }
+
+        .details-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 35px;
+            align-items: start;
+            padding: 0 20px;
+        }
+
+        /* ========== LEFT CARD ========== */
+        .promo-card {
+            position: sticky;
+            top: 100px;
+            height: 620px;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(21, 101, 247, 0.12);
+        }
+
+        .promo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(18, 86, 211, .90), rgba(15, 63, 164, .95));
+        }
+
+        .promo-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 35px;
+            color: #fff;
+        }
+
+        .promo-content h2 {
+            font-size: 34px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .promo-content p {
+            line-height: 2.2;
+            font-size: 15px;
+            opacity: .95;
+            margin-bottom: 35px;
+        }
+
+        .promo-content button {
+            width: 100%;
+            height: 58px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .12);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+            transition: .3s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .promo-content button:hover {
+            background: white;
+            color: #0d6efd;
+        }
+
+        /* ========== RIGHT TABS ========== */
+        .tabs-wrapper {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(21, 101, 247, 0.06);
+            border: 1px solid #eef3fc;
+            min-width: 0;
+        }
+
+        /* ========== Tabs ========== */
+        .tabs {
+            display: flex;
+            gap: 45px;
+            border-bottom: 1px solid #eef1f6;
+            margin-bottom: 35px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-x: contain;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 2px;
+            -webkit-mask-image: linear-gradient(to left, transparent 0%, black 3%, black 97%, transparent 100%);
+            mask-image: linear-gradient(to left, transparent 0%, black 3%, black 97%, transparent 100%);
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 17px;
+            color: #7b859d;
+            padding-bottom: 20px;
+            position: relative;
+            transition: .3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .tab:hover {
+            color: #0d6efd;
+        }
+        .tab.active {
+            color: #0d6efd;
+            font-weight: 700;
+        }
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 3px;
+            background: #0d6efd;
+            border-radius: 10px;
+        }
+
+        /* ========== Tab Content ========== */
+        .tab-content {
+            display: none;
+            animation: fade 0.35s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            from { opacity: 0;
+                transform: translateY(15px); }
+            to { opacity: 1;
+                transform: none; }
+        }
+
+        /* ========== Table ========== */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 16px;
+            max-width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            min-width: 500px;
+            table-layout: auto;
+        }
+
+        table tr:nth-child(even) td {
+            background-color: #fafcff;
+        }
+        table tr:hover td {
+            background-color: #eef4ff;
+        }
+
+        table td {
+            padding: 18px 24px;
+            border-bottom: 1px solid #edf1f8;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table td:first-child {
+            width: 220px;
+            font-weight: 700;
+            color: #2c3b5c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        table td:last-child {
+            color: #5c6e8c;
+        }
+
+        /* ========== Description ========== */
+        #desc h3 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: var(--text-dark);
+        }
+        #desc p {
+            line-height: 2.3;
+            color: #606b84;
+        }
+
+        /* ========== Comments ========== */
+        .comment {
+            padding: 25px;
+            border: 1px solid #edf1f7;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            background: #fafcff;
+            transition: all 0.3s;
+        }
+        .comment:hover {
+            border-color: #d5dff5;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+        .comment strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #1f2c46;
+        }
+        .comment span {
+            color: #f4b400;
+            display: block;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+        .comment p {
+            color: #66738b;
+            line-height: 2;
+        }
+
+        /* ========== FAQ ========== */
+        .faq-item {
+            border: 1px solid #edf1f7;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            background: #fff;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .faq-item:hover {
+            border-color: #dce5f5;
+        }
+        .faq-item h4 {
+            padding: 20px;
+            background: #fafcff;
+            font-size: 16px;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+        .faq-item h4::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 18px;
+            color: #8b96b8;
+            transition: transform 0.35s ease;
+            flex-shrink: 0;
+        }
+        .faq-item.open h4::after {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+        .faq-item.open h4 {
+            background: #eef4ff;
+            color: var(--primary);
+        }
+        .faq-item p {
+            padding: 0 20px;
+            color: #67758d;
+            line-height: 2;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        .faq-item.open p {
+            padding: 0 20px 20px;
+            max-height: 300px;
+        }
+
+        /* ========== Newsletter ========== */
+        .newsletter-box {
+            background: linear-gradient(135deg, #0e5add 0%, #1a4ab8 100%);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white);
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 97%;
+            max-width: 1400px;
+            margin: 60px auto 80px;
+            box-shadow: 0 20px 40px rgba(13, 110, 253, 0.2);
+        }
+
+        .news-icon {
+            font-size: 4rem;
+            opacity: 0.6;
+            display: none;
+        }
+
+        .news-content {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .news-content h3 {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+        }
+        .news-content p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .news-form {
+            display: flex;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px;
+            border-radius: 50px;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            flex-shrink: 0;
+        }
+
+        .news-form input {
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            outline: none;
+            width: 250px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .news-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .news-form button {
+            background: var(--white);
+            color: var(--primary);
+            border: none;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.1s;
+            font-family: inherit;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .news-form button:hover {
+            transform: scale(1.02);
+        }
+        .news-form button:active {
+            transform: scale(0.97);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            position: relative;
+            background: linear-gradient(180deg, #052867 0%, #03245d 50%, #041d4c 100%);
+            color: #fff;
+            padding: 60px 20px 25px;
+            margin-top: 50px;
+            overflow: hidden;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr 1.4fr;
+            gap: 45px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .footer-col {
+            border-left: 1px solid rgba(255, 255, 255, .08);
+            padding-left: 40px;
+            min-width: 0;
+        }
+
+        .company-col {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .footer-col h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 32px;
+            height: 2px;
+            background: #2f79ff;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: .9;
+            transition: .3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #4f9dff;
+        }
+
+        .footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .logo-icon {
+            font-size: 42px;
+            color: #fff;
+        }
+
+        .footer .logo h2 {
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .footer .logo span {
+            font-size: 12px;
+            opacity: .8;
+            color: #fff;
+        }
+
+        .about-text {
+            font-size: 14px;
+            line-height: 2.1;
+            opacity: .9;
+            margin-top: 15px;
+            max-width: 280px;
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0e4db9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .socials a:hover {
+            transform: translateY(-3px);
+            background: #1565F7;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .contact-list i {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .contact-list span {
+            font-size: 15px;
+            line-height: 2;
+            text-align: right;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            margin-top: 45px;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: .8;
+        }
+
+        .copyright {
+            font-size: 14px;
+            opacity: .8;
+        }
+
+        /* دکمه اسکرول به بالا */
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1264ff, #0049d4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 84, 255, .35);
+            z-index: 997;
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 84, 255, .5);
+        }
+
+        /* ========== ریسپانسیو ========== */
+        @media (max-width: 1100px) {
+            .footer {
+                padding: 40px 15px 18px;
+            }
+            .footer-container {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 16px;
+                padding: 0;
+            }
+            .footer-col {
+                padding-left: 12px;
+                border-left: 1px solid rgba(255, 255, 255, .05);
+            }
+            .company-col {
+                border-left: none;
+                padding-left: 0;
+            }
+            .footer-col h3 {
+                font-size: 15px;
+                margin-bottom: 16px;
+            }
+            .footer-col h3::after {
+                width: 20px;
+                height: 1.5px;
+                bottom: -6px;
+            }
+            .footer-col ul li {
+                margin-bottom: 10px;
+            }
+            .footer-col ul li a {
+                font-size: 11px;
+            }
+            .contact-list li {
+                gap: 6px;
+                margin-bottom: 12px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .contact-list i {
+                font-size: 12px;
+                order: -1;
+                margin-bottom: 2px;
+            }
+            .contact-list span {
+                font-size: 10px;
+                line-height: 1.5;
+            }
+            .about-text {
+                font-size: 10px;
+                max-width: 100%;
+                line-height: 1.6;
+            }
+            .footer .logo h2 {
+                font-size: 18px;
+            }
+            .logo-icon {
+                font-size: 26px;
+            }
+            .footer .logo span {
+                font-size: 9px;
+            }
+            .socials { gap: 8px;
+                margin-top: 14px; }
+            .socials a { width: 28px;
+                height: 28px;
+                font-size: 11px; }
+            .footer-bottom {
+                margin-top: 28px;
+                padding-top: 16px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .footer-links a { font-size: 11px; }
+            .copyright { font-size: 11px; }
+            .footer-links { gap: 14px; }
+        }
+
+        @media (max-width: 992px) {
+            .product-section .container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .gallery-box { order: 1;
+                height: 500px; }
+            .info-box { order: 2; }
+
+            .hamburger { display: flex;
+                order: 3; }
+            .header .container { justify-content: space-between;
+                gap: 10px;
+                height: 80px;
+                padding: 0 20px; }
+            .logo { order: 1;
+                flex-grow: 0;
+                text-align: right;
+                margin: 0;
+                margin-left: auto;
+                font-size: 28px; }
+            .header-icons { order: 2;
+                gap: 16px;
+                font-size: 18px; }
+
+            /* منوی کشویی از سمت چپ */
+            nav {
+                order: 0;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                height: 100vh;
+                height: 100dvh;
+                background: #fff;
+                box-shadow: 5px 0 25px rgba(0,0,0,0.12);
+                padding: 90px 30px 30px;
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1000;
+                display: block !important;
+                transform: translateX(-100%);
+            }
+
+            nav.active {
+                transform: translateX(0);
+            }
+
+            nav ul { flex-direction: column;
+                gap: 20px; }
+            nav a { font-size: 16px;
+                display: block;
+                padding: 10px 0; }
+            nav a::after { bottom: 4px; }
+
+            .details-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 0 20px;
+            }
+            .promo-card { height: 380px;
+                position: relative;
+                top: 0; }
+            .promo-content h2 { font-size: 26px;
+                line-height: 1.6; }
+            .promo-content p { font-size: 13px;
+                line-height: 1.9;
+                margin-bottom: 20px; }
+            .promo-content { padding: 25px; }
+            .tabs { gap: 25px; }
+            .tabs-wrapper { padding: 25px; }
+            table td:first-child { width: 150px; }
+
+            .top-features {
+                justify-content: center;
+                gap: 10px;
+                padding: 20px 15px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .feature-item { min-width: 160px;
+                flex: 0 0 auto;
+                gap: 10px; }
+            .feature-icon { font-size: 1.6rem; }
+            .feature-text h4 { font-size: 0.8rem; }
+            .feature-text span { font-size: 0.7rem; }
+
+            .newsletter-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .news-form { width: 100%;
+                max-width: 450px; }
+            .news-form input { width: 100%;
+                min-width: 0; }
+
+            .scroll-top { bottom: 25px;
+                right: 25px;
+                width: 44px;
+                height: 44px; }
+
+            /* اسکرول‌بار تب‌ها در موبایل - حرفه‌ای */
+            .tabs {
+                scrollbar-width: thin;
+                scrollbar-color: #c1cded #f0f3f9;
+                padding-bottom: 8px;
+                -webkit-mask-image: linear-gradient(to left, transparent 0%, black 4%, black 96%, transparent 100%);
+                mask-image: linear-gradient(to left, transparent 0%, black 4%, black 96%, transparent 100%);
+            }
+            .tabs::-webkit-scrollbar {
+                display: block;
+                height: 5px;
+            }
+            .tabs::-webkit-scrollbar-track {
+                background: #f0f3f9;
+                border-radius: 10px;
+                margin: 0 10px;
+            }
+            .tabs::-webkit-scrollbar-thumb {
+                background: #c1cded;
+                border-radius: 10px;
+                min-width: 40px;
+            }
+            .tabs::-webkit-scrollbar-thumb:hover {
+                background: #a0b5de;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 0;
+            }
+            .topbar .container {
+                height: auto;
+                flex-direction: column;
+                gap: 8px;
+                padding: 12px 20px;
+            }
+            .topbar-right {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            .topbar-right a {
+                font-size: 12px;
+                padding: 4px 10px;
+            }
+            .topbar-left {
+                gap: 6px;
+                justify-content: center;
+            }
+            .topbar-left .auth-btn {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+
+            .gallery-box { height: 380px;
+                padding: 15px; }
+            .badge { right: 15px;
+                top: 15px;
+                font-size: 11px;
+                padding: 6px 14px; }
+            h1 { font-size: 24px; }
+            .price { font-size: 30px; }
+            .description { font-size: 13px;
+                line-height: 2; }
+            .features li { font-size: 13px;
+                gap: 10px; }
+            .features i { width: 32px;
+                height: 32px;
+                font-size: 14px; }
+            .buy, .consult { height: 50px;
+                font-size: 15px; }
+            .info-box { padding: 20px; }
+            .nav { width: 40px;
+                height: 40px;
+                font-size: 15px; }
+            .thumb { width: 55px;
+                height: 55px; }
+            .thumbs { gap: 7px;
+                margin-top: 10px; }
+            .tabs { gap: 18px;
+                padding-bottom: 6px; }
+            .tab { font-size: 14px;
+                padding-bottom: 15px; }
+            .promo-card { height: 300px; }
+            .promo-content h2 { font-size: 22px; }
+            .promo-content button { height: 48px;
+                font-size: 14px; }
+
+            .newsletter-box {
+                padding: 25px 20px;
+                margin: 40px auto 50px;
+            }
+            .news-content h3 { font-size: 1.2rem; }
+            .news-content p { font-size: 0.85rem; }
+            .news-form { flex-direction: column;
+                background: transparent;
+                padding: 0;
+                gap: 10px;
+                border-radius: 0; }
+            .news-form input { background: rgba(255,255,255,0.15);
+                border-radius: 50px;
+                padding: 14px 20px;
+                width: 100%;
+                text-align: center; }
+            .news-form button { border-radius: 50px;
+                padding: 12px 30px;
+                width: 100%;
+                text-align: center; }
+
+            .tabs {
+                -webkit-mask-image: linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%);
+                mask-image: linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .topbar .container {
+                padding: 10px 20px;
+                gap: 6px;
+            }
+            /* رفع مشکل نمایش اطلاعات تماس: عدم مخفی‌سازی span و آیکون ایمیل */
+            .topbar-right a span,
+            .topbar-right a .fa-envelope {
+                display: inline;        /* نمایش داده شوند */
+                font-size: 11px;        /* اندازه متن کوچک‌تر */
+            }
+            .topbar-right a .fa-phone { margin: 0; }
+            .topbar-right { gap: 4px; }
+            .topbar-right a {
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+            .topbar-left .auth-btn { font-size: 10px;
+                padding: 4px 8px; }
+
+            .header .container { height: 70px;
+                padding: 0 20px; }
+            .logo { font-size: 22px; }
+            .header-icons { gap: 12px;
+                font-size: 16px; }
+
+            .gallery-box { height: 280px;
+                padding: 10px; }
+            .badge { right: 10px;
+                top: 10px;
+                font-size: 10px;
+                padding: 5px 10px;
+                border-radius: 8px; }
+            .nav { width: 34px;
+                height: 34px;
+                font-size: 13px; }
+            .prev { right: 6px; }
+            .next { left: 6px; }
+            .thumb { width: 45px;
+                height: 45px;
+                border-radius: 8px; }
+            .thumbs { gap: 5px;
+                margin-top: 8px; }
+
+            h1 { font-size: 20px; }
+            .price { font-size: 26px; }
+            .description { font-size: 12px;
+                line-height: 1.9; }
+            .features li { font-size: 12px;
+                gap: 8px; }
+            .features i { width: 28px;
+                height: 28px;
+                font-size: 12px; }
+            .buy, .consult { height: 46px;
+                font-size: 14px;
+                border-radius: 10px; }
+            .bottom { flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+                padding-top: 18px; }
+            .bottom div { font-size: 12px; }
+
+            .top-features {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                padding: 15px 20px;
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+            }
+            .feature-item { justify-content: flex-start;
+                min-width: auto;
+                padding: 8px 0;
+                border-bottom: 1px solid #eef3fc; }
+            .feature-item:last-child { border-bottom: none; }
+
+            .tabs-wrapper { padding: 18px;
+                border-radius: 18px; }
+            .tabs { gap: 14px;
+                margin-bottom: 20px;
+                padding-bottom: 5px; }
+            .tab { font-size: 13px;
+                padding-bottom: 12px; }
+            .tab.active::after { height: 2px;
+                bottom: -1px; }
+            table td { padding: 12px 14px;
+                font-size: 12px; }
+            table td:first-child { width: 120px; }
+            .promo-card { height: 260px;
+                border-radius: 18px; }
+            .promo-content { padding: 18px; }
+            .promo-content h2 { font-size: 18px;
+                line-height: 1.5;
+                margin-bottom: 10px; }
+            .promo-content p { font-size: 11px;
+                line-height: 1.7;
+                margin-bottom: 15px; }
+            .promo-content button { height: 42px;
+                font-size: 13px;
+                border-radius: 10px; }
+            #desc h3 { font-size: 20px; }
+            #desc p { font-size: 13px;
+                line-height: 2; }
+            .comment { padding: 16px;
+                border-radius: 14px; }
+            .comment strong { font-size: 14px; }
+            .comment p { font-size: 12px;
+                line-height: 1.8; }
+            .faq-item h4 { font-size: 13px;
+                padding: 16px; }
+            .faq-item.open p { padding: 0 16px 16px;
+                font-size: 12px; }
+
+            .tabs {
+                -webkit-mask-image: linear-gradient(to left, transparent 0%, black 6%, black 94%, transparent 100%);
+                mask-image: linear-gradient(to left, transparent 0%, black 6%, black 94%, transparent 100%);
+            }
+
+            .footer-container {
+                grid-template-columns: auto auto;
+                justify-content: center;
+                gap: 20px 12px;
+                grid-template-areas:
+                    "contact services"
+                    "quick products"
+                    "company company";
+                padding: 0;
+            }
+            .footer-container>.footer-col:nth-child(1) { grid-area: contact; }
+            .footer-container>.footer-col:nth-child(2) { grid-area: services; }
+            .footer-container>.footer-col:nth-child(3) { grid-area: quick; }
+            .footer-container>.footer-col:nth-child(4) { grid-area: products; }
+            .footer-container>.footer-col:nth-child(5) { grid-area: company; }
+
+            .footer-col { border-left: none;
+                padding-left: 0;
+                text-align: center; }
+            .company-col { grid-column: 1 / -1;
+                text-align: center;
+                margin-top: 10px; }
+            .footer-col h3 { font-size: 12px;
+                margin-bottom: 10px;
+                text-align: center; }
+            .footer-col h3::after { right: 50%;
+                transform: translateX(50%);
+                width: 20px;
+                height: 1px;
+                bottom: -5px; }
+            .footer-col ul li { margin-bottom: 6px;
+                text-align: center; }
+            .footer-col ul li a { font-size: 9px; }
+            .contact-list li { flex-direction: column;
+                align-items: center;
+                gap: 2px;
+                margin-bottom: 8px; }
+            .contact-list i { font-size: 10px;
+                order: -1;
+                margin-bottom: 2px; }
+            .contact-list span { font-size: 8px;
+                line-height: 1.4;
+                text-align: center; }
+            .about-text { font-size: 8px;
+                max-width: 100%;
+                line-height: 1.5;
+                margin-top: 8px; }
+            .footer .logo { justify-content: center;
+                gap: 4px;
+                margin-bottom: 8px; }
+            .footer .logo h2 { font-size: 14px; }
+            .logo-icon { font-size: 18px; }
+            .footer .logo span { font-size: 7px; }
+            .socials { justify-content: center;
+                gap: 6px;
+                margin-top: 12px; }
+            .socials a { width: 26px;
+                height: 26px;
+                font-size: 10px; }
+            .footer { padding: 30px 20px 15px; }
+            .footer-bottom {
+                margin-top: 22px;
+                padding-top: 12px;
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .footer-links { gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center; }
+            .footer-links a { font-size: 9px; }
+            .copyright { font-size: 9px; }
+            .scroll-top { bottom: 20px;
+                right: 20px;
+                width: 38px;
+                height: 38px; }
+            .scroll-top i { font-size: 14px; }
+        }
+
+        @media (max-width: 400px) {
+            .topbar .container {
+                padding: 8px 15px;
+            }
+            .topbar-right a span,
+            .topbar-right a .fa-envelope {
+                font-size: 10px;
+            }
+            .topbar-right a {
+                font-size: 10px;
+                padding: 3px 6px;
+            }
+            .gallery-box { height: 240px; }
+            .thumb { width: 38px;
+                height: 38px; }
+            h1 { font-size: 18px; }
+            .price { font-size: 22px; }
+            .buy, .consult { height: 42px;
+                font-size: 13px; }
+            .nav { width: 30px;
+                height: 30px;
+                font-size: 11px; }
+            .promo-card { height: 220px; }
+            .promo-content h2 { font-size: 16px; }
+            .newsletter-box {
+                padding: 20px 15px;
+                margin: 30px auto 40px;
+            }
+            .footer { padding: 20px 15px 10px; }
+            .footer-container { gap: 14px 6px; }
+            .footer-col h3 { font-size: 10px;
+                margin-bottom: 8px; }
+            .footer-col ul li a { font-size: 7px; }
+            .contact-list span { font-size: 6px; }
+            .about-text { font-size: 6px; }
+            .footer .logo h2 { font-size: 11px; }
+            .socials a { width: 22px;
+                height: 22px;
+                font-size: 8px; }
+            .footer-links a, .copyright { font-size: 7px; }
+            .footer-bottom {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-right">
+                <a href="#"><i class="fa-solid fa-phone"></i> <span>09372105008</span></a>
+                <a href="#"><i class="fa-solid fa-envelope"></i> <span>azzaryazdan@gmail.com</span></a>
+            </div>
+            <div class="topbar-left">
+                <i class="fa-solid fa-user"></i>
+                <a href="#" class="auth-btn">ورود</a>
+                <a href="#" class="auth-btn register">ثبت نام</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="hamburger" id="hamburger" aria-label="منو">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="logo">AZARYAZDAN</div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">دندانپزشکی</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                    <li><a href="#">تماس</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="product-section">
+        <div class="container">
+            <div class="gallery-box" id="galleryBox">
+                <div class="badge">جدید</div>
+                <div class="slider" id="slider">
+                    <button class="nav prev" aria-label="تصویر قبلی"><i class="fa-solid fa-chevron-right"></i></button>
+                    <img id="main-image" src="/media/takmahsulasli.jpeg" alt="محصول">
+                    <button class="nav next" aria-label="تصویر بعدی"><i class="fa-solid fa-chevron-left"></i></button>
+                </div>
+                <div class="thumbs" id="thumbsContainer">
+                    <div class="thumb active"><img src="/media/tak1.jpeg" alt="thumb"></div>
+                    <div class="thumb"><img src="/media/tak2.jpeg" alt="thumb"></div>
+                    <div class="thumb"><img src="/media/tak4.jpeg" alt="thumb"></div>
+                    <div class="thumb"><img src="/media/tak5.jpeg" alt="thumb"></div>
+                    <div class="thumb"><img src="/media/tak1.jpeg" alt="thumb"></div>
+                    <div class="thumb"><img src="/media/tak2.jpeg" alt="thumb"></div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="top-icons">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-solid fa-chart-simple"></i>
+                </div>
+                <h1>یونیت دندانپزشکی مدل V8000</h1>
+                <div class="brand">برند : <span>Medident</span></div>
+                <div class="price">۲۸۵,۰۰۰,۰۰۰ تومان</div>
+                <p class="description">یونیت دندانپزشکی V8000 با طراحی ارگونومیک و امکانات پیشرفته، تجربه‌ای راحت و حرفه‌ای برای دندانپزشک و بیمار فراهم می‌کند.</p>
+                <ul class="features">
+                    <li><i class="fa-solid fa-display"></i> سیستم کنترل دیجیتال</li>
+                    <li><i class="fa-solid fa-chair"></i> صندلی با قابلیت تنظیم اتوماتیک</li>
+                    <li><i class="fa-solid fa-lightbulb"></i> چراغ LED با تنظیم شدت نور</li>
+                    <li><i class="fa-solid fa-shield-heart"></i> فروشنده معتبر</li>
+                    <li><i class="fa-regular fa-heart"></i> گارانتی ۲۴ ماهه</li>
+                    <li><i class="fa-solid fa-medal"></i> خدمات پس از فروش ۱۰ ساله</li>
+                </ul>
+                <button class="buy"><i class="fa-solid fa-cart-shopping"></i> افزودن به سبد خرید</button>
+                <button class="consult"><i class="fa-solid fa-headset"></i> درخواست مشاوره</button>
+                <div class="bottom">
+                    <div><i class="fa-solid fa-truck-fast"></i> ارسال سریع</div>
+                    <div><i class="fa-solid fa-shield"></i> ضمانت اصالت کالا</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="top-features">
+        <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
+            <div class="feature-text"><h4>ارسال به سراسر کشور</h4><span>ارسال سریع تجهیزات</span></div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="feature-text"><h4>نصب و آموزش رایگان</h4><span>آموزش تخصصی به تیم شما</span></div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="feature-text"><h4>گارانتی معتبر</h4><span>۳۶ ماه گارانتی رسمی</span></div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+            <div class="feature-text"><h4>پشتیبانی تخصصی</h4><span>پشتیبانی قبل و بعد از خرید</span></div>
+        </div>
+    </div>
+
+    <section class="product-details">
+        <div class="details-container">
+            <aside class="promo-card">
+                <img src="/media/unitdandan.jpeg" alt="یونیت دندانپزشکی">
+                <div class="overlay"></div>
+                <div class="promo-content">
+                    <h2>به بهترین انتخاب<br>برای مطب‌های حرفه‌ای</h2>
+                    <p>یونیت V8000 با طراحی مدرن و امکانات پیشرفته، بهره‌وری و راحتی را برای شما فراهم می‌کند.</p>
+                    <button><i class="fa-solid fa-headset"></i> درخواست دمو رایگان</button>
+                </div>
+            </aside>
+
+            <div class="tabs-wrapper">
+                <div class="tabs" id="tabsContainer">
+                    <button class="tab active" data-tab="specs">مشخصات محصول</button>
+                    <button class="tab" data-tab="desc">توضیحات</button>
+                    <button class="tab" data-tab="comments">نظرات کاربران (۲)</button>
+                    <button class="tab" data-tab="faq">سوالات متداول</button>
+                </div>
+
+                <div class="tab-content active" id="specs">
+                    <div class="table-wrapper">
+                        <table>
+                            <tbody>
+                                <tr><td>مدل</td><td>V8000</td></tr>
+                                <tr><td>برند</td><td>Medident</td></tr>
+                                <tr><td>کشور سازنده</td><td>کره جنوبی</td></tr>
+                                <tr><td>نوع یونیت</td><td>یونیت دندانپزشکی دیجیتال</td></tr>
+                                <tr><td>سیستم کنترل</td><td>پنل لمسی دیجیتال</td></tr>
+                                <tr><td>چراغ</td><td>LED با شدت نور قابل تنظیم</td></tr>
+                                <tr><td>تعداد شیلنگ</td><td>۵ عدد</td></tr>
+                                <tr><td>تابوره</td><td>دارد</td></tr>
+                                <tr><td>گارانتی</td><td>۲۴ ماه</td></tr>
+                                <tr><td>خدمات پس از فروش</td><td>۱۰ سال</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="desc">
+                    <h3>توضیحات محصول</h3>
+                    <p>یونیت دندانپزشکی V8000 با طراحی ارگونومیک، صندلی برقی، چراغ LED، پنل لمسی و سیستم کنترل دیجیتال، یکی از کامل‌ترین یونیت‌های موجود برای کلینیک‌های مدرن محسوب می‌شود.</p>
+                </div>
+
+                <div class="tab-content" id="comments">
+                    <div class="comment">
+                        <strong>دکتر احمدی</strong>
+                        <span>★★★★★</span>
+                        <p>کیفیت ساخت بسیار عالی و عملکرد نرم موتور واقعاً رضایت‌بخش است.</p>
+                    </div>
+                    <div class="comment">
+                        <strong>دکتر محمدی</strong>
+                        <span>★★★★★</span>
+                        <p>نصب سریع و خدمات پس از فروش حرفه‌ای.</p>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="faq">
+                    <div class="faq-item">
+                        <h4>آیا نصب رایگان است؟</h4>
+                        <p>بله، نصب در سراسر کشور توسط نمایندگی انجام می‌شود.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>مدت گارانتی چقدر است؟</h4>
+                        <p>۲۴ ماه گارانتی معتبر.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="newsletter-box">
+        <div class="news-icon"><i class="fa-regular fa-envelope-open"></i></div>
+        <div class="news-content">
+            <h3>از جدیدترین محصولات و تخفیف‌ها باخبر شوید</h3>
+            <p>با عضویت در خبرنامه از جدیدترین محصولات و تخفیف‌های ویژه مطلع شوید.</p>
+        </div>
+        <div class="news-form">
+            <input type="email" placeholder="ایمیل خود را وارد کنید">
+            <button>عضویت</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col contact-col">
+                <h3>اطلاعات تماس</h3>
+                <ul class="contact-list">
+                    <li><span>09372105008</span><i class="fa-solid fa-phone"></i></li>
+                    <li><span>09372108005</span><i class="fa-solid fa-mobile-screen"></i></li>
+                    <li><span>azaryazdan@gmail.com</span><i class="fa-regular fa-envelope"></i></li>
+                    <li><span>تبریز 17 شهریور جدید <br>جنب بانک ملت کوی نوبری جنب فروشگاه پالتار شرکت آدریزدان پلاک18</span><i class="fa-solid fa-location-dot"></i></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>خدمات</h3>
+                <ul>
+                    <li><a href="#">مشاوره تخصصی</a></li>
+                    <li><a href="#">خدمات پس از فروش</a></li>
+                    <li><a href="#">آموزش و نصب</a></li>
+                    <li><a href="#">گارانتی و ضمانت</a></li>
+                    <li><a href="#">پشتیبانی آنلاین</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>دسترسی سریع</h3>
+                <ul>
+                    <li><a href="#">صفحه اصلی</a></li>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">مقالات</a></li>
+                    <li><a href="#">سوالات متداول</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>محصولات</h3>
+                <ul>
+                    <li><a href="#">تجهیزات دندانپزشکی</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">تجهیزات آزمایشگاهی</a></li>
+                    <li><a href="#">تجهیزات تصویربرداری</a></li>
+                    <li><a href="#">تجهیزات استریل</a></li>
+                    <li><a href="#">تجهیزات مصرفی</a></li>
+                </ul>
+            </div>
+            <div class="footer-col company-col">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-circle-plus"></i></div>
+                    <div><h2>AZRYYAZDAN</h2><span>تجهیزات پزشکی و دندانپزشکی</span></div>
+                </div>
+                <p class="about-text">ارائه دهنده تجهیزات پزشکی و دندانپزشکی از برندهای معتبر جهانی با بهترین قیمت و خدمات پس از فروش</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links"><a href="#">شرایط و قوانین</a><a href="#">سیاست حفظ حریم خصوصی</a></div>
+            <div class="copyright">© 1405 تمامی حقوق این وبسایت متعلق به شرکت مدی‌دنت می‌باشد.</div>
+        </div>
+        <a href="#" class="scroll-top" id="scrollTopBtn" aria-label="بازگشت به بالا"><i class="fa-solid fa-arrow-up"></i></a>
+    </footer>
+
+    <script>
+        (function() {
+            // ==================== همبرگر منو ====================
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            const body = document.body;
+
+            function openMenu() {
+                hamburger.classList.add('active');
+                navMenu.classList.add('active');
+                body.classList.add('menu-open');
+            }
+
+            function closeMenu() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (navMenu.classList.contains('active')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                        closeMenu();
+                    }
+                });
+
+                navMenu.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+
+            // ==================== گالری تصاویر ====================
+            const mainImage = document.getElementById("main-image");
+            const thumbs = document.querySelectorAll(".thumb");
+            const prevBtn = document.querySelector(".prev");
+            const nextBtn = document.querySelector(".next");
+            const slider = document.getElementById("slider");
+
+            if (mainImage && thumbs.length && slider) {
+                const images = Array.from(thumbs).map(thumb => thumb.querySelector("img").src);
+                let current = 0;
+
+                function changeImage(index) {
+                    if (index === current) return;
+                    current = index;
+                    mainImage.style.opacity = '0';
+                    setTimeout(() => {
+                        mainImage.src = images[current];
+                        mainImage.style.opacity = '1';
+                    }, 150);
+                    thumbs.forEach(t => t.classList.remove("active"));
+                    thumbs[current].classList.add("active");
+                    thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+
+                thumbs.forEach((thumb, i) => {
+                    thumb.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        changeImage(i);
+                    });
+                });
+
+                if (nextBtn) {
+                    nextBtn.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        changeImage((current + 1) % images.length);
+                    });
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        changeImage((current - 1 + images.length) % images.length);
+                    });
+                }
+
+                let touchStartX = 0;
+                slider.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                slider.addEventListener('touchend', (e) => {
+                    const diff = touchStartX - e.changedTouches[0].screenX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff > 0) changeImage((current + 1) % images.length);
+                        else changeImage((current - 1 + images.length) % images.length);
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') changeImage((current + 1) % images.length);
+                    if (e.key === 'ArrowRight') changeImage((current - 1 + images.length) % images.length);
+                });
+            }
+
+            // ==================== تب‌ها ====================
+            const tabs = document.querySelectorAll(".tab");
+            const contents = document.querySelectorAll(".tab-content");
+            const tabsContainer = document.getElementById("tabsContainer");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    const targetId = this.dataset.tab;
+                    tabs.forEach(item => item.classList.remove("active"));
+                    contents.forEach(item => item.classList.remove("active"));
+                    this.classList.add("active");
+                    const target = document.getElementById(targetId);
+                    if (target) target.classList.add("active");
+                    this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                });
+            });
+
+            // اسکرول لمسی روان برای تب‌ها
+            if (tabsContainer) {
+                let isDown = false,
+                    startX, scrollLeftPos;
+                tabsContainer.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    tabsContainer.style.cursor = 'grabbing';
+                    startX = e.pageX - tabsContainer.offsetLeft;
+                    scrollLeftPos = tabsContainer.scrollLeft;
+                });
+                tabsContainer.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    tabsContainer.style.cursor = 'default';
+                });
+                tabsContainer.addEventListener('mouseup', () => {
+                    isDown = false;
+                    tabsContainer.style.cursor = 'default';
+                });
+                tabsContainer.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - tabsContainer.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    tabsContainer.scrollLeft = scrollLeftPos - walk;
+                });
+                tabsContainer.addEventListener('touchstart', () => {
+                    tabsContainer.style.overscrollBehaviorX = 'auto';
+                });
+                tabsContainer.addEventListener('touchend', () => {
+                    setTimeout(() => { tabsContainer.style.overscrollBehaviorX = 'contain'; }, 300);
+                });
+            }
+
+            // ==================== FAQ Accordion ====================
+            document.querySelectorAll(".faq-item").forEach(item => {
+                const title = item.querySelector("h4");
+                if (title) {
+                    title.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        const isOpen = item.classList.contains("open");
+                        document.querySelectorAll(".faq-item").forEach(faq => {
+                            faq.classList.remove("open");
+                            const p = faq.querySelector("p");
+                            if (p) p.style.maxHeight = null;
+                        });
+                        if (!isOpen) {
+                            item.classList.add("open");
+                            const p = item.querySelector("p");
+                            if (p) p.style.maxHeight = p.scrollHeight + 40 + "px";
+                        }
+                    });
+                }
+            });
+
+            // ==================== اسکرول به بالا ====================
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (scrollTopBtn) {
+                scrollTopBtn.style.opacity = '0';
+                scrollTopBtn.style.pointerEvents = 'none';
+                scrollTopBtn.style.transition = 'opacity 0.3s, transform 0.3s, box-shadow 0.3s';
+
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 400) {
+                        scrollTopBtn.style.opacity = '1';
+                        scrollTopBtn.style.pointerEvents = 'auto';
+                    } else {
+                        scrollTopBtn.style.opacity = '0';
+                        scrollTopBtn.style.pointerEvents = 'none';
+                    }
+                });
+
+                scrollTopBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992 && navMenu && navMenu.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

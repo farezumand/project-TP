@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت سفارش موفق</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background: #f5f8fc; color: #20304f; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+        .box { background: white; padding: 36px; border-radius: 18px; width: min(90%, 520px); text-align: center; box-shadow: 0 12px 36px #163d7418; }
+        h1 { color: #14845a; font-size: 1.5rem; }
+        p { line-height: 2; }
+        a { display: inline-block; margin-top: 16px; padding: 12px 24px; border-radius: 10px; background: #1565f7; color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <main class="box">
+        <h1>سفارش شما ثبت شد</h1>
+        <p>شماره سفارش: <strong>{{ order.id }}</strong></p>
+        <p>مبلغ سفارش: <strong>{{ order.total }} تومان</strong></p>
+        <p>وضعیت سفارش: {{ order.get_status_display }}</p>
+        <p>سفارش شما در پنل مدیریت قابل مشاهده است. پرداخت آنلاین هنوز به سایت متصل نشده است.</p>
+        <a href="{% url 'product_list' %}">بازگشت به فروشگاه</a>
+    </main>
+</body>
+</html>

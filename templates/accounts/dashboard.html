@@ -1,0 +1,1960 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>داشبورد مشتری - تجهیزات پزشکی</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Vazirmatn-Fallback';
+            src: url('https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Vazirmatn-Fallback';
+            src: url('https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Vazirmatn-Fallback';
+            src: url('https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/webfonts/Vazirmatn-SemiBold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Vazirmatn-Fallback';
+            src: url('https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Vazirmatn-Fallback';
+            src: url('https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/webfonts/Vazirmatn-ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Vazirmatn-Fallback';
+            src: url('https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/webfonts/Vazirmatn-Light.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-darker: #1E40AF;
+            --primary-light: #EFF6FF;
+            --primary-50: #F0F5FF;
+            --primary-100: #DBEAFE;
+            --primary-200: #BFDBFE;
+            --primary-400: #60A5FA;
+            --secondary: #6366F1;
+            --accent: #0EA5E9;
+
+            --text-dark: #0F172A;
+            --text: #334155;
+            --text-medium: #64748B;
+            --text-light: #94A3B8;
+            --text-lighter: #CBD5E1;
+
+            --white: #FFFFFF;
+            --bg: #F8FAFC;
+            --bg-alt: #F1F5F9;
+            --border: #E2E8F0;
+            --border-light: #F1F5F9;
+            --border-focus: #BFDBFE;
+
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.05);
+            --shadow-blue: 0 8px 24px rgba(37, 99, 235, 0.18), 0 2px 8px rgba(37, 99, 235, 0.08);
+            --shadow-blue-lg: 0 16px 40px rgba(37, 99, 235, 0.22), 0 4px 14px rgba(37, 99, 235, 0.1);
+            --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.12);
+
+            --radius-2xl: 20px;
+            --radius-xl: 16px;
+            --radius-lg: 14px;
+            --radius-md: 12px;
+            --radius-sm: 10px;
+            --radius-xs: 8px;
+            --radius-full: 9999px;
+
+            --gradient-blue: linear-gradient(135deg, #2563EB 0%, #3B82F6 40%, #6366F1 100%);
+            --gradient-blue-vivid: linear-gradient(135deg, #1D4ED8 0%, #2563EB 30%, #3B82F6 60%, #6366F1 100%);
+            --gradient-blue-subtle: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            --gradient-green: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+            --gradient-orange: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FBBF24 100%);
+            --gradient-red: linear-gradient(135deg, #DC2626 0%, #EF4444 50%, #F87171 100%);
+            --gradient-purple: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #A78BFA 100%);
+            --gradient-teal: linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #5EEAD4 100%);
+            --gradient-rose: linear-gradient(135deg, #E11D48 0%, #F43F5E 50%, #FB7185 100%);
+
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --header-height: 60px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100vw;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Vazirmatn-Fallback', 'Segoe UI', 'IRANSans', Tahoma, sans-serif;
+            background: #F9FAFB;
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            letter-spacing: -0.01em;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(37, 99, 235, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(99, 102, 241, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(14, 165, 233, 0.02) 0%, transparent 70%);
+            background-attachment: fixed;
+        }
+
+        .material-icons {
+            font-size: inherit;
+            vertical-align: middle;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        /* ============ MOBILE HEADER - Blue Background ============ */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--gradient-blue-vivid);
+            z-index: 200;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35), 0 2px 8px rgba(37, 99, 235, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .mobile-header .hamburger-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition-fast);
+            width: 42px;
+            height: 42px;
+            position: relative;
+        }
+        .mobile-header .hamburger-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+        .mobile-header .hamburger-btn:active {
+            background: rgba(255, 255, 255, 0.28);
+            transform: scale(0.94);
+            transition: transform 0.1s ease;
+        }
+        .mobile-header .hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 3px;
+            transition: var(--transition-fast);
+            transform-origin: center;
+        }
+        .mobile-header .hamburger-btn span:nth-child(2) {
+            width: 18px;
+        }
+        .mobile-header .hamburger-btn span:nth-child(3) {
+            width: 14px;
+        }
+        .mobile-header .hamburger-btn:hover span {
+            width: 22px;
+        }
+        .mobile-header .mobile-brand {
+            font-weight: 800;
+            color: #fff;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+        .mobile-header .mobile-logout {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--radius-xs);
+            transition: var(--transition-fast);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+        .mobile-header .mobile-logout:hover {
+            background: rgba(239, 68, 68, 0.3);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            z-index: 250;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ============ SIDEBAR - Modern Refined ============ */
+        .sidebar {
+            width: 272px;
+            min-height: 100vh;
+            background: var(--white);
+            border-left: 1px solid var(--border);
+            padding: 20px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: sticky;
+            top: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 2px 0 30px rgba(0, 0, 0, 0.04);
+            flex-shrink: 0;
+            transition: right 0.3s ease;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px 24px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .sidebar-logo .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-blue);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-blue);
+            position: relative;
+        }
+        .sidebar-logo .logo-icon::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 15px;
+            border: 2px solid rgba(37, 99, 235, 0.15);
+            pointer-events: none;
+        }
+        .sidebar-logo .logo-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+        .sidebar-logo .logo-sub {
+            font-size: 10px;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .nav-section-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            padding: 14px 14px 6px;
+            font-weight: 700;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            color: var(--text-medium);
+            font-weight: 500;
+            font-size: 13.5px;
+            position: relative;
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: -0.2px;
+        }
+        .nav-item:hover {
+            background: var(--bg-alt);
+            color: var(--text-dark);
+            transform: translateX(-3px);
+        }
+        .nav-item.active {
+            background: var(--primary-50);
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: inset 3px 0 0 var(--primary);
+            border-radius: var(--radius-sm);
+        }
+        .nav-item .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 19px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.75;
+            transition: var(--transition-fast);
+        }
+        .nav-item.active .nav-icon {
+            opacity: 1;
+        }
+        .nav-item:hover .nav-icon {
+            opacity: 0.9;
+        }
+        .nav-item .nav-icon .material-icons {
+            font-size: 19px;
+        }
+        .nav-item .badge {
+            margin-right: auto;
+            background: var(--primary-100);
+            color: var(--primary-dark);
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            min-width: 20px;
+            text-align: center;
+            transition: var(--transition-fast);
+        }
+        .nav-item .badge.warn {
+            background: #FEF3C7;
+            color: #B45309;
+        }
+        .nav-item.active .badge {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+        .nav-item.active .badge.warn {
+            background: #F59E0B;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-light);
+        }
+        .user-mini {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 10px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            background: var(--bg-alt);
+        }
+        .user-mini:hover {
+            background: var(--primary-50);
+        }
+        .user-mini .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--gradient-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+        }
+        .user-mini .info {
+            flex: 1;
+            min-width: 0;
+        }
+        .user-mini .name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 12.5px;
+            letter-spacing: -0.2px;
+        }
+        .user-mini .role {
+            font-size: 10px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .sidebar-close-btn {
+            display: none;
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--bg-alt);
+            border: none;
+            font-size: 22px;
+            color: var(--text-medium);
+            cursor: pointer;
+            z-index: 10;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+        .sidebar-close-btn:hover {
+            background: #FEE2E2;
+            color: #EF4444;
+        }
+
+        /* ============ MAIN CONTENT ============ */
+        .main-content {
+            flex: 1;
+            padding: 28px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            min-width: 0;
+            max-width: 100%;
+            position: relative;
+        }
+
+        .content-section {
+            display: none;
+            flex-direction: column;
+            gap: 22px;
+            animation: fadeSlideIn 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .content-section.active {
+            display: flex;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            background: var(--white);
+            padding: 20px 24px;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+        .welcome-bar::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: -40px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .welcome-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .welcome-text h1 .material-icons {
+            font-size: 28px;
+            color: var(--primary);
+            animation: waveHand 1.5s ease-in-out infinite;
+        }
+        @keyframes waveHand {
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-12deg);
+            }
+            50% {
+                transform: rotate(8deg);
+            }
+            75% {
+                transform: rotate(-6deg);
+            }
+        }
+        .welcome-text p {
+            color: var(--text-medium);
+            font-size: 13px;
+            margin-top: 2px;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        .welcome-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============ BUTTONS - Modern Refined ============ */
+        .btn {
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 12.5px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition-bounce);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            font-family: inherit;
+            letter-spacing: -0.2px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        .btn .material-icons {
+            font-size: 17px;
+            transition: transform 0.2s ease;
+        }
+        .btn:hover .material-icons {
+            transform: translateX(-2px);
+        }
+
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: #fff;
+            box-shadow: var(--shadow-blue);
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-blue-lg);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: var(--white);
+            color: var(--text-dark);
+            border: 1.5px solid var(--border);
+            font-weight: 500;
+            box-shadow: var(--shadow-xs);
+        }
+        .btn-outline:hover {
+            background: var(--bg-alt);
+            border-color: #CBD5E1;
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+
+        .filter-tab {
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            color: var(--text-medium);
+            font-weight: 500;
+            transition: var(--transition-bounce);
+            padding: 7px 15px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: var(--shadow-xs);
+        }
+        .filter-tab.active {
+            background: var(--gradient-blue);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: var(--shadow-blue);
+            font-weight: 600;
+        }
+        .filter-tab:hover:not(.active) {
+            background: var(--bg-alt);
+            border-color: #CBD5E1;
+            transform: translateY(-1px);
+        }
+
+        /* ============ STATS GRID ============ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-bounce);
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+            min-width: 0;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 0 0 4px 4px;
+        }
+        .stat-card:nth-child(1)::before {
+            background: var(--gradient-blue);
+        }
+        .stat-card:nth-child(2)::before {
+            background: var(--gradient-green);
+        }
+        .stat-card:nth-child(3)::before {
+            background: var(--gradient-orange);
+        }
+        .stat-card:nth-child(4)::before {
+            background: var(--gradient-purple);
+        }
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            opacity: 0.04;
+            pointer-events: none;
+            transition: var(--transition-slow);
+        }
+        .stat-card:nth-child(1)::after {
+            background: #2563EB;
+        }
+        .stat-card:nth-child(2)::after {
+            background: #059669;
+        }
+        .stat-card:nth-child(3)::after {
+            background: #D97706;
+        }
+        .stat-card:nth-child(4)::after {
+            background: #7C3AED;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: #CBD5E1;
+        }
+        .stat-card:hover::after {
+            opacity: 0.08;
+            bottom: -20px;
+            right: -20px;
+            width: 110px;
+            height: 110px;
+        }
+        .stat-card .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-card:nth-child(1) .stat-icon {
+            background: #EFF6FF;
+            color: #2563EB;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.15);
+        }
+        .stat-card:nth-child(2) .stat-icon {
+            background: #ECFDF5;
+            color: #059669;
+            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.15);
+        }
+        .stat-card:nth-child(3) .stat-icon {
+            background: #FFFBEB;
+            color: #D97706;
+            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.15);
+        }
+        .stat-card:nth-child(4) .stat-icon {
+            background: #F5F3FF;
+            color: #7C3AED;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.15);
+        }
+        .stat-card .stat-info .stat-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: baseline;
+            gap: 3px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-card .stat-info .stat-label {
+            font-size: 11.5px;
+            color: var(--text-medium);
+            font-weight: 500;
+            margin-top: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-card .trend {
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            letter-spacing: 0.1px;
+            z-index: 1;
+        }
+        .stat-card:nth-child(1) .trend,
+        .stat-card:nth-child(2) .trend,
+        .stat-card:nth-child(4) .trend {
+            background: #ECFDF5;
+            color: #059669;
+        }
+        .stat-card:nth-child(3) .trend {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+
+        /* ============ CONTENT GRID & CARDS ============ */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 18px;
+        }
+        .content-grid.equal {
+            grid-template-columns: 1fr 1fr;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-2xl);
+            padding: 20px 22px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            min-width: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: #E2E8F0;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .card-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            letter-spacing: -0.3px;
+        }
+        .card-header h3 .material-icons {
+            font-size: 20px;
+            color: var(--primary);
+        }
+        .card-header .link {
+            font-size: 12px;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-fast);
+            padding: 6px 10px;
+            border-radius: var(--radius-xs);
+            background: var(--primary-50);
+        }
+        .card-header .link:hover {
+            background: var(--primary-100);
+            text-decoration: none;
+            transform: translateX(-2px);
+        }
+
+        /* ============ TABLE ============ */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 0 -6px;
+            max-width: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            min-width: 600px;
+        }
+        table th {
+            text-align: right;
+            padding: 10px 8px 12px;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--border-light);
+            white-space: nowrap;
+        }
+        table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid var(--border-light);
+            white-space: nowrap;
+            color: var(--text);
+            font-weight: 400;
+        }
+        table tbody tr {
+            transition: var(--transition-fast);
+        }
+        table tbody tr:hover {
+            background: #F8FAFC;
+        }
+        table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+        .status-pill.success {
+            background: #ECFDF5;
+            color: #059669;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.1);
+        }
+        .status-pill.warning {
+            background: #FFFBEB;
+            color: #B45309;
+            box-shadow: 0 2px 8px rgba(180, 83, 9, 0.1);
+        }
+        .status-pill.info {
+            background: #EFF6FF;
+            color: #2563EB;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+        }
+        .status-pill.danger {
+            background: #FEF2F2;
+            color: #DC2626;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+        }
+
+        /* ============ TICKETS ============ */
+        .ticket-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .ticket-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 15px;
+            border-radius: var(--radius-lg);
+            background: var(--bg);
+            transition: var(--transition-fast);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .ticket-item:hover {
+            background: #F8FAFC;
+            border-color: var(--border);
+            box-shadow: var(--shadow-xs);
+            transform: translateX(-3px);
+        }
+        .ticket-item .ticket-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .ticket-item .ticket-icon.blue {
+            background: #EFF6FF;
+            color: #2563EB;
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.1);
+        }
+        .ticket-item .ticket-icon.orange {
+            background: #FFFBEB;
+            color: #D97706;
+            box-shadow: 0 3px 10px rgba(217, 119, 6, 0.1);
+        }
+        .ticket-item .ticket-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .ticket-item .ticket-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 13px;
+            letter-spacing: -0.2px;
+        }
+        .ticket-item .ticket-meta {
+            font-size: 10.5px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        /* ============ FAVORITES ============ */
+        .fav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 14px;
+        }
+        .fav-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-bounce);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-light);
+            min-width: 0;
+        }
+        .fav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: #CBD5E1;
+        }
+        .fav-card .fav-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #F8FAFC;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .fav-card .fav-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .fav-card .fav-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .fav-card:hover .fav-img img {
+            transform: scale(1.06);
+        }
+        .fav-card .fav-info {
+            padding: 13px 15px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .fav-card .fav-name {
+            font-weight: 600;
+            font-size: 13.5px;
+            color: var(--text-dark);
+            line-height: 1.4;
+            letter-spacing: -0.2px;
+        }
+        .fav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        .fav-card .fav-price {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        .cart-icon {
+            font-size: 17px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            background: var(--primary-50);
+            border-radius: 50%;
+            padding: 8px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-icon:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.15);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        /* ============ FORMS ============ */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 12.5px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            letter-spacing: -0.2px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 13px;
+            transition: var(--transition-fast);
+            background: var(--bg);
+            color: var(--text);
+            max-width: 100%;
+            letter-spacing: -0.1px;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+            background: #fff;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .address-card {
+            background: var(--bg);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 1px solid var(--border-light);
+            transition: var(--transition-fast);
+        }
+        .address-card:hover {
+            border-color: var(--border);
+            box-shadow: var(--shadow-xs);
+            background: #F8FAFC;
+        }
+        .address-card .address-text {
+            font-size: 13px;
+            color: var(--text);
+            flex: 1;
+            min-width: 200px;
+            font-weight: 500;
+        }
+        .address-card .address-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .faq-item {
+            background: var(--bg);
+            border-radius: var(--radius-lg);
+            padding: 13px 16px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            border: 1px solid transparent;
+        }
+        .faq-item:hover {
+            background: #F8FAFC;
+            border-color: var(--border-light);
+        }
+        .faq-item .faq-q {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 13.5px;
+            letter-spacing: -0.2px;
+        }
+        .faq-item .faq-a {
+            font-size: 12.5px;
+            color: var(--text-medium);
+            margin-top: 6px;
+            display: none;
+            padding-top: 6px;
+            border-top: 1px solid var(--border-light);
+        }
+        .faq-item.open .faq-a {
+            display: block;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .content-grid,
+            .content-grid.equal {
+                grid-template-columns: 1fr;
+            }
+            .fav-grid {
+                grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+            }
+            .main-content {
+                padding: 22px 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                right: -100%;
+                width: 280px;
+                z-index: 300;
+                transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: var(--shadow-xl);
+                padding-top: calc(var(--header-height) + 16px);
+            }
+            .sidebar.open {
+                right: 0;
+            }
+            .sidebar-close-btn {
+                display: flex;
+                top: calc(var(--header-height) + 6px);
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            .main-content {
+                margin-top: var(--header-height);
+            }
+            .mobile-header {
+                display: flex;
+            }
+            .welcome-bar {
+                padding: 16px 18px;
+                border-radius: var(--radius-xl);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 16px 12px;
+                gap: 16px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .welcome-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 14px 16px;
+                gap: 10px;
+            }
+            .fav-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
+            }
+            .welcome-text h1 {
+                font-size: 19px;
+            }
+            .stat-card {
+                padding: 14px 15px;
+                gap: 10px;
+                border-radius: var(--radius-lg);
+            }
+            .stat-card .stat-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                border-radius: var(--radius-sm);
+            }
+            .stat-card .stat-info .stat-value {
+                font-size: 20px;
+            }
+            .stat-card .trend {
+                font-size: 9px;
+                top: 10px;
+                left: 10px;
+                padding: 3px 7px;
+            }
+            .card {
+                padding: 16px 14px;
+                border-radius: var(--radius-xl);
+            }
+            .btn {
+                padding: 8px 13px;
+                font-size: 11.5px;
+                gap: 4px;
+            }
+            .btn .material-icons {
+                font-size: 15px;
+            }
+            .content-section {
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 12px 8px;
+                gap: 12px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .fav-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .card {
+                padding: 14px 12px;
+            }
+            .welcome-text h1 {
+                font-size: 17px;
+            }
+            .welcome-bar {
+                padding: 12px 14px;
+                border-radius: var(--radius-lg);
+            }
+            .stat-card {
+                padding: 12px 14px;
+            }
+            .table-wrap {
+                font-size: 11px;
+            }
+            table th,
+            table td {
+                padding: 8px 6px;
+            }
+            .nav-item {
+                font-size: 12.5px;
+                padding: 10px 12px;
+            }
+            .ticket-item {
+                padding: 11px 12px;
+                gap: 8px;
+            }
+            .ticket-item .ticket-title {
+                font-size: 12px;
+            }
+            .mobile-header {
+                padding: 0 10px;
+            }
+            .mobile-header .mobile-brand {
+                font-size: 15px;
+                gap: 5px;
+            }
+            .mobile-header .hamburger-btn {
+                width: 38px;
+                height: 38px;
+                padding: 8px;
+                gap: 4px;
+            }
+            .mobile-header .hamburger-btn span {
+                width: 19px;
+                height: 2px;
+            }
+            .mobile-header .hamburger-btn span:nth-child(2) {
+                width: 16px;
+            }
+            .mobile-header .hamburger-btn span:nth-child(3) {
+                width: 12px;
+            }
+            .mobile-header .mobile-logout {
+                width: 36px;
+                height: 36px;
+                font-size: 19px;
+            }
+        }
+
+        /* ============ SCROLLBAR ============ */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+        /* ============ SELECTION ============ */
+        ::selection {
+            background: rgba(37, 99, 235, 0.18);
+            color: var(--text-dark);
+        }
+
+        /* ============ SUBTLE PULSE FOR NEW ITEMS ============ */
+        @keyframes subtlePulse {
+            0%,
+            100% {
+                box-shadow: var(--shadow-sm);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(37, 99, 235, 0.12), 0 1px 4px rgba(37, 99, 235, 0.06);
+            }
+        }
+        .stat-card:nth-child(1) {
+            animation: subtlePulse 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header" id="mobileHeader">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="باز کردن منو">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="mobile-brand">AZARYAZDAN</div>
+        <span class="mobile-logout material-icons" title="خروج" role="button" aria-label="خروج">logout</span>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="بستن منو">
+            <span class="material-icons">close</span>
+        </button>
+        <div class="sidebar-logo">
+            <div class="logo-icon">
+                <span class="material-icons">medical_services</span>
+            </div>
+            <div>
+                <div class="logo-text">AZARYAZDAN</div>
+                <div class="logo-sub">پنل مشتری</div>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">حساب من</div>
+            <a class="nav-item active" data-section="dashboard">
+                <span class="nav-icon"><span class="material-icons">dashboard</span></span> داشبورد
+            </a>
+            <a class="nav-item" data-section="orders">
+                <span class="nav-icon"><span class="material-icons">receipt_long</span></span> سفارش‌های من
+                <span class="badge">۳</span>
+            </a>
+            <a class="nav-item" data-section="favorites">
+                <span class="nav-icon"><span class="material-icons">favorite</span></span> علاقه‌مندی‌ها
+                <span class="badge warn">۸</span>
+            </a>
+            <a class="nav-item" data-section="tickets">
+                <span class="nav-icon"><span class="material-icons">support_agent</span></span> تیکت‌های پشتیبانی
+                <span class="badge">۲</span>
+            </a>
+            <a class="nav-item" data-section="profile">
+                <span class="nav-icon"><span class="material-icons">person</span></span> اطلاعات حساب
+            </a>
+            <a class="nav-item" data-section="addresses">
+                <span class="nav-icon"><span class="material-icons">location_on</span></span> آدرس‌های من
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-mini">
+                <div class="avatar">م ح</div>
+                <div class="info">
+                    <div class="name">مریم حسنی</div>
+                    <div class="role">مشتری ویژه</div>
+                </div>
+                <span class="material-icons" style="font-size:17px; color:var(--text-light);">logout</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+
+        <!-- Dashboard Section -->
+        <section class="content-section active" id="dashboard-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">waving_hand</span> سلام مریم جان!</h1>
+                    <p>از آخرین بازدید شما ۲ سفارش جدید ثبت شده است</p>
+                </div>
+                <div class="welcome-actions">
+                    <button class="btn btn-outline" onclick="navigateTo('contact')">
+                        <span class="material-icons">support_agent</span> پشتیبانی آنلاین
+                    </button>
+                    <button class="btn btn-primary" onclick="navigateTo('orders')">
+                        <span class="material-icons">add_shopping_cart</span> سفارش جدید
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card" data-navigate="orders" data-filter="all">
+                    <div class="stat-icon"><span class="material-icons">receipt_long</span></div>
+                    <div class="stat-info">
+                        <div class="stat-value">۱۲</div>
+                        <div class="stat-label">کل سفارش‌ها</div>
+                    </div>
+                    <div class="trend">↑ ۳ سفارش جدید</div>
+                </div>
+                <div class="stat-card" data-navigate="orders" data-filter="active">
+                    <div class="stat-icon"><span class="material-icons">local_shipping</span></div>
+                    <div class="stat-info">
+                        <div class="stat-value">۴</div>
+                        <div class="stat-label">سفارش فعال</div>
+                    </div>
+                    <div class="trend">۲ در حال ارسال</div>
+                </div>
+                <div class="stat-card" data-navigate="tickets">
+                    <div class="stat-icon"><span class="material-icons">support_agent</span></div>
+                    <div class="stat-info">
+                        <div class="stat-value">۲</div>
+                        <div class="stat-label">تیکت باز</div>
+                    </div>
+                    <div class="trend">۱ پاسخ جدید</div>
+                </div>
+                <div class="stat-card" data-navigate="favorites">
+                    <div class="stat-icon"><span class="material-icons">favorite</span></div>
+                    <div class="stat-info">
+                        <div class="stat-value">۸</div>
+                        <div class="stat-label">مورد علاقه‌مندی</div>
+                    </div>
+                    <div class="trend">۲ محصول جدید</div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><span class="material-icons">history</span> سفارش‌های اخیر</h3>
+                        <span class="link" onclick="navigateTo('orders')">مشاهده همه ←</span>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>شماره سفارش</th><th>نام محصول</th><th>تاریخ</th><th>مبلغ</th><th>وضعیت</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>#ORD-9123</strong></td><td>فشارسنج دیجیتال</td><td>۱۸ خرداد ۱۴۰۵</td><td>۲,۸۵۰,۰۰۰</td><td><span class="status-pill info">در حال ارسال</span></td></tr>
+                                <tr><td><strong>#ORD-9087</strong></td><td>تب‌سنج لیزری</td><td>۱۲ خرداد ۱۴۰۵</td><td>۴,۲۰۰,۰۰۰</td><td><span class="status-pill success">تحویل شده</span></td></tr>
+                                <tr><td><strong>#ORD-9045</strong></td><td>ماسک اکسیژن</td><td>۰۵ خرداد ۱۴۰۵</td><td>۱,۶۵۰,۰۰۰</td><td><span class="status-pill success">تحویل شده</span></td></tr>
+                                <tr><td><strong>#ORD-9012</strong></td><td>پالس اکسیمتر</td><td>۲۸ اردیبهشت ۱۴۰۵</td><td>۳,۱۰۰,۰۰۰</td><td><span class="status-pill warning">در انتظار پرداخت</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><span class="material-icons">confirmation_number</span> تیکت‌های پشتیبانی</h3>
+                        <span class="link" onclick="navigateTo('tickets')">ثبت تیکت جدید ←</span>
+                    </div>
+                    <div class="ticket-list">
+                        <div class="ticket-item" onclick="navigateTo('tickets')">
+                            <div class="ticket-icon blue"><span class="material-icons">build</span></div>
+                            <div class="ticket-info">
+                                <div class="ticket-title">مشکل در کالیبراسیون فشارسنج</div>
+                                <div class="ticket-meta">#T-1045 • ۲ روز پیش</div>
+                            </div>
+                            <span class="status-pill info">در حال بررسی</span>
+                        </div>
+                        <div class="ticket-item" onclick="navigateTo('tickets')">
+                            <div class="ticket-icon orange"><span class="material-icons">local_shipping</span></div>
+                            <div class="ticket-info">
+                                <div class="ticket-title">پیگیری ارسال سفارش #ORD-9123</div>
+                                <div class="ticket-meta">#T-1040 • ۵ روز پیش</div>
+                            </div>
+                            <span class="status-pill warning">پاسخ داده شده</span>
+                        </div>
+                        <div class="ticket-item" onclick="navigateTo('tickets')">
+                            <div class="ticket-icon blue"><span class="material-icons">description</span></div>
+                            <div class="ticket-info">
+                                <div class="ticket-title">درخواست فاکتور رسمی</div>
+                                <div class="ticket-meta">#T-1032 • ۱ هفته پیش</div>
+                            </div>
+                            <span class="status-pill success">بسته شده</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3><span class="material-icons">favorite</span> علاقه‌مندی‌های اخیر</h3>
+                    <span class="link" onclick="navigateTo('favorites')">مشاهده لیست کامل ←</span>
+                </div>
+                <div class="fav-grid">
+                    <div class="fav-card" onclick="navigateTo('favorites')">
+                        <div class="fav-img"><img src="/media/dasgahalaemhayati.jpeg" alt="مانیتور علائم حیاتی" loading="lazy"></div>
+                        <div class="fav-info">
+                            <div class="fav-name">مانیتور علائم حیاتی</div>
+                            <div class="fav-bottom">
+                                <span class="fav-price">۴۲۰,۰۰۰,۰۰۰ ریال</span>
+                                <span class="material-icons cart-icon">shopping_cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fav-card" onclick="navigateTo('favorites')">
+                        <div class="fav-img"><img src="/media/sorang.jpeg" alt="پمپ انفوزیون سرنگ" loading="lazy"></div>
+                        <div class="fav-info">
+                            <div class="fav-name">پمپ انفوزیون سرنگ</div>
+                            <div class="fav-bottom">
+                                <span class="fav-price">۱۸۰,۰۰۰,۰۰۰ ریال</span>
+                                <span class="material-icons cart-icon">shopping_cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fav-card" onclick="navigateTo('favorites')">
+                        <div class="fav-img"><img src="/media/portabl.jpeg" alt="ونتیلاتور پرتابل" loading="lazy"></div>
+                        <div class="fav-info">
+                            <div class="fav-name">ونتیلاتور پرتابل</div>
+                            <div class="fav-bottom">
+                                <span class="fav-price">۸۵۰,۰۰۰,۰۰۰ ریال</span>
+                                <span class="material-icons cart-icon">shopping_cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fav-card" onclick="navigateTo('favorites')">
+                        <div class="fav-img"><img src="/media/tabasnj.jpeg" alt="تب‌سنج دیجیتال" loading="lazy"></div>
+                        <div class="fav-info">
+                            <div class="fav-name">تب‌سنج دیجیتال</div>
+                            <div class="fav-bottom">
+                                <span class="fav-price">۳,۲۰۰,۰۰۰ ریال</span>
+                                <span class="material-icons cart-icon">shopping_cart</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section class="content-section" id="orders-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">receipt_long</span> سفارش‌های من</h1>
+                    <p>مدیریت و پیگیری کلیه سفارش‌ها</p>
+                </div>
+                <button class="btn btn-primary"><span class="material-icons">add_shopping_cart</span> ثبت سفارش جدید</button>
+            </div>
+            <div class="card">
+                <div class="filter-tabs" id="order-filters">
+                    <span class="filter-tab active" data-filter="all">همه</span>
+                    <span class="filter-tab" data-filter="active">فعال</span>
+                    <span class="filter-tab" data-filter="shipping">در حال ارسال</span>
+                    <span class="filter-tab" data-filter="delivered">تحویل شده</span>
+                    <span class="filter-tab" data-filter="pending">در انتظار پرداخت</span>
+                </div>
+                <div class="table-wrap">
+                    <table id="orders-table">
+                        <thead><tr><th>شماره سفارش</th><th>نام محصول</th><th>تاریخ</th><th>مبلغ</th><th>وضعیت</th></tr></thead>
+                        <tbody>
+                            <tr data-status="shipping"><td><strong>#ORD-9123</strong></td><td>فشارسنج دیجیتال</td><td>۱۸ خرداد ۱۴۰۵</td><td>۲,۸۵۰,۰۰۰</td><td><span class="status-pill info">در حال ارسال</span></td></tr>
+                            <tr data-status="delivered"><td><strong>#ORD-9087</strong></td><td>تب‌سنج لیزری</td><td>۱۲ خرداد ۱۴۰۵</td><td>۴,۲۰۰,۰۰۰</td><td><span class="status-pill success">تحویل شده</span></td></tr>
+                            <tr data-status="delivered"><td><strong>#ORD-9045</strong></td><td>ماسک اکسیژن</td><td>۰۵ خرداد ۱۴۰۵</td><td>۱,۶۵۰,۰۰۰</td><td><span class="status-pill success">تحویل شده</span></td></tr>
+                            <tr data-status="pending"><td><strong>#ORD-9012</strong></td><td>پالس اکسیمتر</td><td>۲۸ اردیبهشت ۱۴۰۵</td><td>۳,۱۰۰,۰۰۰</td><td><span class="status-pill warning">در انتظار پرداخت</span></td></tr>
+                            <tr data-status="active"><td><strong>#ORD-8990</strong></td><td>دستگاه فشار خون</td><td>۲۰ اردیبهشت ۱۴۰۵</td><td>۵,۶۰۰,۰۰۰</td><td><span class="status-pill info">در حال پردازش</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tickets Section -->
+        <section class="content-section" id="tickets-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">confirmation_number</span> تیکت‌های پشتیبانی</h1>
+                    <p>پیگیری درخواست‌ها و مشکلات</p>
+                </div>
+                <button class="btn btn-primary"><span class="material-icons">add</span> ثبت تیکت جدید</button>
+            </div>
+            <div class="card">
+                <div class="ticket-list">
+                    <div class="ticket-item"><div class="ticket-icon blue"><span class="material-icons">build</span></div><div class="ticket-info"><div class="ticket-title">مشکل در کالیبراسیون فشارسنج</div><div class="ticket-meta">#T-1045 • ۲ روز پیش</div></div><span class="status-pill info">در حال بررسی</span></div>
+                    <div class="ticket-item"><div class="ticket-icon orange"><span class="material-icons">local_shipping</span></div><div class="ticket-info"><div class="ticket-title">پیگیری ارسال سفارش #ORD-9123</div><div class="ticket-meta">#T-1040 • ۵ روز پیش</div></div><span class="status-pill warning">پاسخ داده شده</span></div>
+                    <div class="ticket-item"><div class="ticket-icon blue"><span class="material-icons">description</span></div><div class="ticket-info"><div class="ticket-title">درخواست فاکتور رسمی</div><div class="ticket-meta">#T-1032 • ۱ هفته پیش</div></div><span class="status-pill success">بسته شده</span></div>
+                    <div class="ticket-item"><div class="ticket-icon orange"><span class="material-icons">payment</span></div><div class="ticket-info"><div class="ticket-title">مشکل در پرداخت آنلاین</div><div class="ticket-meta">#T-1028 • ۲ هفته پیش</div></div><span class="status-pill success">بسته شده</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Favorites Section -->
+        <section class="content-section" id="favorites-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">favorite</span> علاقه‌مندی‌ها</h1>
+                    <p>لیست محصولات مورد علاقه شما</p>
+                </div>
+            </div>
+            <div class="fav-grid">
+                <div class="fav-card">
+                    <div class="fav-img"><img src="/media/dasgahalaemhayati.jpeg" alt="مانیتور" loading="lazy"></div>
+                    <div class="fav-info">
+                        <div class="fav-name">مانیتور علائم حیاتی</div>
+                        <div class="fav-bottom">
+                            <span class="fav-price">۴۲۰,۰۰۰,۰۰۰ ریال</span>
+                            <span class="material-icons cart-icon">shopping_cart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fav-card">
+                    <div class="fav-img"><img src="/media/sorang.jpeg" alt="پمپ" loading="lazy"></div>
+                    <div class="fav-info">
+                        <div class="fav-name">پمپ انفوزیون سرنگ</div>
+                        <div class="fav-bottom">
+                            <span class="fav-price">۱۸۰,۰۰۰,۰۰۰ ریال</span>
+                            <span class="material-icons cart-icon">shopping_cart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fav-card">
+                    <div class="fav-img"><img src="/media/portabl.jpeg" alt="ونتیلاتور" loading="lazy"></div>
+                    <div class="fav-info">
+                        <div class="fav-name">ونتیلاتور پرتابل</div>
+                        <div class="fav-bottom">
+                            <span class="fav-price">۸۵۰,۰۰۰,۰۰۰ ریال</span>
+                            <span class="material-icons cart-icon">shopping_cart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fav-card">
+                    <div class="fav-img"><img src="/media/tabasnj.jpeg" alt="تب‌سنج" loading="lazy"></div>
+                    <div class="fav-info">
+                        <div class="fav-name">تب‌سنج دیجیتال</div>
+                        <div class="fav-bottom">
+                            <span class="fav-price">۳,۲۰۰,۰۰۰ ریال</span>
+                            <span class="material-icons cart-icon">shopping_cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section class="content-section" id="profile-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">person</span> اطلاعات حساب</h1>
+                    <p>ویرایش اطلاعات شخصی و حساب کاربری</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="form-group"><label>نام و نام خانوادگی</label><input type="text" value="مریم حسنی"></div>
+                <div class="form-group"><label>شماره موبایل</label><input type="text" value="۰۹۱۲۳۴۵۶۷۸۹"></div>
+                <div class="form-group"><label>ایمیل</label><input type="email" value="maryam@example.com"></div>
+                <button class="btn btn-primary"><span class="material-icons">save</span> ذخیره تغییرات</button>
+            </div>
+        </section>
+
+        <!-- Addresses Section -->
+        <section class="content-section" id="addresses-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">location_on</span> آدرس‌های من</h1>
+                    <p>مدیریت آدرس‌های ارسال</p>
+                </div>
+                <button class="btn btn-primary"><span class="material-icons">add</span> افزودن آدرس جدید</button>
+            </div>
+            <div class="card">
+                <div class="address-card">
+                    <div class="address-text">تهران، خیابان ولیعصر، کوچه پزشکی، پلاک ۴۲، واحد ۷</div>
+                    <div class="address-actions">
+                        <button class="btn btn-outline" style="padding:6px 12px;"><span class="material-icons">edit</span></button>
+                        <button class="btn btn-outline" style="padding:6px 12px; color:#EF4444;"><span class="material-icons">delete</span></button>
+                    </div>
+                </div>
+                <div class="address-card">
+                    <div class="address-text">اصفهان، خیابان چهارباغ، ساختمان پزشکان، طبقه ۳</div>
+                    <div class="address-actions">
+                        <button class="btn btn-outline" style="padding:6px 12px;"><span class="material-icons">edit</span></button>
+                        <button class="btn btn-outline" style="padding:6px 12px; color:#EF4444;"><span class="material-icons">delete</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="content-section" id="faq-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">help</span> سوالات متداول</h1>
+                    <p>پاسخ به پرتکرارترین پرسش‌ها</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">چگونه سفارش خود را پیگیری کنم؟</div><div class="faq-a">از طریق بخش سفارش‌های من می‌توانید وضعیت سفارش خود را مشاهده کنید.</div></div>
+                <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">شرایط بازگشت کالا چگونه است؟</div><div class="faq-a">تا ۷ روز پس از تحویل، در صورت سالم بودن بسته‌بندی امکان بازگشت وجود دارد.</div></div>
+                <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">آیا محصولات گارانتی دارند؟</div><div class="faq-a">تمامی محصولات دارای گارانتی ۱۸ ماهه هستند.</div></div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="content-section" id="contact-section">
+            <div class="welcome-bar">
+                <div class="welcome-text">
+                    <h1><span class="material-icons">phone</span> تماس با ما</h1>
+                    <p>راه‌های ارتباط با پشتیبانی</p>
+                </div>
+            </div>
+            <div class="content-grid equal">
+                <div class="card">
+                    <h3 style="margin-bottom:14px; display:flex; align-items:center; gap:8px; font-size:15px; color:var(--text-dark);"><span class="material-icons" style="color:var(--primary);">call</span> اطلاعات تماس</h3>
+                    <p style="margin-bottom:8px; font-size:13px;"><strong>تلفن:</strong> ۰۲۱-۴۱۲۳۴۰۰۰</p>
+                    <p style="margin-bottom:8px; font-size:13px;"><strong>واتس‌اپ:</strong> ۰۹۱۰۱۲۳۴۵۶۷</p>
+                    <p style="margin-bottom:8px; font-size:13px;"><strong>ایمیل:</strong> support@meditech.ir</p>
+                    <p style="font-size:13px;"><strong>ساعت کاری:</strong> شنبه تا پنجشنبه ۸ تا ۲۰</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom:14px; display:flex; align-items:center; gap:8px; font-size:15px; color:var(--text-dark);"><span class="material-icons" style="color:var(--primary);">email</span> ارسال پیام</h3>
+                    <div class="form-group"><label>موضوع</label><input type="text" placeholder="موضوع پیام"></div>
+                    <div class="form-group"><label>پیام</label><textarea placeholder="متن پیام خود را بنویسید..."></textarea></div>
+                    <button class="btn btn-primary"><span class="material-icons">send</span> ارسال</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const closeBtn = document.getElementById('sidebarCloseBtn');
+            const navItems = document.querySelectorAll('.nav-item[data-section]');
+            const sections = document.querySelectorAll('.content-section');
+            const statCards = document.querySelectorAll('.stat-card[data-navigate]');
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            hamburgerBtn.addEventListener('click', openSidebar);
+            closeBtn.addEventListener('click', closeSidebar);
+            overlay.addEventListener('click', closeSidebar);
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (window.innerWidth <= 1024) {
+                        setTimeout(closeSidebar, 150);
+                    }
+                });
+            });
+
+            function deactivateAll() {
+                sections.forEach(s => s.classList.remove('active'));
+                navItems.forEach(n => n.classList.remove('active'));
+            }
+
+            function showSection(sectionName) {
+                deactivateAll();
+                const targetSection = document.getElementById(sectionName + '-section');
+                if (targetSection) targetSection.classList.add('active');
+                const navItem = document.querySelector(`.nav-item[data-section="${sectionName}"]`);
+                if (navItem) navItem.classList.add('active');
+                document.querySelector('.main-content').scrollTop = 0;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            window.navigateTo = function(sectionName, filter = null) {
+                showSection(sectionName);
+                if (sectionName === 'orders' && filter) {
+                    setTimeout(() => {
+                        const filterTabs = document.querySelectorAll('#order-filters .filter-tab');
+                        filterTabs.forEach(tab => {
+                            if (tab.dataset.filter === filter) tab.click();
+                        });
+                    }, 50);
+                }
+                if (window.innerWidth <= 1024) closeSidebar();
+            };
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionName = this.dataset.section;
+                    if (sectionName) showSection(sectionName);
+                });
+            });
+
+            statCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const sectionName = this.dataset.navigate;
+                    const filter = this.dataset.filter || null;
+                    if (sectionName) window.navigateTo(sectionName, filter);
+                });
+            });
+
+            // Order filters
+            const filterTabs = document.querySelectorAll('#order-filters .filter-tab');
+            const orderRows = document.querySelectorAll('#orders-table tbody tr');
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.dataset.filter;
+                    orderRows.forEach(row => {
+                        if (filter === 'all') row.style.display = '';
+                        else if (filter === 'active') {
+                            const s = row.dataset.status;
+                            row.style.display = (s === 'active' || s === 'shipping') ? '' :
+                                'none';
+                        } else {
+                            row.style.display = (row.dataset.status === filter) ? '' :
+                                'none';
+                        }
+                    });
+                });
+            });
+
+            console.log('✅ داشبورد مدرن - نسخه بازطراحی‌شده با هدر آبی و استایل پرجنب‌وجوش');
+        })();
+    </script>
+</body>
+</html>

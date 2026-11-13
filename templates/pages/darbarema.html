@@ -1,0 +1,1449 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>درباره ما | تجهیزات پزشکی آذریزدی</title>
+
+    <style>
+        :root {
+            --primary: #1565F7;
+            --primary-dark: #0E4FC7;
+            --primary-light: #EAF2FF;
+            --secondary: #4B8CFF;
+            --text-dark: #1D2B53;
+            --text: #4A587C;
+            --text-light: #8B96B8;
+            --white: #FFFFFF;
+            --border: #E6ECF5;
+            --bg: #F8FAFD;
+            --shadow: 0 10px 30px rgba(21, 101, 247, .08);
+            --shadow-lg: 0 20px 50px rgba(21, 101, 247, .12);
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --gradient-blue: linear-gradient(135deg, #1565F7 0%, #0E4FC7 100%);
+            --gradient-light: linear-gradient(135deg, #EAF2FF 0%, #D6E6FF 100%);
+            --gradient-accent: linear-gradient(135deg, #4B8CFF 0%, #1565F7 100%);
+            --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            overflow-x: hidden;
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            width: 100%;
+            max-width: 100vw;
+            background: var(--bg);
+            line-height: 1.7;
+        }
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ========== TOPBAR ========== */
+        .topbar {
+            height: 70px;
+            background: var(--primary);
+        }
+        .topbar .container {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+        .topbar-right,
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .topbar-right a {
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        .topbar-right a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .topbar-left {
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+        .topbar-left i.fa-user {
+            color: #fff;
+            font-size: 16px;
+            margin-left: 8px;
+            opacity: 0.9;
+        }
+        .topbar-left .auth-btn {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+        }
+        .topbar-left .auth-btn:hover {
+            background: #fff;
+            color: var(--primary);
+            border-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .topbar-left .auth-btn.register {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        .topbar-left .auth-btn.register:hover {
+            background: #fff;
+            color: var(--primary-dark);
+        }
+
+        /* ========== HEADER / NAV ========== */
+        .header {
+            background: #fff;
+            margin-top: -10px;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            width: 100%;
+            max-width: 100vw;
+        }
+        .header .container {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+        .logo {
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--primary);
+            order: 2;
+            white-space: nowrap;
+        }
+        .hamburger {
+            order: 1;
+        }
+        nav {
+            order: 3;
+        }
+        .header-icons {
+            order: 4;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 6px 0;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        .header-icons {
+            display: flex;
+            gap: 22px;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .header-icons i {
+            transition: transform 0.25s ease, color 0.25s;
+        }
+        .header-icons i:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* --- Helper Classes --- */
+        .text-primary {
+            color: var(--primary);
+        }
+        .text-dark {
+            color: var(--text-dark);
+        }
+        .text-center {
+            text-align: center;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        /* --- Section 1: Introduction (Hero) --- */
+        .intro-section {
+            padding-top: 40px;
+            padding-bottom: 30px;
+        }
+        .intro-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        .intro-text-col {
+            flex: 1;
+            min-width: 280px;
+        }
+        .intro-image-col {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+        .intro-image-col img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+            height: auto;
+            min-height: 350px;
+            display: block;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.4s ease;
+        }
+        .intro-image-col img:hover {
+            transform: scale(1.02);
+        }
+        .intro-headline {
+            margin-bottom: 20px;
+        }
+        .intro-headline h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 10px 0;
+        }
+        .intro-desc {
+            color: var(--text);
+            margin-bottom: 25px;
+            line-height: 1.9;
+        }
+        .intro-features {
+            margin-bottom: 10px;
+            padding: 0;
+            list-style: none;
+        }
+        .intro-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            padding: 10px 16px;
+            background: var(--gradient-light);
+            border-radius: var(--radius-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .intro-features li:hover {
+            transform: translateX(-6px);
+            box-shadow: 0 6px 20px rgba(21, 101, 247, 0.1);
+        }
+        .intro-features li i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        /* --- Section 2: Stats Cards --- */
+        .stats-section {
+            padding: 30px 0 50px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .stat-card {
+            position: relative;
+            background: var(--white);
+            padding: 35px 20px 30px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(21, 101, 247, 0.06);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            overflow: hidden;
+            border: 2px solid transparent;
+            z-index: 1;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-blue);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            border-radius: var(--radius-md);
+        }
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 45px rgba(21, 101, 247, 0.2);
+            border-color: var(--primary);
+        }
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+        .stat-card:hover .stat-icon-wrapper {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1) rotateY(180deg);
+        }
+        .stat-card:hover .stat-icon-wrapper i {
+            color: #fff;
+        }
+        .stat-card:hover .number {
+            color: #fff;
+        }
+        .stat-card:hover .label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .stat-card:hover .stat-accent-line {
+            background: rgba(255, 255, 255, 0.6);
+            width: 60px;
+        }
+        .stat-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            margin-bottom: 18px;
+            transition: all 0.5s ease;
+        }
+        .stat-icon-wrapper i {
+            font-size: 2rem;
+            color: var(--primary);
+            transition: color 0.4s ease;
+        }
+        .stat-accent-line {
+            width: 35px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 4px;
+            margin: 10px auto 15px;
+            transition: all 0.4s ease;
+        }
+        .stat-card .number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 8px 0 5px;
+            transition: color 0.4s ease;
+            letter-spacing: -1px;
+        }
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.4s ease;
+        }
+
+        /* --- Section 3: Middle Banner --- */
+        .middle-banner {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            margin: 20px 0;
+        }
+        .banner-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        .banner-img-col {
+            flex: 1;
+            min-width: 260px;
+        }
+        .banner-img-col img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            display: block;
+            padding-left: 15px;
+        }
+        .banner-text-col {
+            flex: 1.5;
+            min-width: 280px;
+            padding-right: 15px;
+        }
+        .banner-text-col h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        .banner-text-col p {
+            color: var(--text);
+            margin-bottom: 30px;
+        }
+        .banner-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        .banner-feature-item {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            transition: transform 0.3s ease;
+        }
+        .banner-feature-item:hover {
+            transform: translateY(-4px);
+        }
+        .banner-feature-item i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .banner-feature-item h6 {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* --- Section 4: Values --- */
+        .values-section {
+            background-color: var(--primary-light);
+            padding: 60px 0;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin: 20px 0;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .value-card {
+            padding: 20px;
+            border-left: 1px solid rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        .values-grid .value-card:last-child {
+            border-left: none;
+        }
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+        .value-card h5 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .value-card p {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        /* --- Section 5: Team --- */
+        .team-section {
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            z-index: -1;
+        }
+        .team-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 250px;
+            height: 250px;
+            background: #D6E6FF;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        .team-card {
+            position: relative;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 0 0 28px 0;
+            box-shadow: 0 8px 30px rgba(21, 101, 247, 0.07);
+            transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .team-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 22px 55px rgba(21, 101, 247, 0.18);
+            border-color: var(--primary-light);
+        }
+        .team-card-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background: var(--gradient-blue);
+            clip-path: ellipse(120% 85% at 50% 15%);
+            transition: clip-path 0.5s ease;
+        }
+        .team-card:hover .team-card-img-wrap {
+            clip-path: ellipse(130% 90% at 50% 10%);
+        }
+        .team-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease, filter 0.4s ease;
+            filter: brightness(0.95);
+        }
+        .team-card:hover .team-card-img-wrap img {
+            transform: scale(1.08);
+            filter: brightness(1.05);
+        }
+        .team-card-body {
+            padding: 25px 18px 15px;
+            text-align: center;
+        }
+        .team-card-body h5 {
+            color: var(--text-dark);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+        .team-card:hover .team-card-body h5 {
+            color: var(--primary);
+        }
+        .team-card-body .role {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .team-card-socials {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.35s ease;
+        }
+        .team-card:hover .team-card-socials {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .team-card-socials a {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .team-card-socials a:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(21, 101, 247, 0.3);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            position: relative;
+            background: linear-gradient(180deg, #052867 0%, #03245d 50%, #041d4c 100%);
+            color: #fff;
+            padding: 60px 40px 25px;
+            margin-top: 100px;
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr 1.4fr;
+            gap: 30px;
+        }
+        .footer-col {
+            border-left: 1px solid rgba(255, 255, 255, .08);
+            padding-left: 30px;
+        }
+        .company-col {
+            border-left: none;
+            padding-left: 0;
+        }
+        .footer-col h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 32px;
+            height: 2px;
+            background: #2f79ff;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 16px;
+        }
+        .footer-col ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: .9;
+            transition: .3s;
+        }
+        .footer-col ul li a:hover {
+            color: #4f9dff;
+        }
+        .footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .logo-icon {
+            font-size: 42px;
+            color: #fff;
+        }
+        .footer .logo h2 {
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 700;
+            color: #fff;
+        }
+        .footer .logo span {
+            font-size: 12px;
+            opacity: .8;
+            color: #fff;
+        }
+        .about-text {
+            font-size: 14px;
+            line-height: 2.1;
+            opacity: .9;
+            margin-top: 15px;
+            max-width: 280px;
+        }
+        .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0e4db9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .socials a:hover {
+            transform: translateY(-3px);
+        }
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .contact-list i {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 4px;
+        }
+        .contact-list span {
+            font-size: 15px;
+            line-height: 2;
+            text-align: right;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            margin-top: 45px;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: .8;
+        }
+        .copyright {
+            font-size: 14px;
+            opacity: .8;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1264ff, #0049d4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 84, 255, .35);
+            z-index: 999;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 84, 255, .5);
+        }
+        .scroll-top i {
+            font-size: 18px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+
+        /* تبلت */
+        @media (max-width: 992px) {
+            .container {
+                padding: 0 20px;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .header .container {
+                height: 80px;
+                justify-content: flex-start;
+                gap: 15px;
+            }
+            .logo {
+                order: 2;
+                flex-grow: 1;
+                text-align: center;
+                font-size: 28px;
+            }
+            .hamburger {
+                order: 1;
+            }
+            .header-icons {
+                order: 3;
+                margin-right: auto;
+                gap: 16px;
+                font-size: 19px;
+            }
+            nav {
+                order: 0;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 270px;
+                height: 100vh;
+                background: #fff;
+                box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+                padding: 90px 30px 30px;
+                transition: left 0.4s ease;
+                z-index: 1000;
+                display: block !important;
+            }
+            nav.active {
+                left: 0;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            nav a {
+                font-size: 16px;
+                display: block;
+                padding: 10px 0;
+            }
+            .stats-grid,
+            .banner-features,
+            .values-grid,
+            .team-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .values-grid .value-card {
+                border-left: 1px solid rgba(0, 0, 0, 0.08);
+            }
+            .values-grid .value-card:nth-child(4n) {
+                border-left: none;
+            }
+            .footer {
+                padding: 50px 30px 25px;
+            }
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
+            .footer-col {
+                border-left: none;
+                padding-left: 0;
+            }
+            .section-title {
+                font-size: 1.7rem;
+            }
+            .intro-headline h1 {
+                font-size: 2rem;
+            }
+            .team-card-img-wrap {
+                height: 240px;
+            }
+            .team-card-body {
+                padding-top: 20px;
+            }
+        }
+
+        /* موبایل */
+        @media (max-width: 768px) {
+            .topbar {
+                height: auto;
+                padding: 12px 0;
+            }
+            .topbar .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .topbar-right a {
+                font-size: 12px;
+            }
+            .header .container {
+                height: 70px;
+                gap: 0;
+                justify-content: space-between;
+                padding: 0 12px;
+            }
+            .hamburger {
+                order: 3;
+                margin: 0;
+            }
+            .logo {
+                order: 1;
+                flex-grow: 0;
+                font-size: 24px;
+                margin: 0;
+            }
+            .header-icons {
+                order: 2;
+                margin: 0;
+                gap: 14px;
+                font-size: 17px;
+            }
+
+            .intro-wrapper,
+            .banner-wrapper {
+                flex-direction: column-reverse;
+            }
+            .intro-image-col img {
+                min-height: 250px;
+            }
+            .intro-headline h1 {
+                font-size: 1.8rem;
+            }
+            .banner-text-col h2 {
+                font-size: 1.4rem;
+            }
+            .intro-features li {
+                padding: 8px 14px;
+            }
+
+            .stats-grid,
+            .banner-features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0;
+            }
+            .values-grid .value-card {
+                border-left: 1px solid rgba(0, 0, 0, 0.08);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+                padding: 18px 14px;
+            }
+            .values-grid .value-card:nth-child(even) {
+                border-left: none;
+            }
+            .values-grid .value-card:nth-child(3),
+            .values-grid .value-card:nth-child(4) {
+                border-bottom: none;
+            }
+
+            .stat-card {
+                padding: 25px 12px 22px;
+            }
+            .stat-icon-wrapper {
+                width: 55px;
+                height: 55px;
+            }
+            .stat-icon-wrapper i {
+                font-size: 1.5rem;
+            }
+            .stat-card .number {
+                font-size: 1.5rem;
+            }
+            .stat-card .label {
+                font-size: 0.8rem;
+            }
+            .banner-feature-item {
+                padding: 12px 10px;
+            }
+            .banner-feature-item i {
+                font-size: 1.5rem;
+            }
+            .banner-feature-item h6 {
+                font-size: 0.8rem;
+            }
+            .team-card-img-wrap {
+                height: 260px;
+            }
+            .team-card-body {
+                padding-top: 20px;
+            }
+            .team-card-body h5 {
+                font-size: 1rem;
+            }
+            .team-card-body .role {
+                font-size: 0.78rem;
+            }
+            .team-card-socials {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .footer {
+                padding: 40px 20px 20px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas:
+                    "contact services"
+                    "access products"
+                    "company company";
+                gap: 25px;
+            }
+            .contact-col {
+                grid-area: contact;
+            }
+            .footer-col:nth-child(2) {
+                grid-area: services;
+            }
+            .footer-col:nth-child(3) {
+                grid-area: access;
+            }
+            .footer-col:nth-child(4) {
+                grid-area: products;
+            }
+            .company-col {
+                grid-area: company;
+                text-align: center;
+                margin: 0 auto;
+                max-width: 400px;
+            }
+            .footer-col {
+                border-left: none;
+                padding-left: 0;
+            }
+            .scroll-top {
+                bottom: 25px;
+                right: 25px;
+                width: 44px;
+                height: 44px;
+            }
+            .section-padding {
+                padding: 40px 0;
+            }
+            .intro-section {
+                padding-top: 25px;
+                padding-bottom: 10px;
+            }
+            .stats-section {
+                padding: 20px 0 40px;
+            }
+            .middle-banner {
+                margin: 10px 0;
+                border-radius: var(--radius-md);
+            }
+        }
+
+        /* موبایل کوچک */
+        @media (max-width: 480px) {
+            .header .container {
+                gap: 0;
+                padding: 0 8px;
+            }
+            .logo {
+                font-size: 20px;
+            }
+            .header-icons {
+                gap: 10px;
+                font-size: 15px;
+            }
+            .stats-grid,
+            .banner-features,
+            .team-grid {
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 18px 8px 16px;
+            }
+            .stat-icon-wrapper {
+                width: 48px;
+                height: 48px;
+            }
+            .stat-icon-wrapper i {
+                font-size: 1.3rem;
+            }
+            .stat-card .number {
+                font-size: 1.2rem;
+            }
+            .stat-accent-line {
+                width: 25px;
+                height: 2px;
+            }
+            .banner-feature-item {
+                padding: 10px 6px;
+            }
+            .banner-feature-item i {
+                font-size: 1.3rem;
+            }
+            .values-grid .value-card {
+                padding: 14px 10px;
+            }
+            .team-card-img-wrap {
+                height: 230px;
+            }
+            .team-card-body {
+                padding: 18px 12px 15px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .intro-headline h1 {
+                font-size: 1.5rem;
+            }
+            .banner-text-col h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-right">
+                <a href="#"><i class="fa-solid fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</a>
+                <a href="#"><i class="fa-solid fa-envelope"></i> info@medident.com</a>
+            </div>
+            <div class="topbar-left">
+                <i class="fa-solid fa-user"></i>
+                <a href="#" class="auth-btn">ورود</a>
+                <a href="#" class="auth-btn register">ثبت نام</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">AZARYAZDAN</div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">دندانپزشکی</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                    <li><a href="#">تماس</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro-section section-padding">
+            <div class="intro-wrapper">
+                <div class="intro-text-col">
+                    <div class="intro-headline">
+                        <h1 class="text-dark">درباره ما</h1>
+                    </div>
+                    <h2 class="section-title text-primary">همراه مطمئن شما در مسیر سلامت و لبخند زیبا</h2>
+                    <p class="intro-desc">
+                        مدیدنت از سال ۱۳۹۳ با هدف تأمین و ارائه بهترین تجهیزات دندانپزشکی و پزشکی فعالیت خود را آغاز کرده است. ما با تکیه بر تجربه، تخصص و تعهد به کیفیت، همواره تلاش کرده‌ایم تا نیازهای شما عزیزان را برآورده سازیم و در این راه از همراهی متخصصان و مشتریان عزیز خود بی‌نهایت سپاسگزاریم.
+                    </p>
+                    <ul class="intro-features">
+                        <li><i class="fas fa-check-circle"></i> ارائه بهترین برندهای روز دنیا</li>
+                        <li><i class="fas fa-check-circle"></i> مشاوره تخصصی قبل و بعد از خرید</li>
+                        <li><i class="fas fa-check-circle"></i> خدمات پس از فروش و پشتیبانی حرفه‌ای</li>
+                    </ul>
+                </div>
+                <div class="intro-image-col">
+                    <img src="/media/dandanmiz.jpeg" alt="دندانپزشکی">
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper"><i class="fas fa-history"></i></div>
+                    <span class="number">۱۰۰+</span>
+                    <div class="stat-accent-line"></div>
+                    <span class="label">سال تجربه</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper"><i class="fas fa-boxes"></i></div>
+                    <span class="number">۲۰۰۰+</span>
+                    <div class="stat-accent-line"></div>
+                    <span class="label">محصول متنوع</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper"><i class="fas fa-users"></i></div>
+                    <span class="number">۱۰۰۰۰+</span>
+                    <div class="stat-accent-line"></div>
+                    <span class="label">مشتری راضی</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper"><i class="fas fa-certificate"></i></div>
+                    <span class="number">۲۰۰+</span>
+                    <div class="stat-accent-line"></div>
+                    <span class="label">برند معتبر</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="middle-banner section-padding">
+            <div class="banner-wrapper">
+                <div class="banner-text-col">
+                    <h2>مدیدنت، کیفیتی که می‌توانید به آن اعتماد کنید</h2>
+                    <p>
+                        ما در مدیدنت با بهره‌گیری از دانش تخصصی و همکاری با برندهای معتبر جهانی، مجموعه‌ای کامل از تجهیزات دندانپزشکی و پزشکی را برای مطب‌ها، کلینیک‌ها و مراکز درمانی فراهم کرده‌ایم. هدف ما تسهیل مسیر حرفه‌ای شما و ارتقای سطح خدمات به بیماران است.
+                    </p>
+                    <div class="banner-features">
+                        <div class="banner-feature-item"><i class="fas fa-box-open"></i><h6>محصولات با کیفیت</h6></div>
+                        <div class="banner-feature-item"><i class="fas fa-file-invoice-dollar"></i><h6>قیمت‌گذاری منصفانه</h6></div>
+                        <div class="banner-feature-item"><i class="fas fa-truck"></i><h6>ارسال سریع به سراسر کشور</h6></div>
+                        <div class="banner-feature-item"><i class="fas fa-headset"></i><h6>پشتیبانی همیشگی</h6></div>
+                    </div>
+                </div>
+                <div class="banner-img-col">
+                    <img src="/media/bimarestan.jpeg" alt="Medident Storefront">
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <div class="container">
+                <h2 class="section-title text-center">ارزش‌های ما</h2>
+                <div class="values-grid">
+                    <div class="value-card"><i class="fas fa-lightbulb"></i><h5>نوآوری</h5><p>همواره در جستجوی جدیدترین محصولات و تکنولوژی‌های روز دنیا</p></div>
+                    <div class="value-card"><i class="fas fa-shield-alt"></i><h5>اعتماد</h5><p>ایجاد اعتماد پایدار از طریق کیفیت، صداقت و مسئولیت‌پذیری</p></div>
+                    <div class="value-card"><i class="fas fa-handshake"></i><h5>مشتری‌مداری</h5><p>رضایت مشتریان اولویت اصلی ما در تمام مراحل همکاری</p></div>
+                    <div class="value-card"><i class="fas fa-award"></i><h5>کیفیت</h5><p>تضمین اصالت و کیفیت تمامی محصولات ارائه شده</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <div class="container">
+                <h2 class="section-title text-center">تیم ما</h2>
+                <p class="section-subtitle text-center">متشکل از متخصصان حرفه‌ای و متعهد در کنار شما هستیم</p>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-card-img-wrap"><img src="/media/mard1.jpeg" alt="علی محمدی"></div>
+                        <div class="team-card-body">
+                            <h5>علی محمدی</h5><span class="role">مدیرعامل</span>
+                            <div class="team-card-socials">
+                                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-img-wrap"><img src="/media/sara.jpeg" alt="سارا احمدی"></div>
+                        <div class="team-card-body">
+                            <h5>سارا احمدی</h5><span class="role">مدیر فروش</span>
+                            <div class="team-card-socials">
+                                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-img-wrap"><img src="/media/mard2.jpeg" alt="محمد رضایی"></div>
+                        <div class="team-card-body">
+                            <h5>محمد رضایی</h5><span class="role">کارشناس محصول</span>
+                            <div class="team-card-socials">
+                                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-img-wrap"><img src="/media/narges.jpeg" alt="نرگس پاکزاد"></div>
+                        <div class="team-card-body">
+                            <h5>نرگس پاکزاد</h5><span class="role">پشتیبانی و خدمات پس از فروش</span>
+                            <div class="team-card-socials">
+                                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col contact-col">
+                <h3>اطلاعات تماس</h3>
+                <ul class="contact-list">
+                    <li><span>09372105008</span><i class="fa-solid fa-phone"></i></li>
+                    <li><span>09372108005</span><i class="fa-solid fa-mobile-screen"></i></li>
+                    <li><span>azaryazdan@gmail.com</span><i class="fa-regular fa-envelope"></i></li>
+                    <li><span>تبریز 17 شهریور جدید <br>جنب بانک ملت کوی نوبری جنب فروشگاه پالتار شرکت آدریزدان پلاک18</span><i class="fa-solid fa-location-dot"></i></li>
+                </ul>
+            </div>
+            <div class="footer-col"><h3>خدمات</h3><ul><li><a href="#">مشاوره تخصصی</a></li><li><a href="#">خدمات پس از فروش</a></li><li><a href="#">آموزش و نصب</a></li><li><a href="#">گارانتی و ضمانت</a></li><li><a href="#">پشتیبانی آنلاین</a></li></ul></div>
+            <div class="footer-col"><h3>دسترسی سریع</h3><ul><li><a href="#">صفحه اصلی</a></li><li><a href="#">درباره ما</a></li><li><a href="#">برندها</a></li><li><a href="#">مقالات</a></li><li><a href="#">سوالات متداول</a></li><li><a href="#">تماس با ما</a></li></ul></div>
+            <div class="footer-col"><h3>محصولات</h3><ul><li><a href="#">تجهیزات دندانپزشکی</a></li><li><a href="#">تجهیزات پزشکی</a></li><li><a href="#">تجهیزات آزمایشگاهی</a></li><li><a href="#">تجهیزات تصویربرداری</a></li><li><a href="#">تجهیزات استریل</a></li><li><a href="#">تجهیزات مصرفی</a></li></ul></div>
+            <div class="footer-col company-col">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-circle-plus"></i></div>
+                    <div><h2>AZRYYAZDAN</h2><span>تجهیزات پزشکی و دندانپزشکی</span></div>
+                </div>
+                <p class="about-text">ارائه دهنده تجهیزات پزشکی و دندانپزشکی از برندهای معتبر جهانی با بهترین قیمت و خدمات پس از فروش</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links"><a href="#">شرایط و قوانین</a><a href="#">سیاست حفظ حریم خصوصی</a></div>
+            <div class="copyright">© 1405 تمامی حقوق این وبسایت متعلق به شرکت مدی‌دنت می‌باشد.</div>
+        </div>
+        <a href="#" class="scroll-top" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const stats = document.querySelectorAll('.stat-card .number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, { threshold: 0.5 });
+            stats.forEach(stat => {
+                stat.style.opacity = "0.5";
+                stat.style.transform = "translateY(10px)";
+                stat.style.transition = "all 0.5s ease";
+                observer.observe(stat);
+            });
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>

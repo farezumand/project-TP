@@ -1,0 +1,1769 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وبلاگ تجهیزات پزشکی مدیکا — مقالات تخصصی پزشکی</title>
+    <!-- Font Awesome 6 for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1565F7;
+            --primary-dark: #0E4FC7;
+            --primary-light: #EAF2FF;
+            --secondary: #4B8CFF;
+            --text-dark: #1D2B53;
+            --text: #4A587C;
+            --text-light: #8B96B8;
+            --white: #FFFFFF;
+            --card-bg: #F8FAFE;
+            --card-bg-alt: #F5F7FD;
+            --border: #E3E9F5;
+            --border-light: #EDF1F9;
+            --bg: #F4F7FC;
+            --shadow: 0 10px 30px rgba(21, 101, 247, .07);
+            --shadow-hover: 0 20px 48px rgba(21, 101, 247, .10);
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --nav-dark: #0B1E4B;
+            --nav-dark-hover: #132E6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Vazirmatn', 'Iran Sans', Tahoma, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            direction: rtl;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .meta-icon {
+            margin-left: 5px;
+            vertical-align: middle;
+            font-size: inherit;
+            color: inherit;
+        }
+        .sidebar-widget h4 i {
+            margin-left: 8px;
+            font-size: 1.1em;
+            vertical-align: middle;
+            color: var(--primary);
+        }
+        .blog-hero-badge i {
+            margin-left: 5px;
+        }
+        .hero-search button i {
+            margin-left: 5px;
+        }
+        .footer i {
+            margin-left: 4px;
+        }
+        .post-meta i {
+            color: var(--text-light);
+        }
+
+        /* ========== TOPBAR ========== */
+        .topbar {
+            height: 70px;
+            background: var(--primary);
+            padding-inline: 30px;
+        }
+        .topbar .container {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .topbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+        .topbar-right,
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 5px;
+        }
+        .topbar-right a {
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .topbar-right a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .topbar-left {
+            gap: 4px;
+            margin-bottom: 5px;
+        }
+        .topbar-left i.fa-user {
+            color: #fff;
+            font-size: 16px;
+            margin-left: 8px;
+            opacity: 0.9;
+        }
+        .topbar-left .auth-btn {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+        }
+        .topbar-left .auth-btn:hover {
+            background: #fff;
+            color: var(--primary);
+            border-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .topbar-left .auth-btn.register {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        .topbar-left .auth-btn.register:hover {
+            background: #fff;
+            color: var(--primary-dark);
+        }
+        @media (max-width: 768px) {
+            .topbar {
+                height: auto;
+                padding: 12px 0;
+            }
+            .topbar .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .topbar-right a {
+                font-size: 12px;
+            }
+        }
+
+        /* ========== HEADER / NAV ========== */
+        .header {
+            background: #fff;
+            margin-top: -10px;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            padding-inline: 30px;
+            transition: box-shadow 0.35s ease;
+        }
+        .header.scrolled {
+            box-shadow: 0 12px 36px rgba(21, 101, 247, 0.13);
+        }
+        .header .container {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            order: 1;
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        nav {
+            order: 2;
+        }
+        .header-icons {
+            order: 3;
+        }
+        .hamburger {
+            order: 4;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 6px 0;
+            transition: color 0.25s ease;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        .header-icons {
+            display: flex;
+            gap: 7px;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+            align-items: center;
+        }
+        .header-icons i {
+            transition: transform 0.25s ease, color 0.25s;
+        }
+        .header-icons i:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* همبرگر منو */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background: #fff;
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background: #fff;
+        }
+
+        /* overlay تیره پشت منوی موبایل */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 999;
+            transition: opacity 0.35s ease;
+        }
+        .nav-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        @media (max-width: 992px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-overlay {
+                display: block;
+                opacity: 0;
+                pointer-events: none;
+            }
+            .nav-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                /* از چپ باز می‌شود */
+                width: 285px;
+                height: 100vh;
+                background: linear-gradient(180deg, #0B1E4B 0%, #0D2458 40%, #0F2A66 100%);
+                box-shadow: 5px 0 30px rgba(0, 0, 0, 0.35);
+                padding: 100px 28px 30px;
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1000;
+                display: block !important;
+                overflow-y: auto;
+            }
+            nav.active {
+                left: 0;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 6px;
+            }
+            nav a {
+                font-size: 15px;
+                display: block;
+                padding: 13px 18px;
+                color: #fff;
+                font-weight: 500;
+                border-radius: 10px;
+                transition: all 0.25s ease;
+                border: 1px solid transparent;
+            }
+            nav a::after {
+                display: none;
+            }
+            nav a:hover {
+                background: rgba(255, 255, 255, 0.08);
+                color: #7BB3FF;
+                border-color: rgba(255, 255, 255, 0.12);
+                padding-right: 24px;
+            }
+            /* جداکننده بین آیتم‌های منو */
+            nav ul li {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+            .header .container {
+                height: 80px;
+            }
+            .logo {
+                font-size: 28px;
+            }
+        }
+        /* ========== HERO BLOG SECTION ========== */
+        .blog-hero {
+            background: linear-gradient(180deg, #EDF3FF 0%, #F4F7FC 100%);
+            padding: 60px 24px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(21, 101, 247, 0.04) 0%, transparent 70%);
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .blog-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .blog-hero-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+        }
+        .blog-hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            line-height: 1.3;
+        }
+        .blog-hero h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+        .blog-hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--primary-light);
+            z-index: -1;
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+        .blog-hero p {
+            font-size: 17px;
+            color: var(--text-light);
+            max-width: 550px;
+            margin: 0 auto 28px;
+            line-height: 1.8;
+        }
+        .hero-search {
+            display: flex;
+            align-items: center;
+            background: #FBFCFE;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 6px 6px 6px 20px;
+            max-width: 520px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(21, 101, 247, 0.05);
+            transition: all 0.3s ease;
+        }
+        .hero-search:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 8px 36px rgba(21, 101, 247, 0.10);
+            background: #fff;
+        }
+        .hero-search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            color: var(--text-dark);
+            background: transparent;
+            font-family: inherit;
+            padding: 10px 4px;
+        }
+        .hero-search input::placeholder {
+            color: var(--text-light);
+        }
+        .hero-search button {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 26px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .hero-search button:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 4px 18px rgba(21, 101, 247, 0.35);
+        }
+
+        /* ========== MAIN LAYOUT ========== */
+        .main-layout {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 36px;
+        }
+
+        @media (max-width: 992px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 30px 18px 50px;
+            }
+            .footer {
+                margin-top: 30px;
+            }
+        }
+
+        /* ========== BLOG POSTS AREA ========== */
+        .posts-section {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+        .section-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.3px;
+        }
+        .section-header .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.25s;
+        }
+        .section-header .view-all:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Featured Post Card */
+        .post-card.featured {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 0;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            transition: all 0.35s ease;
+        }
+        .post-card.featured:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+            border-color: #d5dff5;
+        }
+        .post-card.featured .post-image {
+            position: relative;
+            min-height: 300px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e8f0fe, #dce8fc);
+        }
+        .post-card.featured .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .post-card.featured:hover .post-image img {
+            transform: scale(1.04);
+        }
+        .post-card.featured .post-image .post-category-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: var(--primary);
+            color: #fff;
+            padding: 7px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            z-index: 2;
+        }
+        .post-card.featured .post-body {
+            padding: 28px 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(180deg, #FBFCFE 0%, #F7F9FD 100%);
+        }
+        .post-card.featured .post-body .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 13px;
+            color: var(--text-light);
+            flex-wrap: wrap;
+        }
+        .post-card.featured .post-body .post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .post-card.featured .post-body h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.4;
+            letter-spacing: -0.3px;
+        }
+        .post-card.featured .post-body h3 a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.25s;
+        }
+        .post-card.featured .post-body h3 a:hover {
+            color: var(--primary);
+        }
+        .post-card.featured .post-body p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.8;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .read-more-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: gap 0.3s ease;
+            margin-top: 4px;
+        }
+        .read-more-link:hover {
+            gap: 12px;
+            color: var(--primary-dark);
+        }
+        .read-more-link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+        .read-more-link:hover svg {
+            transform: translateX(-4px);
+        }
+
+        @media (max-width: 768px) {
+            .post-card.featured {
+                grid-template-columns: 1fr;
+            }
+            .post-card.featured .post-image {
+                min-height: 220px;
+                max-height: 260px;
+            }
+            .post-card.featured .post-body {
+                padding: 20px 18px;
+                gap: 10px;
+            }
+            .post-card.featured .post-body h3 {
+                font-size: 18px;
+            }
+        }
+
+        /* Standard Post Cards Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .posts-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+
+        .post-card.standard {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(21, 101, 247, 0.03);
+            border: 1px solid var(--border-light);
+            transition: all 0.35s ease;
+        }
+        .post-card.standard:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+            border-color: #d5dff5;
+        }
+        .post-card.standard .post-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #eef3fc, #e2eaf8);
+        }
+        .post-card.standard .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .post-card.standard:hover .post-image img {
+            transform: scale(1.05);
+        }
+        .post-card.standard .post-image .post-category-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--secondary);
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 2;
+            letter-spacing: 0.3px;
+        }
+        .post-card.standard .post-body {
+            padding: 20px 18px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: linear-gradient(180deg, #FBFCFE 0%, #F8FAFD 100%);
+        }
+        .post-card.standard .post-body .post-meta {
+            font-size: 12px;
+            color: var(--text-light);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .post-card.standard .post-body h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.45;
+        }
+        .post-card.standard .post-body h3 a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.25s;
+        }
+        .post-card.standard .post-body h3 a:hover {
+            color: var(--primary);
+        }
+        .post-card.standard .post-body p {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .post-card.standard .post-image {
+                height: 140px;
+            }
+            .post-card.standard .post-body {
+                padding: 14px 12px 16px;
+            }
+            .post-card.standard .post-body h3 {
+                font-size: 14px;
+            }
+            .post-card.standard .post-body p {
+                font-size: 11px;
+            }
+            .post-card.standard .post-body .post-meta {
+                font-size: 10px;
+                gap: 6px;
+            }
+            .post-card.standard .post-image .post-category-badge {
+                top: 8px;
+                right: 8px;
+                padding: 4px 10px;
+                font-size: 10px;
+            }
+            .read-more-link {
+                font-size: 12px;
+            }
+        }
+
+        /* ========== PAGINATION ========== */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .pagination a,
+        .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.25s ease;
+            color: var(--text);
+            border: 1px solid transparent;
+        }
+        .pagination a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary-light);
+        }
+        .pagination span.active {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(21, 101, 247, 0.3);
+        }
+        .pagination .arrow {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* ========== SIDEBAR ========== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+        }
+
+        .sidebar-widget {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 24px 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 14px rgba(21, 101, 247, 0.025);
+            transition: all 0.3s ease;
+        }
+        .sidebar-widget h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-light);
+            position: relative;
+            letter-spacing: -0.2px;
+        }
+        .sidebar-widget h4::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .category-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .category-list li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            text-decoration: none;
+            color: var(--text);
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.25s ease;
+            background: transparent;
+        }
+        .category-list li a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .category-list li a .count {
+            background: #EDF1F8;
+            color: var(--text-light);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .category-list li a:hover .count {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .recent-post-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.25s ease;
+        }
+        .recent-post-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .recent-post-item:hover {
+            padding-right: 6px;
+        }
+        .recent-post-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #e8f0fe, #dce8fc);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .recent-post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .recent-post-info h5 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .recent-post-info h5 a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.25s;
+        }
+        .recent-post-info h5 a:hover {
+            color: var(--primary);
+        }
+        .recent-post-info .date {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag-cloud a {
+            display: inline-block;
+            padding: 8px 14px;
+            background: #EDF1F8;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+        .tag-cloud a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Newsletter Widget */
+        .newsletter-widget {
+            background: linear-gradient(135deg, #1a3a6b, #0d2b54);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 26px 20px;
+            text-align: center;
+            border: none;
+            box-shadow: 0 12px 32px rgba(21, 101, 247, 0.18);
+        }
+        .newsletter-widget h4 {
+            color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+            font-size: 18px;
+        }
+        .newsletter-widget h4::after {
+            background: #fff;
+            right: 50%;
+            transform: translateX(50%);
+            width: 40px;
+        }
+        .newsletter-widget p {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .newsletter-widget input {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        .newsletter-widget input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .newsletter-widget input:focus {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .newsletter-widget button {
+            width: 100%;
+            padding: 13px;
+            border-radius: 50px;
+            border: none;
+            background: #fff;
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        .newsletter-widget button:hover {
+            background: #e8f0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            position: relative;
+            background: linear-gradient(180deg, #052867 0%, #03245d 50%, #041d4c 100%);
+            color: #fff;
+            padding: 60px 50px 25px;
+            margin-top: 100px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr 1.4fr;
+            gap: 45px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .footer-col {
+            border-left: 1px solid rgba(255, 255, 255, .08);
+            padding-left: 40px;
+        }
+        .company-col {
+            border-left: none;
+            padding-left: 0;
+        }
+        .contact-col {
+            border-left: 1px solid rgba(255, 255, 255, .08);
+        }
+        .footer-col h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 32px;
+            height: 2px;
+            background: #2f79ff;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 16px;
+        }
+        .footer-col ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: .9;
+            transition: .3s;
+        }
+        .footer-col ul li a:hover {
+            color: #4f9dff;
+        }
+        .footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .logo-icon {
+            font-size: 42px;
+            color: #fff;
+        }
+        .footer .logo h2 {
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 700;
+            color: #fff;
+        }
+        .footer .logo span {
+            font-size: 12px;
+            opacity: .8;
+            color: #fff;
+        }
+        .about-text {
+            font-size: 14px;
+            line-height: 2.1;
+            opacity: .9;
+            margin-top: 15px;
+            max-width: 280px;
+        }
+        .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0e4db9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .socials a:hover {
+            transform: translateY(-3px);
+            background: #1565F7;
+        }
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .contact-list i {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .contact-list span {
+            font-size: 15px;
+            line-height: 2;
+            text-align: right;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            margin-top: 45px;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: .8;
+        }
+        .copyright {
+            font-size: 14px;
+            opacity: .8;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1264ff, #0049d4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 84, 255, .35);
+            z-index: 999;
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.35s;
+        }
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 84, 255, .5);
+        }
+        .scroll-top i {
+            font-size: 18px;
+        }
+
+        /* ========== FOOTER RESPONSIVE ========== */
+        @media (max-width: 1100px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 35px 30px;
+            }
+            .footer-col {
+                border-left: none;
+                padding-left: 0;
+            }
+            .company-col {
+                grid-column: span 3;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                padding-top: 25px;
+                text-align: center;
+            }
+            .company-col .logo {
+                justify-content: center;
+            }
+            .about-text {
+                max-width: 100%;
+                text-align: center;
+            }
+            .socials {
+                justify-content: center;
+            }
+            .company-col .footer-col h3::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 45px 25px 20px;
+                margin-top: 30px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 28px 20px;
+            }
+            .footer-col {
+                padding-left: 0;
+                border-left: none;
+            }
+            .company-col {
+                grid-column: 1 / -1;
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 22px;
+                margin-top: 4px;
+            }
+            .company-col .logo {
+                justify-content: center;
+            }
+            .about-text {
+                max-width: 100%;
+                text-align: center;
+            }
+            .socials {
+                justify-content: center;
+            }
+            .company-col h3::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+            .footer-col h3 {
+                font-size: 18px;
+                margin-bottom: 18px;
+            }
+            .footer-col ul li {
+                margin-bottom: 12px;
+            }
+            .footer-col ul li a {
+                font-size: 13px;
+            }
+            .contact-list span {
+                font-size: 13px;
+            }
+            .contact-list i {
+                font-size: 15px;
+            }
+            .scroll-top {
+                bottom: 25px;
+                right: 25px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer {
+                padding: 35px 16px 18px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 14px;
+            }
+            .company-col {
+                grid-column: 1 / -1;
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 18px;
+                margin-top: 2px;
+            }
+            .company-col .logo {
+                justify-content: center;
+            }
+            .about-text {
+                text-align: center;
+                max-width: 100%;
+            }
+            .socials {
+                justify-content: center;
+            }
+            .footer-col h3 {
+                font-size: 16px;
+            }
+            .footer-col ul li a {
+                font-size: 12px;
+            }
+            .contact-list span {
+                font-size: 12px;
+            }
+            .contact-list li {
+                gap: 8px;
+                margin-bottom: 14px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-right">
+                <a href="#"><i class="fa-solid fa-phone"></i>09372105008</a>
+                <a href="#"><i class="fa-solid fa-envelope"></i> azaryazdan.com</a>
+            </div>
+            <div class="topbar-left">
+                <i class="fa-solid fa-user"></i>
+                <a href="#" class="auth-btn">ورود</a>
+                <a href="#" class="auth-btn register">ثبت نام</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header" id="header">
+        <div class="container">
+            <div class="logo">AZARYAZDAN</div>
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- overlay برای بستن منو با کلیک بیرون -->
+            <div class="nav-overlay" id="navOverlay"></div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">دندانپزشکی</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                    <li><a href="#">تماس</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- BLOG HERO -->
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <span class="blog-hero-badge"><i class="fas fa-newspaper meta-icon"></i> مقالات تخصصی</span>
+            <h1>وبلاگ <span>تجهیزات پزشکی</span> آذریزدان</h1>
+            <p>جدیدترین مقالات، راهنماهای تخصصی و اخبار حوزه تجهیزات پزشکی را در وبلاگ آذریزدان مطالعه کنید.</p>
+            <div class="hero-search">
+                <input type="text" placeholder="جستجو در مقالات...">
+                <button><i class="fas fa-search meta-icon"></i> جستجو</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-layout">
+
+        <!-- POSTS SECTION -->
+        <section class="posts-section">
+
+            <!-- Featured Post -->
+            <article class="post-card featured">
+                <div class="post-image">
+                    <span class="post-category-badge">ویژه</span>
+                    <img src="/media/webloggggg.jpeg" alt="ونتیلاتور">
+                </div>
+                <div class="post-body">
+                    <div class="post-meta">
+                        <span><i class="fas fa-calendar-alt meta-icon"></i> ۲۴ خرداد ۱۴۰۵</span>
+                        <span><i class="fas fa-clock meta-icon"></i> ۱۲ دقیقه مطالعه</span>
+                        <span><i class="fas fa-eye meta-icon"></i> ۴,۸۲۰ بازدید</span>
+                    </div>
+                    <h3><a href="#">راهنمای جامع انتخاب دستگاه ونتیلاتور برای بیمارستان‌ها و مراکز درمانی</a></h3>
+                    <p>در این مقاله به بررسی کامل معیارهای انتخاب ونتیلاتور مناسب، مقایسه برندهای مطرح جهانی و نکات کلیدی در خرید تجهیزات تنفسی می‌پردازیم. از ظرفیت‌های مختلف تا تکنولوژی‌های روز...</p>
+                    <a href="#" class="read-more-link">
+                        ادامه مطلب
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Section Header -->
+            <div class="section-header">
+                <h2><i class="fas fa-clipboard-list meta-icon"></i> جدیدترین مقالات</h2>
+                <a href="#" class="view-all">مشاهده همه مقالات </a>
+            </div>
+
+            <!-- Posts Grid -->
+            <div class="posts-grid">
+                <!-- Post 1 -->
+                <article class="post-card standard">
+                    <div class="post-image">
+                        <span class="post-category-badge">تصویربرداری</span>
+                        <img src="/media/mri jadid.jpeg" alt="MRI">
+                    </div>
+                    <div class="post-body">
+                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۲۲ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۸ دقیقه</span></div>
+                        <h3><a href="#">تفاوت‌های کلیدی MRI و CT Scan در تشخیص پزشکی</a></h3>
+                        <p>بررسی تخصصی مزایا و معایب هر روش تصویربرداری و کاربردهای بالینی آن‌ها...</p>
+                        <a href="#" class="read-more-link">ادامه مطلب →</a>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post-card standard">
+                    <div class="post-image">
+                        <span class="post-category-badge">مانیتورینگ</span>
+                        <img src="/media/dasgahalaemhayati.jpeg" alt="مانیتورینگ علائم حیاتی">
+                    </div>
+                    <div class="post-body">
+                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۲۰ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۶ دقیقه</span></div>
+                        <h3><a href="#">مانیتورینگ علائم حیاتی: استانداردهای ۲۰۲۵</a></h3>
+                        <p>آشنایی با جدیدترین استانداردهای جهانی در مانیتورینگ بیمار و تجهیزات مرتبط...</p>
+                        <a href="#" class="read-more-link">ادامه مطلب →</a>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="post-card standard">
+                    <div class="post-image">
+                        <span class="post-category-badge">اتاق عمل</span>
+                        <img src="/media/cheraghled.jpeg" alt="چراغ جراحی">
+                    </div>
+                    <div class="post-body">
+                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۱۸ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۱۰ دقیقه</span></div>
+                        <h3><a href="#">چراغ‌های جراحی LED: راهنمای خرید هوشمندانه</a></h3>
+                        <p>نکات ضروری برای انتخاب چراغ جراحی مناسب با توجه به نیاز اتاق عمل شما...</p>
+                        <a href="#" class="read-more-link">ادامه مطلب →</a>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="post-card standard">
+                    <div class="post-image">
+                        <span class="post-category-badge">استریلیزاسیون</span>
+                        <img src="/media/otocluve.jpeg" alt="اتوکلاو">
+                    </div>
+                    <div class="post-body">
+                        <div class="post-meta"><span><i class="fas fa-calendar-alt meta-icon"></i> ۱۵ خرداد ۱۴۰۵</span><span><i class="fas fa-clock meta-icon"></i> ۷ دقیقه</span></div>
+                        <h3><a href="#">اتوکلاو بیمارستانی: مقایسه کلاس B و کلاس S</a></h3>
+                        <p>تفاوت‌های فنی، مزایا و کاربردهای هر کلاس در مراکز درمانی مختلف...</p>
+                        <a href="#" class="read-more-link">ادامه مطلب →</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="pagination">
+                <a href="#" class="arrow">«</a>
+                <span class="active">۱</span>
+                <a href="#">۲</a>
+                <a href="#">۳</a>
+                <a href="#">۴</a>
+                <span>...</span>
+                <a href="#">۱۲</a>
+                <a href="#" class="arrow">»</a>
+            </nav>
+        </section>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <!-- Categories Widget -->
+            <div class="sidebar-widget">
+                <h4><i class="fas fa-folder-open"></i> دسته‌بندی مقالات</h4>
+                <ul class="category-list">
+                    <li><a href="#">تجهیزات تصویربرداری <span class="count">۲۴</span></a></li>
+                    <li><a href="#">تجهیزات اتاق عمل <span class="count">۱۸</span></a></li>
+                    <li><a href="#">مانیتورینگ بیمار <span class="count">۱۵</span></a></li>
+                    <li><a href="#">استریلیزاسیون <span class="count">۱۱</span></a></li>
+                    <li><a href="#">تجهیزات تنفسی <span class="count">۹</span></a></li>
+                    <li><a href="#">تجهیزات آزمایشگاهی <span class="count">۱۴</span></a></li>
+                    <li><a href="#">اخبار صنعت <span class="count">۲۰</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Recent Posts Widget -->
+            <div class="sidebar-widget">
+                <h4><i class="fas fa-history"></i> آخرین مقالات</h4>
+                <div class="recent-post-item">
+                    <div class="recent-post-thumb">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23dce8fc' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%231565F7' opacity='0.35'/%3E%3C/svg%3E" alt="">
+                    </div>
+                    <div class="recent-post-info">
+                        <h5><a href="#">نگهداری پیشگیرانه تجهیزات پزشکی</a></h5>
+                        <span class="date">۱۴ خرداد ۱۴۰۵</span>
+                    </div>
+                </div>
+                <div class="recent-post-item">
+                    <div class="recent-post-thumb">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23e2ebfa' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%234B8CFF' opacity='0.35'/%3E%3C/svg%3E" alt="">
+                    </div>
+                    <div class="recent-post-info">
+                        <h5><a href="#">کالیبراسیون دستگاه‌های فشارسنج</a></h5>
+                        <span class="date">۱۲ خرداد ۱۴۰۵</span>
+                    </div>
+                </div>
+                <div class="recent-post-item">
+                    <div class="recent-post-thumb">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23edf2fc' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%231565F7' opacity='0.3'/%3E%3C/svg%3E" alt="">
+                    </div>
+                    <div class="recent-post-info">
+                        <h5><a href="#">نکات ایمنی در استفاده از لیزر پزشکی</a></h5>
+                        <span class="date">۱۰ خرداد ۱۴۰۵</span>
+                    </div>
+                </div>
+                <div class="recent-post-item">
+                    <div class="recent-post-thumb">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%23e6eefa' width='60' height='60'/%3E%3Ccircle cx='30' cy='28' r='12' fill='%234B8CFF' opacity='0.3'/%3E%3C/svg%3E" alt="">
+                    </div>
+                    <div class="recent-post-info">
+                        <h5><a href="#">بازار تجهیزات پزشکی در سال ۱۴۰۵</a></h5>
+                        <span class="date">۸ خرداد ۱۴۰۵</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags Widget -->
+            <div class="sidebar-widget">
+                <h4><i class="fas fa-tags"></i> برچسب‌های پرطرفدار</h4>
+                <div class="tag-cloud">
+                    <a href="#">ونتیلاتور</a>
+                    <a href="#">MRI</a>
+                    <a href="#">اتوکلاو</a>
+                    <a href="#">مانیتور</a>
+                    <a href="#">چراغ جراحی</a>
+                    <a href="#">CT Scan</a>
+                    <a href="#">الکتروکاردیوگراف</a>
+                    <a href="#">استاندارد</a>
+                    <a href="#">کالیبراسیون</a>
+                    <a href="#">نگهداری</a>
+                    <a href="#">خرید</a>
+                    <a href="#">واردات</a>
+                </div>
+            </div>
+
+            <!-- Newsletter Widget -->
+            <div class="newsletter-widget">
+                <h4><i class="fas fa-envelope-open-text"></i> خبرنامه تخصصی</h4>
+                <p>جدیدترین مقالات و اخبار تجهیزات پزشکی را مستقیماً در ایمیل خود دریافت کنید.</p>
+                <input type="email" placeholder="ایمیل خود را وارد کنید...">
+                <button>عضویت رایگان</button>
+            </div>
+        </aside>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col contact-col">
+                <h3>اطلاعات تماس</h3>
+                <ul class="contact-list">
+                    <li><span>09372105008</span><i class="fa-solid fa-phone"></i></li>
+                    <li><span>09372108005</span><i class="fa-solid fa-mobile-screen"></i></li>
+                    <li><span>azaryazdan@gmail.com</span><i class="fa-regular fa-envelope"></i></li>
+                    <li><span>تبریز 17 شهریور جدید <br>جنب بانک ملت کوی نوبری جنب فروشگاه پالتار شرکت آدریزدان پلاک18</span><i class="fa-solid fa-location-dot"></i></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>خدمات</h3>
+                <ul>
+                    <li><a href="#">مشاوره تخصصی</a></li>
+                    <li><a href="#">خدمات پس از فروش</a></li>
+                    <li><a href="#">آموزش و نصب</a></li>
+                    <li><a href="#">گارانتی و ضمانت</a></li>
+                    <li><a href="#">پشتیبانی آنلاین</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>دسترسی سریع</h3>
+                <ul>
+                    <li><a href="#">صفحه اصلی</a></li>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">مقالات</a></li>
+                    <li><a href="#">سوالات متداول</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>محصولات</h3>
+                <ul>
+                    <li><a href="#">تجهیزات دندانپزشکی</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">تجهیزات آزمایشگاهی</a></li>
+                    <li><a href="#">تجهیزات تصویربرداری</a></li>
+                    <li><a href="#">تجهیزات استریل</a></li>
+                    <li><a href="#">تجهیزات مصرفی</a></li>
+                </ul>
+            </div>
+            <div class="footer-col company-col">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-circle-plus"></i></div>
+                    <div><h2>AZRYYAZDAN</h2><span>تجهیزات پزشکی و دندانپزشکی</span></div>
+                </div>
+                <p class="about-text">ارائه دهنده تجهیزات پزشکی و دندانپزشکی از برندهای معتبر جهانی با بهترین قیمت و خدمات پس از فروش</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links"><a href="#">شرایط و قوانین</a><a href="#">سیاست حفظ حریم خصوصی</a></div>
+            <div class="copyright">© 1405 تمامی حقوق این وبسایت متعلق به شرکت مدی‌دنت می‌باشد.</div>
+        </div>
+        <a href="#" class="scroll-top" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+    </footer>
+
+    <script>
+        // ========== همبرگر منو ==========
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function openMenu() {
+            hamburger.classList.add('active');
+            navMenu.classList.add('active');
+            navOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // بستن منو با کلیک روی overlay
+        navOverlay.addEventListener('click', closeMenu);
+
+        // بستن منو با کلیک روی لینک‌ها
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
+
+        // بستن منو با کلید Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // ========== اسکرول هدر ==========
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ========== دکمه اسکرول به بالا ==========
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // تنظیم اولیه
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.pointerEvents = 'none';
+            scrollTopBtn.style.transition = 'opacity 0.35s ease, transform 0.3s, box-shadow 0.3s';
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollTopBtn.style.opacity = '1';
+                    scrollTopBtn.style.pointerEvents = 'auto';
+                } else {
+                    scrollTopBtn.style.opacity = '0';
+                    scrollTopBtn.style.pointerEvents = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

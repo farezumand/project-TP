@@ -1,0 +1,1501 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه محصولات</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            /* متغیرهای جدید که هدر و بقیه نیاز دارن */
+            --primary: #0d6efd;
+            --primary-dark: #0a58ca;
+            --white: #ffffff;
+            --shadow: 0 2px 15px rgba(0,0,0,0.08);
+            --radius-lg: 20px;
+            
+            /* متغیرهایی که از قبل داشتی (دست نخورده) */
+            --primary-blue: #0056b3;
+            --primary-hover: #004494;
+            --bg-body: #f4f6f9;
+            --bg-card: #ffffff;
+            --border-color: #e9ecef;
+            --text-dark: #232b34;
+            --text-light: #6c757d;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-hover: 0 8px 20px rgba(0,0,0,0.08);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        a { text-decoration: none; }
+
+        .container {
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        /* ========== HEADER ========== */
+        .topbar {
+            height: 70px;
+            background: var(--primary);
+        }
+        .topbar .container {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+        .topbar-right,
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .topbar-right a {
+            padding: 6px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        .topbar-right a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .topbar-left {
+            gap: 4px;
+            margin-bottom: 7px;
+        }
+        .topbar-left i.fa-user {
+            color: #fff;
+            font-size: 16px;
+            margin-left: 8px;
+            opacity: 0.9;
+        }
+        .topbar-left .auth-btn {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+        }
+        .topbar-left .auth-btn:hover {
+            background: #fff;
+            color: var(--primary);
+            border-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .topbar-left .auth-btn.register {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        .topbar-left .auth-btn.register:hover {
+            background: #fff;
+            color: var(--primary-dark);
+        }
+        @media (max-width: 768px) {
+            .topbar {
+                height: auto;
+                padding: 12px 0;
+            }
+            .topbar .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .topbar-right a {
+                font-size: 12px;
+            }
+        }
+
+        /* ========== HEADER / NAV ========== */
+        .header {
+            background: #fff;
+            margin-top: -10px;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .header .container {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 6px 0;
+            transition: color 0.25s ease;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+            align-items: center;
+        }
+        .header-icons a {
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+        }
+        .header-icons i {
+            transition: transform 0.25s ease, color 0.25s;
+        }
+        .header-icons i:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+            order: 1;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 992px) {
+            .hamburger { display: flex; }
+            .header-icons { order: 0; }
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 300px;
+                height: 100vh;
+                background: rgba(11, 21, 38, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                box-shadow: 5px 0 30px rgba(0, 0, 0, 0.4);
+                padding: 100px 30px 30px;
+                transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+                z-index: 1000;
+                display: block !important;
+                border-left: 1px solid rgba(255, 255, 255, 0.15);
+            }
+            nav.active { left: 0; }
+            nav ul { flex-direction: column; gap: 5px; }
+            nav a {
+                color: #ffffff;
+                font-size: 17px;
+                display: block;
+                padding: 14px 10px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                font-weight: 500;
+                transition: all 0.3s ease;
+                border-radius: 8px;
+                margin-bottom: 4px;
+            }
+            nav a:hover {
+                background: rgba(21, 101, 247, 0.25);
+                color: #ffffff;
+                padding-right: 20px;
+                border-bottom-color: transparent;
+            }
+            .header .container { height: 80px; }
+            .logo { font-size: 28px; }
+        }
+
+        /* ========== HERO (بدون لایه شیشه‌ای در دسکتاپ) ========== */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            height: 310px;
+            background: url('/media/hirofurushgah.jpeg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+        .hero-text {
+            text-align: right;
+        }
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #0d2144;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+        }
+        .breadcrumb {
+            color: #5c6d8f;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+        .hero-text p {
+            color: #2d3d5d;
+            font-size: 17px;
+            font-weight: 500;
+            text-shadow: 0 1px 5px rgba(255, 255, 255, 0.7);
+        }
+        .hero-image img {
+            width: 460px;
+            max-width: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+
+        /* تنظیمات موبایل/تبلت برای هیرو */
+        @media (max-width: 992px) {
+            .hero {
+                height: auto;
+                padding: 60px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .hero-content {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                text-align: center;
+            }
+            .hero-text {
+                text-align: right; /* راست‌چین */
+                margin: 0 auto;
+                max-width: 500px;
+                background: rgba(255, 255, 255, 0.18);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                padding: 25px 30px;
+                border-radius: 24px;
+                border: 1px solid rgba(255, 255, 255, 0.35);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            }
+            .hero-image img {
+                width: 300px;
+            }
+        }
+
+        /* ========== CATEGORIES (هاور فوق‌العاده نرم و جذاب) ========== */
+        .categories {
+            margin-top: -35px;
+            position: relative;
+            z-index: 5;
+        }
+        .category-box {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, .08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        a.category-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+            min-width: 120px;
+            padding: 16px 8px;
+            border-radius: 20px;
+            transition: all 0.55s cubic-bezier(0.23, 0.1, 0.32, 1);
+            background: transparent;
+            border: 1px solid transparent;
+        }
+        a.category-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            width: 1px;
+            height: 70%;
+            background: #edf2f8;
+            transition: background 0.3s;
+        }
+        a.category-item i {
+            font-size: 30px;
+            color: #246cff;
+            transition: all 0.55s cubic-bezier(0.23, 0.1, 0.32, 1);
+        }
+        a.category-item span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #102449;
+            transition: all 0.55s cubic-bezier(0.23, 0.1, 0.32, 1);
+        }
+        a.category-item.active {
+            background: #f0f5ff;
+            border: 1px solid #caddff;
+            box-shadow: 0 10px 24px rgba(21, 108, 255, 0.15);
+        }
+        a.category-item.active i,
+        a.category-item.active span {
+            color: #0f5bea;
+        }
+        a.category-item:hover {
+            background: #f7faff;
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(21, 108, 255, 0.18), 0 0 0 2px rgba(21, 108, 255, 0.08);
+            border-color: #b8d4ff;
+        }
+        a.category-item:hover i {
+            color: #0b4bd1;
+            transform: scale(1.2) rotate(-3deg);
+        }
+        a.category-item:hover span {
+            color: #093a9e;
+            letter-spacing: -0.2px;
+        }
+
+        @media (max-width: 992px) {
+            a.category-item {
+                min-width: 100px;
+                padding: 12px 6px;
+            }
+        }
+
+        ul, ol { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; font-family: inherit; border: none; background: none; }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1300px; margin: 0 auto; }
+
+        /* ---------- LAYOUT ---------- */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* ---------- SIDEBAR ---------- */
+        .sidebar {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 20px;
+            overflow: hidden;
+        }
+        .sidebar-section {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .sidebar-section:last-of-type { border-bottom: none; }
+        .sidebar-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 18px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sidebar-title i { color: var(--primary-blue); font-size: 0.9rem; }
+
+        .category-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+            background-color: transparent;
+        }
+        .category-list li:hover {
+            background-color: #f0f4ff;
+            color: var(--primary-blue);
+            padding-right: 12px;
+        }
+        .category-count {
+            background: #f1f3f5;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .category-list li:hover .category-count {
+            background: #dbe4ff;
+            color: var(--primary-blue);
+        }
+
+        .search-icon-box {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .search-icon-box input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        .search-icon-box input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0,86,179,0.1);
+        }
+        .search-icon-box i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b0b5ba;
+        }
+
+        .brand-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 8px;
+            margin-bottom: 2px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+            background-color: #fcfcfd;
+        }
+        .brand-item:nth-child(even) { background-color: #f8fafc; }
+        .brand-item:hover { background-color: #f0f4ff; }
+        .brand-item label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex: 1;
+        }
+        .brand-item input[type="checkbox"] {
+            accent-color: var(--primary-blue);
+            width: 17px;
+            height: 17px;
+        }
+        .brand-count {
+            background: #f1f3f5;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .brand-item:hover .brand-count {
+            background: #dbe4ff;
+            color: var(--primary-blue);
+        }
+
+        .see-more {
+            display: block;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border-color);
+            font-weight: 600;
+        }
+        .see-more i { font-size: 0.7rem; }
+
+        .price-inputs {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .price-inputs input {
+            width: 50%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .range-slider-container {
+            position: relative;
+            height: 6px;
+            background: #dee2e6;
+            border-radius: 10px;
+            margin: 15px 0 20px;
+        }
+        .range-slider-container input[type="range"] {
+            position: absolute;
+            width: 100%;
+            height: 6px;
+            background: none;
+            pointer-events: none;
+        }
+        .range-slider-container input[type="range"]::-webkit-slider-thumb {
+            pointer-events: auto;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        .apply-filter-btn {
+            width: 100%;
+            background: var(--primary-blue);
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .apply-filter-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,86,179,0.25);
+        }
+
+        .filter-radio-item,
+        .filter-check-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9px 8px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+            background-color: #fcfcfd;
+        }
+        .filter-radio-item:nth-child(even),
+        .filter-check-item:nth-child(even) { background-color: #f8fafc; }
+        .filter-radio-item:hover,
+        .filter-check-item:hover { background-color: #f0f4ff; }
+
+        .filter-radio-item label,
+        .filter-check-item label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex: 1;
+        }
+        .filter-radio-item input,
+        .filter-check-item input {
+            accent-color: var(--primary-blue);
+            width: 17px;
+            height: 17px;
+        }
+        .filter-count {
+            background: #f1f3f5;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        .filter-radio-item:hover .filter-count,
+        .filter-check-item:hover .filter-count {
+            background: #dbe4ff;
+            color: var(--primary-blue);
+        }
+
+        .clear-filters-btn {
+            width: calc(100% - 40px);
+            margin: 10px 20px 20px;
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            background: white;
+        }
+        .clear-filters-btn:hover { background: #f8f9fa; border-color: #ccc; }
+
+        /* ---------- MAIN CONTENT ---------- */
+        .main-content { min-width: 0; }
+
+        .toolbar {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+        .toolbar-left { display: flex; align-items: center; gap: 15px; }
+        .count-label { font-size: 0.9rem; color: var(--text-light); font-weight: 500; }
+        .sort-select {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 7px 12px;
+            font-size: 0.9rem;
+            background: #fff;
+            color: var(--text-dark);
+            outline: none;
+        }
+        .view-toggles { display: flex; gap: 5px; }
+        .view-btn {
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: #adb5bd;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        .view-btn.active { background: var(--primary-blue); color: #fff; }
+        .view-btn:hover:not(.active) { background: #e9ecef; color: var(--text-dark); }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .products-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            padding: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: #f0f2f5;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--primary-blue);
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .product-img-box {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafbfc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .product-img-box img { max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+
+        .product-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .product-brand {
+            font-size: 0.8rem;
+            color: #a0a6ad;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .product-rating i { color: #f7c948; font-size: 0.7rem; }
+
+        .product-price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .product-actions {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        .cart-btn { background: #eef6fc; color: var(--primary-blue); }
+        .cart-btn:hover { background: var(--primary-blue); color: white; }
+        .fav-btn { color: #adb5bd; }
+        .fav-btn.active { color: #dc3545; }
+        .fav-btn:hover { color: #dc3545; transform: scale(1.1); }
+
+        .pagination-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding-bottom: 20px;
+        }
+        .page-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .page-btn.active { background: var(--primary-blue); color: #fff; border-color: var(--primary-blue); }
+        .page-btn:hover:not(.active) { background: #f8f9fa; border-color: #ced4da; }
+        .pagination-dots {
+            color: var(--text-light);
+            padding: 0 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-filter-btn {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        .mobile-filter-btn:hover { background: var(--primary-hover); }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .sidebar-overlay.active { display: block; }
+
+        @media (max-width: 992px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                right: -110%;
+                width: 85%;
+                max-width: 360px;
+                height: 100vh;
+                z-index: 1000;
+                overflow-y: auto;
+                border-radius: 0;
+                transition: right 0.3s ease;
+                padding: 25px 0;
+                box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            }
+            .sidebar.active { right: 0; }
+            .mobile-filter-btn { display: inline-flex; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+        }
+
+        @media (max-width: 576px) {
+            body { padding: 10px; }
+            .toolbar { flex-direction: column; align-items: stretch; gap: 10px; text-align: center; }
+            .toolbar-left { justify-content: space-between; }
+            .products-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .product-card { padding: 10px; }
+            .product-img-box { height: 120px; }
+            .product-title { font-size: 0.8rem; }
+            .product-price { font-size: 0.9rem; }
+            .product-actions .action-btn { width: 28px; height: 28px; }
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            position: relative;
+            background: linear-gradient(180deg, #052867 0%, #03245d 50%, #041d4c 100%);
+            color: #fff;
+            padding: 60px 70px 25px;
+            margin-top: 100px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr 1.4fr;
+            gap: 45px;
+        }
+        .footer-col {
+            border-left: 1px solid rgba(255, 255, 255, .08);
+            padding-left: 40px;
+        }
+        .company-col {
+            border-left: none;
+            padding-left: 0;
+        }
+        .footer-col h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 32px;
+            height: 2px;
+            background: #2f79ff;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 16px; }
+        .footer-col ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: .9;
+            transition: .3s;
+        }
+        .footer-col ul li a:hover { color: #4f9dff; }
+        .footer .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .logo-icon { font-size: 42px; color: #fff; }
+        .footer .logo h2 { font-size: 34px; line-height: 1; font-weight: 700; color: #fff; }
+        .footer .logo span { font-size: 12px; opacity: .8; color: #fff; }
+        .about-text {
+            font-size: 14px;
+            line-height: 2.1;
+            opacity: .9;
+            margin-top: 15px;
+            max-width: 280px;
+        }
+        .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #0e4db9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .socials a:hover { transform: translateY(-3px); }
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .contact-list i {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 4px;
+        }
+        .contact-list span {
+            font-size: 15px;
+            line-height: 2;
+            text-align: right;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            margin-top: 45px;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-links { display: flex; gap: 25px; }
+        .footer-links a { color: #fff; text-decoration: none; font-size: 14px; opacity: .8; }
+        .copyright { font-size: 14px; opacity: .8; }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1264ff, #0049d4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 84, 255, .35);
+            z-index: 999;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 84, 255, .5);
+        }
+        .scroll-top i { font-size: 18px; }
+
+        @media (max-width: 992px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .footer-col {
+                border-left: none;
+                padding-left: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 25px 20px;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+            .footer-col.company-col {
+                grid-column: span 2;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                border-left: none !important;
+                padding-left: 0;
+            }
+            .footer-col.company-col .about-text {
+                max-width: 100%;
+            }
+            .scroll-top {
+                bottom: 25px;
+                right: 25px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-col.company-col {
+                grid-column: span 2;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-right">
+                <a href="#"><i class="fa-solid fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</a>
+                <a href="#"><i class="fa-solid fa-envelope"></i> info@medident.com</a>
+            </div>
+            <div class="topbar-left">
+                <i class="fa-solid fa-user"></i>
+                <a href="#" class="auth-btn">ورود</a>
+                <a href="#" class="auth-btn register">ثبت نام</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">AZARYAZDAN</div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">دندانپزشکی</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                    <li><a href="#">تماس</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <a href="{% url 'cart_detail' %}" aria-label="سبد خرید" title="سبد خرید">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>فروشگاه محصولات</h1>
+                <div class="breadcrumb">
+                <p>
+                    بهترین تجهیزات پزشکی و دندانپزشکی از معتبرترین برندهای جهان
+                </p>
+            </div>
+            <div class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <div class="category-box">
+                <a href="{% url 'product_list' %}" class="category-item {% if not selected_category %}active{% endif %}">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>همه محصولات</span>
+                </a>
+                {% for category in categories %}
+                <a href="?category={{ category.slug }}" class="category-item {% if selected_category == category.slug %}active{% endif %}">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>{{ category.name }}</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <br><br><br>
+    </section>
+
+    <div class="container">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    
+        <button class="mobile-filter-btn" onclick="toggleSidebar()">
+            <i class="fa-solid fa-sliders"></i> <span>فیلترها</span>
+        </button>
+    
+        <div class="main-wrapper">
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title"><i class="fa-solid fa-list-ul"></i> دسته بندی محصولات</div>
+                    
+                    <ul class="category-list">
+                        <li>
+                            <a href="{% url 'product_list' %}">
+                                <span>همه محصولات</span>
+                            </a>
+                        </li>
+
+                        {% for category in categories %}
+                        <li>
+                            <a href="?category={{ category.slug }}">
+                                <span>{{ category.name }}</span>
+                            </a>
+                            <span class="category-count">
+                                {{ category.product_count|default:"" }}
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+    
+                <form method="get" id="filtersForm">
+                <div class="sidebar-section">
+                    <div class="sidebar-title"><i class="fa-solid fa-tag"></i> فیلتر بر اساس برند</div>
+                    <div class="search-icon-box">
+                        <input type="text" id="brandSearch" placeholder="جستجوی برند ...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    
+                    {% if selected_category %}
+                        <input type="hidden" name="category" value="{{ selected_category }}">
+                    {% endif %}
+                    {% if selected_sort %}
+                        <input type="hidden" name="sort" value="{{ selected_sort }}">
+                    {% endif %}
+                    {% for brand in brands %}
+                        <div class="brand-item">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="brand"
+                                    value="{{ brand.slug }}"
+                                    {% if selected_brand == brand.slug %}checked{% endif %}
+                                >
+                                {{ brand.name }}
+                            </label>
+
+                            <span class="brand-count">{{ brand.product_count }}</span>
+                        </div>
+                        {% endfor %}
+
+                </div>
+    
+                <div class="sidebar-section">
+                    <div class="sidebar-title"><i class="fa-solid fa-arrow-up-wide-short"></i> فیلتر بر اساس قیمت</div>
+                    <div class="price-inputs">
+                        <input type="number" name="min_price" min="0" value="{{ min_price }}" placeholder="از" aria-label="حداقل قیمت">
+                        <input type="number" name="max_price" min="0" value="{{ max_price }}" placeholder="تا" aria-label="حداکثر قیمت">
+                    </div>
+                    <button type="submit" class="apply-filter-btn">اعمال فیلتر <i class="fa-solid fa-check"></i></button>
+                </div>
+    
+                <div class="sidebar-section">
+                    <div class="sidebar-title"><i class="fa-solid fa-boxes-stacked"></i> وضعیت موجودی</div>
+                    <div class="filter-radio-item"><label><input type="radio" name="stock" value="available" {% if selected_stock == 'available' %}checked{% endif %}> موجود</label></div>
+                    <div class="filter-radio-item"><label><input type="radio" name="stock" value="unavailable" {% if selected_stock == 'unavailable' %}checked{% endif %}> ناموجود</label></div>
+                </div>
+    
+                <div class="sidebar-section">
+                    <div class="sidebar-title"><i class="fa-solid fa-check-double"></i> فیلتر بر اساس ویژگی</div>
+                    <div class="filter-check-item"><label><input type="checkbox"> گارانتی معتبر</label></div>
+                    <div class="filter-check-item"><label><input type="checkbox"> خدمات پس از فروش</label></div>
+                    <div class="filter-check-item"><label><input type="checkbox"> ارسال سریع</label></div>
+                    <div class="filter-check-item"><label><input type="checkbox"> نصب و آموزش رایگان</label></div>
+                </div>
+    
+                </form>
+                <a href="{% url 'product_list' %}" class="clear-filters-btn"><i class="fa-solid fa-trash-can"></i> پاک کردن فیلترها</a>
+            </aside>
+    
+            <div class="main-content">
+                <div class="toolbar">
+                    <div class="count-label">نمایش {{ page_obj.start_index }} تا {{ page_obj.end_index }} از {{ page_obj.paginator.count }} محصول</div>
+                    <div class="toolbar-left">
+                        <form method="get" id="sortForm">
+                            {% for key, value in request.GET.items %}
+                                {% if key != 'sort' and key != 'page' %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endif %}
+                            {% endfor %}
+                            <select class="sort-select" name="sort" onchange="this.form.submit()">
+                                <option value="newest" {% if selected_sort == 'newest' %}selected{% endif %}>جدیدترین</option>
+                                <option value="price_asc" {% if selected_sort == 'price_asc' %}selected{% endif %}>ارزان ترین</option>
+                                <option value="price_desc" {% if selected_sort == 'price_desc' %}selected{% endif %}>گران ترین</option>
+                            </select>
+                        </form>
+                        <div class="view-toggles">
+                            <button class="view-btn active" onclick="setView('grid')" title="نمایش گرید"><i class="fa-solid fa-th-large"></i></button>
+                            <button class="view-btn" onclick="setView('list')" title="نمایش لیست"><i class="fa-solid fa-list-ul"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-grid" id="productsGrid">
+
+                    {% for product in products %}
+
+                    <div class="product-card">
+
+                        <div class="product-img-box">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% endif %}
+                        </div>
+
+                        <div class="product-title">
+                            {{ product.name }}
+                        </div>
+
+                        <span class="product-brand">
+                            {% if product.brand %}
+                                {{ product.brand.name }}
+                            {% endif %}
+                        </span>
+
+                        <div class="product-price">
+                            {{ product.price|floatformat:0 }} تومان
+                        </div>
+
+                        <div class="product-actions">
+                            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="action-btn cart-btn">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </form>
+
+                            <button class="action-btn fav-btn" onclick="toggleFav(this)">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p>در حال حاضر محصولی برای نمایش وجود ندارد.</p>
+
+                    {% endfor %}
+
+                </div>
+
+    
+                
+    
+                {% if page_obj.paginator.num_pages > 1 %}
+                <div class="pagination-wrapper">
+                    {% if page_obj.has_previous %}
+                        <a class="page-btn" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value|urlencode }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">‹</a>
+                    {% endif %}
+                    {% for number in page_obj.paginator.page_range %}
+                        {% if number == page_obj.number %}
+                            <span class="page-btn active">{{ number }}</span>
+                        {% elif number <= 3 or number > page_obj.paginator.num_pages|add:'-2' or number >= page_obj.number|add:'-1' and number <= page_obj.number|add:'1' %}
+                            <a class="page-btn" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value|urlencode }}&{% endif %}{% endfor %}page={{ number }}">{{ number }}</a>
+                        {% elif number == 4 or number == page_obj.paginator.num_pages|add:'-2' %}
+                            <span class="pagination-dots">...</span>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <a class="page-btn" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value|urlencode }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">›</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col contact-col">
+                <h3>اطلاعات تماس</h3>
+                <ul class="contact-list">
+                    <li><span>09372105008</span><i class="fa-solid fa-phone"></i></li>
+                    <li><span>09372108005</span><i class="fa-solid fa-mobile-screen"></i></li>
+                    <li><span>azaryazdan@gmail.com</span><i class="fa-regular fa-envelope"></i></li>
+                    <li><span>تبریز 17 شهریور جدید <br>جنب بانک ملت کوی نوبری جنب فروشگاه پالتار شرکت آدریزدان پلاک18</span><i class="fa-solid fa-location-dot"></i></li>
+                </ul>
+            </div>
+            <div class="footer-col"><h3>خدمات</h3><ul><li><a href="#">مشاوره تخصصی</a></li><li><a href="#">خدمات پس از فروش</a></li><li><a href="#">آموزش و نصب</a></li><li><a href="#">گارانتی و ضمانت</a></li><li><a href="#">پشتیبانی آنلاین</a></li></ul></div>
+            <div class="footer-col"><h3>دسترسی سریع</h3><ul><li><a href="#">صفحه اصلی</a></li><li><a href="#">درباره ما</a></li><li><a href="#">برندها</a></li><li><a href="#">مقالات</a></li><li><a href="#">سوالات متداول</a></li><li><a href="#">تماس با ما</a></li></ul></div>
+            <div class="footer-col"><h3>محصولات</h3><ul><li><a href="#">تجهیزات دندانپزشکی</a></li><li><a href="#">تجهیزات پزشکی</a></li><li><a href="#">تجهیزات آزمایشگاهی</a></li><li><a href="#">تجهیزات تصویربرداری</a></li><li><a href="#">تجهیزات استریل</a></li><li><a href="#">تجهیزات مصرفی</a></li></ul></div>
+            <div class="footer-col company-col">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-circle-plus"></i></div>
+                    <div><h2>AZRYYAZDAN</h2><span>تجهیزات پزشکی و دندانپزشکی</span></div>
+                </div>
+                <p class="about-text">ارائه دهنده تجهیزات پزشکی و دندانپزشکی از برندهای معتبر جهانی با بهترین قیمت و خدمات پس از فروش</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links"><a href="#">شرایط و قوانین</a><a href="#">سیاست حفظ حریم خصوصی</a></div>
+            <div class="copyright">© 1405 تمامی حقوق این وبسایت متعلق به شرکت مدی‌دنت می‌باشد.</div>
+        </div>
+        <a href="#" class="scroll-top" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        function setView(type) {
+            const grid = document.getElementById('productsGrid');
+            const btns = document.querySelectorAll('.view-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            
+            if (type === 'grid') {
+                grid.classList.remove('list-view');
+                btns[0].classList.add('active');
+            } else {
+                grid.classList.add('list-view');
+                btns[1].classList.add('active');
+            }
+        }
+
+        function toggleFav(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid', 'active');
+                btn.classList.add('active');
+                alert('به لیست علاقه مندی ها اضافه شد');
+            } else {
+                icon.classList.remove('fa-solid', 'active');
+                icon.classList.add('fa-regular');
+                btn.classList.remove('active');
+                alert('از لیست علاقه مندی ها حذف شد');
+            }
+        }
+
+        document.getElementById('brandSearch').addEventListener('input', function() {
+            const term = this.value.toLowerCase();
+            const items = document.querySelectorAll('.brand-item');
+            items.forEach(item => {
+                const brandName = item.querySelector('label').innerText.toLowerCase();
+                item.style.display = brandName.includes(term) ? 'flex' : 'none';
+            });
+        });
+
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

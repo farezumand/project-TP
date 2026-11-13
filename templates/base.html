@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}تجهیزات پزشکی و دندانپزشکی آذریزدن{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- نوار بالایی -->
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-right">
+                <a href="tel:09372105008">
+                    <i class="fa-solid fa-phone"></i>
+                    09372105008
+                </a>
+
+                <a href="mailto:azaryazdan@gmail.com">
+                    <i class="fa-solid fa-envelope"></i>
+                    azaryazdan@gmail.com
+                </a>
+            </div>
+
+            <div class="topbar-left">
+                <i class="fa-solid fa-user"></i>
+                <a href="#" class="auth-btn">ورود</a>
+                <a href="#" class="auth-btn register">ثبت‌نام</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- هدر و منوی اصلی -->
+    <header class="header">
+        <div class="container">
+
+            <a href="#" class="site-logo">AZARYAZDAN</a>
+
+            <button class="hamburger" id="hamburger" type="button" aria-label="باز کردن منو" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="navMenu" class="nav-menu">
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">دندانپزشکی</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                    <li><a href="#">تماس</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-icons">
+                <a href="#" aria-label="جستجو">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="#" aria-label="علاقه‌مندی‌ها">
+                    <i class="fa-solid fa-heart"></i>
+                </a>
+                <a href="#" aria-label="سبد خرید">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- محتوای اختصاصی هر صفحه -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- فوتر مشترک -->
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-col contact-col">
+                <h3>اطلاعات تماس</h3>
+                <ul class="contact-list">
+                    <li>
+                        <span>09372105008</span>
+                        <i class="fa-solid fa-phone"></i>
+                    </li>
+                    <li>
+                        <span>09372108005</span>
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </li>
+                    <li>
+                        <span>azaryazdan@gmail.com</span>
+                        <i class="fa-regular fa-envelope"></i>
+                    </li>
+                    <li>
+                        <span>
+                            تبریز، ۱۷ شهریور جدید، جنب بانک ملت،
+                            کوی نوبری، پلاک ۱۸
+                        </span>
+                        <i class="fa-solid fa-location-dot"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>خدمات</h3>
+                <ul>
+                    <li><a href="#">مشاوره تخصصی</a></li>
+                    <li><a href="#">خدمات پس از فروش</a></li>
+                    <li><a href="#">آموزش و نصب</a></li>
+                    <li><a href="#">گارانتی و ضمانت</a></li>
+                    <li><a href="#">پشتیبانی آنلاین</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>دسترسی سریع</h3>
+                <ul>
+                    <li><a href="#">صفحه اصلی</a></li>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">برندها</a></li>
+                    <li><a href="#">مقالات</a></li>
+                    <li><a href="#">سوالات متداول</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>محصولات</h3>
+                <ul>
+                    <li><a href="#">تجهیزات دندانپزشکی</a></li>
+                    <li><a href="#">تجهیزات پزشکی</a></li>
+                    <li><a href="#">تجهیزات آزمایشگاهی</a></li>
+                    <li><a href="#">تجهیزات تصویربرداری</a></li>
+                    <li><a href="#">تجهیزات استریل</a></li>
+                    <li><a href="#">تجهیزات مصرفی</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col company-col">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-heart-circle-plus"></i>
+                    <div>
+                        <h2>AZARYAZDAN</h2>
+                        <span>تجهیزات پزشکی و دندانپزشکی</span>
+                    </div>
+                </div>
+
+                <p class="about-text">
+                    ارائه‌دهنده تجهیزات پزشکی و دندانپزشکی از برندهای
+                    معتبر جهانی همراه با خدمات پس از فروش
+                </p>
+
+                <div class="socials">
+                    <a href="#" aria-label="اینستاگرام">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="تلگرام">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                    <a href="#" aria-label="لینکدین">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" aria-label="واتساپ">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="#">شرایط و قوانین</a>
+                <a href="#">سیاست حفظ حریم خصوصی</a>
+            </div>
+
+            <div class="copyright">
+                © ۱۴۰۵ تمامی حقوق این وب‌سایت محفوظ است.
+            </div>
+        </div>
+
+        <button class="scroll-top" id="scrollTopBtn" type="button" aria-label="بازگشت به بالای صفحه">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+
+    </footer>
+
+    <script src="{% static 'js/base.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>
